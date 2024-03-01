@@ -1,0 +1,25 @@
+.mainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 12vh;
+    background: #202833;
+}
+
+.nameContainer {
+    padding: .5vw 3vw .5vw 1.5vw;
+    margin-right: 5%;
+    border-radius: 1vw;
+    display: flex;
+    align-items: center;
+    background: #469C9A;
+}
+
+.nameContainerImg {
+    height: 2vw;
+}
+
+.nameContainerName {
+    margin-left: 1vw;
+    font-size: 1.5vw;
+}

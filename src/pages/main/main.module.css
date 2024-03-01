@@ -1,0 +1,136 @@
+.mainContentBox {
+    margin: 1vw .7vw 1.5vw .7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.mainHistory {
+    padding: 0 .5vw 0 .5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: #202833;
+    border-radius: 1vw;
+}
+
+.historyContainer {
+    margin: .7vw .5vw .7vw .5vw;
+}
+
+.historyLogo {
+    width: 5vw;
+}
+
+.historyStatys {
+    padding: .2vw;
+    margin-top: .5vw;
+    background: #469C9A;
+    border-radius: 1vw;
+    font-size: 1vw;
+}
+
+.historyName {
+    margin-top: .3vw;
+    font-size: 1.0vw;
+}
+
+.Lenta {
+    margin: .5vw 0 .5vw 0;
+    padding: .5vw 0 .5vw 0;
+    background: #469C9A;
+    border-radius: 1vw;
+    font-size: 2.5vw;
+}
+
+.newsBox {
+    padding: 3vw 2vw 2vw 2vw;
+    background: #202833;
+    border-radius: 1vw;
+}
+
+.newsContentBox {
+    padding-bottom: 2vw;
+    text-align: start;
+    margin: 0 2vw 2vw 2vw;
+    border-bottom: 2px solid #469C9A;
+}
+
+.newsContentH2 {
+    font-size: 2.5vw;
+}
+
+.newsContentImg {
+    margin-top: 2vw;
+}
+
+.newsContentSpan {
+    margin-top: 1vw;
+    line-height: 2.2vw;
+    display: inline-block;
+    font-size: 1.3vw;
+}
+
+
+.tasksBox {
+    position: sticky;
+    top: 1vw;
+    height: 38vh;
+    padding: 0 0 0vw .55vw;
+    margin-left: 1vw;
+    background: #202833;
+    border-radius: 1vw;
+
+}
+
+.taskCard {
+    display: flex;
+    align-items: center;
+}
+
+.tasksTitle {
+    font-size: 1.8vw;
+}
+
+.taskImg {
+    width: 3.2vw;
+}
+
+.taskName {
+    margin: 1vw 0 .8vw .4vw;
+    font-size: 1.2vw;
+}
+
+.mainRatingBox {
+    padding: 0 0 1vw 1.5vw;
+    margin: 1vw 0 0 1vw;
+    position: sticky;
+    top: 42vh;
+    background: #202833;
+    border-radius: 1vw;
+}
+
+.mainRatingTitle {
+    font-size: 1.8vw;
+}
+
+.mainRatingCard {
+    font-size: 1.3vw;
+    display: flex;
+    align-items: center;
+}
+
+.mainRatingImg {
+    width: 1.8vw;
+}
+
+.mainRatingName {
+    margin: 1vw 0 .8vw 1vw;
+    font-size: 1.2vw;
+}
