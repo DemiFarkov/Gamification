@@ -1,0 +1,186 @@
+.mainContainer {
+    margin: 1vw .7vw 1.5vw .7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    padding: .7vw;
+    color: #fff;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw;
+}
+
+.filter {
+    margin-top: 1vw;
+    display: flex;
+    justify-content: start;
+    padding: .7vw;
+    border: .1vw solid #469C9A;
+    border-radius: 1vw;
+}
+
+.filterInput {
+    padding: .4vw .8vw .4vw .8vw;
+    border-radius: 3vw;
+    font-size: 1.3vw;
+}
+
+.filterSelectContainer {
+    margin-left: 3vw;
+    display: flex;
+    align-items: center;
+}
+
+.filterSelectLabel {
+    font-size: 1.2vw;
+}
+
+.filterSelect {
+    margin-left: 1vw;
+    padding: .4vw .8vw .4vw .8vw;
+    border-radius: 3vw;
+    font-size: 1.3vw;
+}
+
+.filterSelect option {
+    background: #469C9A;
+}
+
+.tableName {
+    margin: 1vw 0 0 1.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1vw;
+}
+
+.tableUser {
+    width: 20%;
+}
+
+.tableLogin {
+    width: 20%;
+}
+
+.tableKarma {
+    width: 5%;
+}
+
+.tableCoin {
+    width: 7%;
+}
+
+.tableXP {
+    width: 8%;
+}
+
+.tableJob {
+    width: 15%;
+}
+
+.tableDate {
+    width: 12%;
+}
+
+.tableRol {
+    width: 13%;
+}
+
+.tableContainer {
+    margin-top: 1vw;
+    padding-left: 1.5vw;
+    background: #202833;
+    border-radius: 1vw;
+    border: 1px solid #469C9A;
+}
+
+.tableContent {
+    display: grid;
+    grid-template-columns: 20% 20% 5% 7% 8% 15% 12% 13%;
+}
+
+.tableContent div {
+    border-right: 1px solid #469C9A;
+}
+
+.tableContent div:nth-child(8n) {
+    border-right: none
+}
+
+.tableContent div:nth-child(n+9) {
+    border-top: 1px solid #469C9A;
+}
+
+.tableRow {
+    padding: 1vw;
+    font-size: 1.2vw;
+}
+
+.tableRowFlex {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.tableFlexRow {
+    padding: .8vw;
+    font-size: 1.2vw;
+    border: none !important;
+}
+
+.tableRowArrow {
+    width: 1vw;
+    cursor: pointer;
+}
+
+.tableMenuContainer {
+    position: absolute;
+    top: 90%;
+    right: 0;
+    background: #D9D9D9;
+    border-radius: 1vw;
+    visibility: visible;
+    opacity: 1;
+    z-index: 100;
+    transition: .1s all;
+}
+
+.tableMenuContainerHidden {
+    position: absolute;
+    top: 90%;
+    right: 0;
+    background: #D9D9D9;
+    border-radius: 1vw;
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+    z-index: 100;
+    transition: .1s all;
+}
+
+.tableMenuContent {
+    padding: .1vw;
+    color: #000;
+    transition: .2s all;
+    cursor: pointer;
+}
+
+.tableMenuContent:hover {
+    background: #949494;
+}
+
+.tableMenuContent:first-child:hover {
+    border-radius: 1vw 1vw 0 0;
+}
+
+.tableMenuContent:last-child:hover {
+    border-radius: 0 0 1vw 1vw;
+}

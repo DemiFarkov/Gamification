@@ -9,7 +9,7 @@ import Rating from "./rating";
 const Main = () => {
   return (
     <div>
-      <Header />
+      <Header skrol="17" />
       <div className={classes.mainContentBox}>
         <Navigation />
         <div className={classes.mainContent}>

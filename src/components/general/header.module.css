@@ -1,25 +1,73 @@
+body {
+    overflow-x: hidden;
+}
+
 .mainContainer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     height: 12vh;
+    width: 100vw;
     background: #202833;
+
 }
 
 .nameContainer {
-    padding: .5vw 3vw .5vw 1.5vw;
-    margin-right: 5%;
-    border-radius: 1vw;
+    position: relative;
     display: flex;
     align-items: center;
-    background: #469C9A;
 }
 
 .nameContainerImg {
-    height: 2vw;
+    height: 3vw;
+    width: 3vw;
+    background: #fff;
+    border: 3px solid #469C9A;
+    border-radius: 50%;
 }
 
-.nameContainerName {
+
+.nameContainerNavOpen {
     margin-left: 1vw;
     font-size: 1.5vw;
+    cursor: pointer;
+}
+
+.nav {
+    position: absolute;
+    top: 130%;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    z-index: 100;
+    background: #697b95;
+    border-radius: .5vw;
+    transition: .1s;
+}
+
+.navHidden {
+    position: absolute;
+    top: 130%;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    z-index: 100;
+    background: #697b95;
+    border-radius: .5vw;
+    visibility: hidden;
+    opacity: 0;
+    transition: .1s;
+}
+
+.link {
+    width: 15vw;
+    padding: .5vw;
+    color: #fff;
+    font-size: 1.2vw;
+    display: block;
+    transition: .2s;
+}
+
+.link:hover {
+    background: #3a4759;
 }

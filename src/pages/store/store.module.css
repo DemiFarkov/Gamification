@@ -1,0 +1,141 @@
+.mainContentBox {
+    padding-right: 1vw;
+    margin: 1vw .7vw 1.5vw .7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+}
+
+.H1 {
+    padding: .7vw;
+    color: #fff;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw;
+}
+
+.mainContentGrid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.storeCards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.storeCard {
+    padding: 1vw;
+    margin: .938%;
+    margin-top: 1.5vw;
+    background: #202833;
+    border-radius: 1vw;
+    transition: .3s all;
+}
+
+.storeCard:nth-child(4n) {
+    margin-right: 0;
+}
+
+.storeCard:nth-child(4n-3) {
+    margin-left: 0;
+}
+
+.cardTitle {
+    margin: 0 auto;
+    width: 80%;
+    border-radius: 3vw;
+    padding: .3vw;
+    background: #469C9A;
+    font-size: 1.1vw;
+}
+
+.cardImg {
+    margin-top: 1vw;
+    width: 14vw;
+}
+
+.cardRemains {
+    padding: .2vw;
+    margin-top: 1vw;
+    font-size: 1vw;
+    background: #469C9A;
+    border-radius: 3vw;
+
+}
+
+.cardFooter {
+    margin-top: 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardPrice {
+    display: flex;
+    align-items: center;
+}
+
+.priceImg {
+    width: 2vw;
+}
+
+.priceText {
+    margin-left: .3vw;
+    font-size: 1vw;
+
+}
+
+.buy {
+    padding: .2vw .7vw .2vw .7vw;
+    margin-left: 1vw;
+    background: #fff;
+    color: #000;
+    border-radius: 3vw;
+    font-size: 1vw;
+}
+
+.storeHistory {
+    margin-top: 1.5vw;
+    background: #202833;
+    height: 90vh;
+    border-radius: 1vw;
+    position: sticky;
+    top: 1vw;
+}
+
+.historyTitle {
+    padding: 0.3vw;
+    margin: 1vw auto 0 auto;
+    width: 70%;
+    font-size: 1.1vw;
+    border-radius: 3vw;
+    background: #469C9A;
+}
+
+.HistoryCardContainer {
+    margin: 2vw;
+    padding: 1vw 0 1.5vw 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #469C9A;
+}
+
+.HistoryCardImg {
+    width: 3vw;
+}
+
+.HistoryCardName {
+    margin-left: 1vw;
+    font-size: 1.2vw;
+}
+
+.HistoryCardDate {
+    margin-left: 1vw;
+    font-size: 1vw;
+
+}

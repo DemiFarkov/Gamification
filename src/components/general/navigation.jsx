@@ -11,7 +11,30 @@ const Navigation = () => {
   return (
     <div className={classes.mainContainer}>
       <Link
-        to="./pages/profil"
+        to="../pages/main"
+        className={classes.button}
+        onMouseOver={() => setInventoryOpen(true)}
+        onMouseOut={() => setInventoryOpen(false)}
+      >
+        <img src={Logo} alt="" className={classes.mainContainerImg} />
+        <div
+          className={
+            InventoryOpen
+              ? classes.menuContainerOpen
+              : classes.menuContainerClose
+          }
+        >
+          <div
+            className={
+              InventoryOpen ? classes.menuNameOpen : classes.menuNameClose
+            }
+          >
+            Главная
+          </div>
+        </div>
+      </Link>
+      <Link
+        to="../pages/profil"
         className={classes.button}
         onMouseOver={() => setProfilOpen(true)}
         onMouseOut={() => setProfilOpen(false)}
@@ -33,7 +56,7 @@ const Navigation = () => {
       </Link>
 
       <Link
-        to="./pages/profil"
+        to="../pages/store"
         className={classes.button}
         onMouseOver={() => setStoreOpen(true)}
         onMouseOut={() => setStoreOpen(false)}
@@ -52,7 +75,7 @@ const Navigation = () => {
         </div>
       </Link>
       <Link
-        to="./pages/profil"
+        to="../pages/players"
         className={classes.button}
         onMouseOver={() => setFriendsOpen(true)}
         onMouseOut={() => setFriendsOpen(false)}
@@ -68,30 +91,7 @@ const Navigation = () => {
               FriendsOpen ? classes.menuNameOpen : classes.menuNameClose
             }
           >
-            Друзья
-          </div>
-        </div>
-      </Link>
-      <Link
-        to="./pages/profil"
-        className={classes.button}
-        onMouseOver={() => setInventoryOpen(true)}
-        onMouseOut={() => setInventoryOpen(false)}
-      >
-        <img src={Logo} alt="" className={classes.mainContainerImg} />
-        <div
-          className={
-            InventoryOpen
-              ? classes.menuContainerOpen
-              : classes.menuContainerClose
-          }
-        >
-          <div
-            className={
-              InventoryOpen ? classes.menuNameOpen : classes.menuNameClose
-            }
-          >
-            Инвентарь
+            Игроки
           </div>
         </div>
       </Link>

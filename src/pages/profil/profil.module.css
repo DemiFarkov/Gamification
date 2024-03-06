@@ -3,7 +3,7 @@ body {
 }
 
 .mainContainer {
-    width: 94%;
+    width: calc(94% + 17px);
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
 }

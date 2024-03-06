@@ -9,7 +9,7 @@ import Navigation from "../../components/general/navigation";
 const Profil = () => {
   return (
     <>
-      <Header />
+      <Header skrol="0" />
       <div className={classes.mainContentBox}>
         <Navigation />
         <div className={classes.mainContainer}>
