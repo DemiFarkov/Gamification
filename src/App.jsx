@@ -26,7 +26,10 @@ function App() {
           <Route path="pages/main" element={<Main />} />
           <Route path="pages/players" element={<Players />} />
           <Route path="pages/store" element={<Store />} />
-          <Route path="pages/adminPages/changeUsers" element={<ChangeUsers />} />
+          <Route
+            path="pages/adminPages/changeUsers"
+            element={<ChangeUsers />}
+          />
         </Routes>
       </section>
     </>
