@@ -12,10 +12,9 @@ import Main from "./pages/main/main";
 import Players from "./pages/players/players";
 import Store from "./pages/store/store";
 import ChangeUsers from "./pages/adminPadges/changeUsers/changeUsers";
+import CreateTest from "./pages/createTest/createTest";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <section className="formContainer">
@@ -26,6 +25,7 @@ function App() {
           <Route path="pages/main" element={<Main />} />
           <Route path="pages/players" element={<Players />} />
           <Route path="pages/store" element={<Store />} />
+          <Route path="pages/createTest" element={<CreateTest />} />
           <Route
             path="pages/adminPages/changeUsers"
             element={<ChangeUsers />}

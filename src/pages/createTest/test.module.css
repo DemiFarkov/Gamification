@@ -1,0 +1,127 @@
+.testContainer {
+    margin: 1vw .7vw 1.5vw .7vw;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.testMainContent {
+    width: 94%;
+}
+
+.H1 {
+    padding: .7vw;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw;
+}
+
+.testBlock {
+    padding: 2vw 0 2vw 0;
+    margin: 1vw auto 0 auto;
+    width: 65%;
+    background: #202833;
+    border-radius: 3vw;
+}
+
+.answerInput {
+    padding: .7vw;
+    margin: 1vw auto 0 auto;
+    width: 85%;
+    display: block;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    background: #fff;
+}
+
+.answerInput:first-child {
+    margin-top: 0;
+}
+
+.answerInputFileContainer {
+    position: relative;
+    padding: .3vw;
+    margin: 1vw auto 0 auto;
+    width: 85%;
+    display: block;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    background: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.answerInputFile {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.answerInputFileText {
+    padding: .4vw;
+    background: #9B9B9B;
+    border-radius: 3vw;
+    border: 1px solid #202833;
+    font-size: 1.2vw;
+    transition: all .1s;
+}
+
+.answerInputFileText:hover {
+    background: #d2d1d1;
+}
+
+.answerInputFileName {
+    vertical-align: middle;
+    margin-left: 1vw;
+    color: #757575;
+    font-size: 1.2vw;
+}
+
+.btnContainer {
+    margin: 2vw auto 0 auto;
+    width: 65%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.btnContainerBtn {
+    padding: .8vw;
+    width: 48%;
+    background: #202833;
+    border: 1px solid #469C9A;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.btnContainerBtn:hover {
+    background: #4a5b74;
+}
+
+.btnContainerBtnForm {
+    margin: 1vw auto 0 auto;
+    padding: .8vw;
+    width: 70%;
+    background: #202833;
+    border: 1px solid #469C9A;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+    color: #fff;
+    cursor: pointer;
+
+}
+
+.btnContainerBtnForm:hover {
+    background: #4a5b74;
+    border: 1px solid #469C9A;
+
+}

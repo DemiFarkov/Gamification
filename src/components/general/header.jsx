@@ -32,7 +32,7 @@ const Header = (props) => {
           <Link className={classes.link} to="../pages/adminPages/changeUsers">
             Изменение пользователей
           </Link>
-          <Link className={classes.link} to="../pages/profil">
+          <Link className={classes.link} to="../pages/createTest">
             Создать тест
           </Link>
           <Link className={classes.link} to="../pages/profil">
