@@ -77,7 +77,7 @@
     width: 100%;
     align-items: center;
     user-select: none;
-    padding: .5vw 2vw .5vw 2vw;
+    padding: .5vw 2vw .5vw 1.5vw;
     margin-bottom: 1vw;
     border: 1px solid #469C9A;
     border-radius: 3vw;
@@ -225,7 +225,7 @@
 .TestSettingsinputName {
     margin: 0 0 .2vw 1vw;
     text-align: start;
-    font-size: 1vw;
+    font-size: .9vw;
 }
 
 .TestSettingsInputTitle {
