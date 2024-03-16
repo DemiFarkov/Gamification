@@ -145,7 +145,7 @@ const CreateTest = () => {
                 <textarea
                   name=""
                   id=""
-                  cols="40"
+                  cols="30"
                   rows="20"
                   className={classes.textareaCOntent}
                 ></textarea>
