@@ -17,7 +17,7 @@ import CreateTest from "./pages/createTest/createTest";
 function App() {
   return (
     <>
-      <section className="formContainer">фыв
+      <section className="formContainer">
         <Routes>
           <Route path="/" element={<AutorizationForm />} />
           <Route path="*" element={<Not />} />

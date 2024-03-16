@@ -1,34 +1,53 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import plus from "../../img/img_test/plus.svg";
+import dash from "../../img/img_test/dash.svg";
 import classes from "./test.module.css";
+import CheckBoxDLS from "./checkBoxDLS";
 
-const Input = () => {
+const Input = (props) => {
   return (
-    <>
+    <div className={classes.answerInputContainer}>
       <input
         type="text"
         className={classes.answerInput}
         placeholder="Введите ответ"
       />
-    </>
+    </div>
+  );
+};
+
+const InputDLS = () => {
+  return (
+    <div className={classes.answerInputContainer}>
+      <input
+        type="text"
+        className={classes.answerInput}
+        placeholder="Введите ответ"
+      />
+    </div>
   );
 };
 
 const TestQue = (test) => {
   const [inputList, setInputList] = useState([<Input key={0} />]);
-  const [fileName, setFileName] = useState("Файл не выбран");
+  function onAddBtnClick() {
+    setInputList(inputList.concat(<InputDLS key={inputList.length} />));
+  }
 
-  const onAddBtnClick = (event) => {
-    if (event == "form") {
-      setInputList(inputList.concat(<Input key={inputList.length} />));
-    }
-  };
+  const [fileName, setFileName] = useState("Файл не выбран");
 
   function handleChange(event) {
     setFileName(event.target.files[0].name);
-    console.log(test.idfileColor);
     document.getElementById(`${test.idfileColor}`).style = "color: #000";
   }
+  useEffect(() => {
+    const element = document.querySelector(`#${test.idPlus}`);
+    console.log(element);
+    element.addEventListener("click", onAddBtnClick);
+    return () => {
+      element.removeEventListener("click", onAddBtnClick);
+    };
+  });
   return (
     <div className={classes.testBlock}>
       <input
@@ -36,7 +55,9 @@ const TestQue = (test) => {
         className={classes.answerInput}
         placeholder="Введите вопрос"
       />
+
       {inputList}
+
       <input
         type="number"
         className={classes.answerInput}
@@ -62,6 +83,7 @@ const TestQue = (test) => {
         className={classes.answerInput}
         placeholder="Введите пояснения"
       />
+      <CheckBoxDLS id={test.idPlus} />
     </div>
   );
 };

@@ -12,7 +12,7 @@ const TableTR = () => {
       >
         Джастин Тимберлейк
       </div>
-      <div className={classes.tableRow}>d.timberlake@autoa.su</div>
+      <div className={classes.tableRow}>d.timberlake@autotrade.su</div>
       <div className={classes.tableRow}>100</div>
       <div className={classes.tableRow}>1000</div>
       <div className={classes.tableRow}>200xp</div>

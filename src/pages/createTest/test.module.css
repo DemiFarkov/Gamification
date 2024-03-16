@@ -9,6 +9,11 @@
     width: 94%;
 }
 
+.mainContentGrid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
 .H1 {
     padding: .7vw;
     font-size: 2.5vw;
@@ -16,22 +21,244 @@
     border-radius: 1vw;
 }
 
+.mainCheckbox {
+    padding: 1vw 1vw 1vw 1.5vw;
+    margin: 1vw 2vw 0 0;
+    border: 3px solid #469C9A;
+    border-radius: 3vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainCheckboxWrapper {
+    margin: 1vw 0 0 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.mainCheckboxWrapper:first-child {
+    margin-top: 0;
+}
+
+.mainCheckboxInput {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.mainCheckboxLabel {
+    display: flex;
+    text-align: start;
+    align-items: center;
+    user-select: none;
+}
+
+.mainCheckboxLabel::before {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}
+
+.mainCheckboxInput:checked+label::before {
+    background-color: #407d7c;
+}
+
+.mainCheckboxLabelDls {
+    display: flex;
+    text-align: start;
+    width: 100%;
+    align-items: center;
+    user-select: none;
+    padding: .5vw 2vw .5vw 2vw;
+    margin-bottom: 1vw;
+    border: 1px solid #469C9A;
+    border-radius: 3vw;
+}
+
+.mainCheckboxLabelDls::before {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}
+
+.mainCheckboxInputDls:checked+label::before {
+    background-color: #407d7c;
+}
+
+.mainCheckboxInputDls {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.mainCheckboxDLS {
+    top: 0;
+    right: calc(100% + 2vw);
+    width: calc(50% - 2vw);
+    position: absolute;
+}
+
+.addBtn {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    user-select: none;
+    padding: 0.5vw 2vw 0.5vw 2vw;
+    margin-bottom: 1vw;
+    cursor: pointer;
+    border: 1px solid #469C9A;
+    border-radius: 3vw;
+}
+
 .testBlock {
+    position: relative;
     padding: 2vw 0 2vw 0;
     margin: 1vw auto 0 auto;
-    width: 65%;
+
     background: #202833;
     border-radius: 3vw;
+}
+
+
+.TestName {
+    padding: 1vw 0 2vw 0;
+    margin: 1vw auto 0 auto;
+
+    background: #202833;
+    border-radius: 3vw;
+
+}
+
+.TestNameInputContainer {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.TestNameInput {
+    padding: .7vw;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    background: #D9D9D9;
+}
+
+.answerInputContainer {
+    margin: 1vw auto 0 auto;
+    position: relative;
+}
+
+.svgPlus {
+    width: 3vw;
+    position: absolute;
+    left: -.5%;
+    cursor: pointer;
 }
 
 .answerInput {
     padding: .7vw;
     margin: 1vw auto 0 auto;
-    width: 85%;
+    width: 90%;
     display: block;
     font-size: 1.2vw;
     border-radius: 3vw;
-    background: #fff;
+    background: #D9D9D9;
+
+}
+
+.TestNameInputWrapper {
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.TestNameInputTitle {
+    text-align: start;
+    font-size: 1.8vw;
+    -webkit-text-stroke: 1px #000000;
+}
+
+.TestSettingsBlock {
+    padding: 1vw 0 2vw 0;
+    margin: 1vw auto 0 auto;
+
+    background: #202833;
+    border-radius: 3vw;
+}
+
+.TestSettingsInputBlock {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.TestSettingsinputWrapper {
+    margin-top: .5vw;
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.TestSettingsinputName {
+    margin: 0 0 .2vw 1vw;
+    text-align: start;
+    font-size: 1vw;
+}
+
+.TestSettingsInputTitle {
+    text-align: start;
+    width: 100%;
+    font-size: 1.8vw;
+    -webkit-text-stroke: 1px #000000;
+}
+
+.TestSettingsinput {
+    padding: 0.7vw;
+    font-size: .95vw;
+    border-radius: 3vw;
+    background: #D9D9D9;
+}
+
+.textareaContainer {
+    padding: 1vw 1vw 1vw 1vw;
+    margin: 1vw 0 0 2vw;
+    background: #202833;
+    border-radius: 3vw;
+}
+
+.textareaTitle {
+    font-size: 1.5vw;
+}
+
+.textareaCOntent {
+    padding: 1vw;
+    margin-top: 1vw;
+    background: #D9D9D9;
+    border-radius: 1vw;
+    resize: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
 }
 
 .answerInput:first-child {
@@ -42,13 +269,14 @@
     position: relative;
     padding: .3vw;
     margin: 1vw auto 0 auto;
-    width: 85%;
+    width: 90%;
     display: block;
     font-size: 1.2vw;
     border-radius: 3vw;
     background: #fff;
     display: flex;
     align-items: center;
+    background: #D9D9D9;
 }
 
 .answerInputFile {
@@ -79,7 +307,7 @@
 
 .btnContainer {
     margin: 2vw auto 0 auto;
-    width: 65%;
+
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
