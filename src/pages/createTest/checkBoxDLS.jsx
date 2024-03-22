@@ -26,7 +26,7 @@ const CheckBoxDLS = (id) => {
         </label>
       
       <div className={classes.addBtn} id={id.id}>Добавить свой ответ</div>
-      <div className={classes.addBtn}>Добавить фото</div>
+      {/* <div className={classes.addBtn}>Добавить фото</div> */}
       <div className={classes.addBtn}>Добавить пояснение</div>
     </div>
   );

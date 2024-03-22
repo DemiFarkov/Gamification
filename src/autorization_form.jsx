@@ -16,7 +16,7 @@ export default function AutorizationForm() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (location.pathname == "/Gamification") {
+    
       try {
         const user = await instance.post("api/login/", {
           username,
@@ -28,7 +28,7 @@ export default function AutorizationForm() {
         return e;
       }
     }
-  };
+  
   return (
     <div className={classes.mainContainer}>
       <LoginForm
