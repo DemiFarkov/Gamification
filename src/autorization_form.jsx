@@ -1,21 +1,49 @@
 import classes from "./autorization_form.module.css";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { instance } from "./utils/axios";
+import LoginForm from "./components/general/loginForm";
+import RegistForm from "./components/general/registForm";
+import { useDispatch } from "react-redux";
+import { login } from "./toolkitRedux/toolkitSlice";
+import { useAuth } from "./hooks/reduxHooks";
+import { Navigate, useNavigate } from "react-router-dom";
+import PrivateRoute from "./components/general/PrivateRoute";
 
 export default function AutorizationForm() {
-  const [visible, setVisible] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (location.pathname == "/Gamification") {
+      try {
+        const user = await instance.post("api/login/", {
+          username,
+          password,
+        });
+        dispatch(login(user.data));
+        navigate("pages/profil");
+      } catch (e) {
+        return e;
+      }
+    }
+  };
   return (
     <div className={classes.mainContainer}>
-      <section className={classes.formContainer}>
-        <form action="" className={classes.form_container}>
-          <input type="text" className={classes.formInput} />
-          <input type="password" className={classes.formInput} />
-          <Link to="./pages/profil" className={classes.button}>
-            Войти
-          </Link>
-          {/* <button className={classes.button}>Войти</button> */}
-        </form>
-      </section>      
+      {location.pathname === "/Gamification" ? (
+        <LoginForm
+          setUsername={setUsername}
+          setPassword={setPassword}
+          handleSubmit={(e) => handleSubmit(e)}
+        />
+      ) : (
+        <RegistForm
+          setUsername={setUsername}
+          setPassword={setPassword}
+          handleSubmit={() => handleSubmit()}
+        />
+      )}
     </div>
   );
 }

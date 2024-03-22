@@ -153,10 +153,6 @@
     transition: .1s all;
 }
 
-.tableMenuContent:nth-last-child(-n+3) {
-    background: #000;
-}
-
 .tableMenuContainerHidden {
     position: absolute;
     top: 90%;
