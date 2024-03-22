@@ -31,19 +31,11 @@ export default function AutorizationForm() {
   };
   return (
     <div className={classes.mainContainer}>
-      {location.pathname === "/Gamification" ? (
-        <LoginForm
-          setUsername={setUsername}
-          setPassword={setPassword}
-          handleSubmit={(e) => handleSubmit(e)}
-        />
-      ) : (
-        <RegistForm
-          setUsername={setUsername}
-          setPassword={setPassword}
-          handleSubmit={() => handleSubmit()}
-        />
-      )}
+      <LoginForm
+        setUsername={setUsername}
+        setPassword={setPassword}
+        handleSubmit={(e) => handleSubmit(e)}
+      />
     </div>
   );
 }
