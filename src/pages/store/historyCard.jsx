@@ -14,7 +14,6 @@ const HistoryCard = () => {
     month = "0" + month;
   }
   var dates = day + "." + month + "." + year;
-  console.log(dates);
   return (
     <div className={classes.HistoryCardContainer}>
       <img src={Ticket} alt="" className={classes.HistoryCardImg} />

@@ -26,11 +26,10 @@ const LoginForm = (props) => {
             Вход
           </button>
         </form>
-        <div className={classes.noLogin}>
-          Нет учетной записи?{" "}
-          <Link to="./components/general/registForm">
-            Зарегистрироваться
-          </Link>
+        <div className={classes.data}>
+          <h2>Данные для входа: </h2>
+          <div>Логин: o.putintseazzaa</div>
+          <div>Пароль: m4rgm3wX56</div>
         </div>
       </section>
     </>

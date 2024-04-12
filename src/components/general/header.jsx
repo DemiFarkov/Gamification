@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import classes from "./header.module.css";
-import Сircle from "../../img/img_profil/Ellipse_7.png";
 import strelka from "../../img/Arrow27.svg";
 import { Link } from "react-router-dom";
-import { useRef, useEffect } from "react";
-import { useClickOutside } from "./useClickOutside";
-const Header = (props) => {
+import { useRef } from "react";
+import { useClickOutside } from "../../hooks/useClickOutside";
+const Header = () => {
   const [visibleNav, setVisibleNav] = useState(false);
   const ref = useRef(null);
   useClickOutside(ref, () => {

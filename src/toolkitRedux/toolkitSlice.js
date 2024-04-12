@@ -12,7 +12,6 @@ export const authSlice = createSlice({
         login(state, action) {
             state.user = action.payload
             state.isLogged = true
-            console.log("Ну слайс хотя бы работает")
         }
     }
 })

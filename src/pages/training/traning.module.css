@@ -1,0 +1,70 @@
+.mainContainer {
+    padding-right: 1vw;
+    margin: 1vw 0.7vw 1.5vw 0.7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+}
+
+.H1 {
+    padding: 0.7vw;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw
+}
+
+.navTest {
+    margin: 1.5vw auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navBtn {
+    width: 20%;
+    height: 3vw;
+    border: .2vw solid #469C9A;
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2vw;
+    cursor: pointer;
+
+}
+
+.navBtn:hover {
+    background: #212b37;
+}
+
+.mainBlock {
+    padding: 3vw 5vw 3vw 5vw;
+    margin: 0 auto;
+    width: 85%;
+    border-radius: 1vw;
+    background: #202833;
+}
+
+.AccordionTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.AccordionTitle {
+    padding: .25vw .4vw .25vw .4vw;
+    background: #469C9A;
+    border-radius: 3vw;
+    font-size: 1.1vw;
+}
+
+
+th {
+    padding: 1vw;
+    border: 1px solid #469C9A;
+    color: aliceblue;
+    font-weight: 400;
+}

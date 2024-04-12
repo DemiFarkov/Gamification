@@ -8,6 +8,8 @@ const Navigation = () => {
   const [StoreOpen, setStoreOpen] = useState(false);
   const [FriendsOpen, setFriendsOpen] = useState(false);
   const [InventoryOpen, setInventoryOpen] = useState(false);
+  const [TestOpen, setTestOpen] = useState(false);
+
   return (
     <div className={classes.mainContainer}>
       <Link
@@ -92,6 +94,25 @@ const Navigation = () => {
             }
           >
             Игроки
+          </div>
+        </div>
+      </Link>
+      <Link
+        to="../pages/traning"
+        className={classes.button}
+        onMouseOver={() => setTestOpen(true)}
+        onMouseOut={() => setTestOpen(false)}
+      >
+        <img src={Logo} alt="" className={classes.mainContainerImg} />
+        <div
+          className={
+            TestOpen ? classes.menuContainerOpen : classes.menuContainerClose
+          }
+        >
+          <div
+            className={TestOpen ? classes.menuNameOpen : classes.menuNameClose}
+          >
+            Тесты
           </div>
         </div>
       </Link>

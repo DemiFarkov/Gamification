@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classes from "./profil.module.css";
-import WindowModal from "../../components/general/WindowModal";
+import WindowModal from "./WindowModal";
 
 const ColumnContainer2 = () => {
   const [openMore, setOpenMore] = useState(false);

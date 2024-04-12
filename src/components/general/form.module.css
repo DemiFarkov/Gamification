@@ -10,6 +10,8 @@
     background: #202833;
     box-shadow: 0 0 150px #61cdcb93;
     border-radius: 15px;
+    position: relative;
+
 }
 
 .form_container {
@@ -54,4 +56,16 @@
 .noLogin {
     margin-top: 1vw;
     font-size: 1.4vw;
+}
+
+.data {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 15vw;
+    padding: 2vw;
+    background-color: #fff;
+    color: #202833;
+    text-align: start;
+    
 }
