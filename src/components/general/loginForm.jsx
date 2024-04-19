@@ -28,8 +28,8 @@ const LoginForm = (props) => {
         </form>
         <div className={classes.data}>
           <h2>Данные для входа: </h2>
-          <div>Логин: o.putintseazzaa</div>
-          <div>Пароль: m4rgm3wX56</div>
+          <div>Логин: n.gorbenko</div>
+          <div>Пароль: mKf5YMkLpZ</div>
         </div>
       </section>
     </>

@@ -58,7 +58,7 @@ const TestSettings = () => {
       <TestSettingsInput
         type={"number"}
         title={"Опыт"}
-        text={"Введите минимальное кол-во опыта..."}
+        text={"Введите минимальное уровень для прохождения..."}
         min="0"
         id={"EXPForTest"}
 

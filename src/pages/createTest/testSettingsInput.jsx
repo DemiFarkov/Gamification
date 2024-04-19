@@ -12,6 +12,7 @@ const TestSettingsInput = (props) => {
         min={props.min ? props.min : undefined}
         max={props.max ? props.max : undefined}
         id={props.id}
+        
       />
     </div>
   );

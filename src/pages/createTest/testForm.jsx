@@ -10,7 +10,7 @@ const TestForm = (props) => {
     idTitle,
     idText,
     data,
-    countForBlocks,blockList
+    countForTheory,
   } = props;
   const [fileName, setFileName] = useState("Файл не выбран");
   const [collectionForm, setCollectionForm] = useState({});
@@ -28,14 +28,13 @@ const TestForm = (props) => {
       ? document.querySelector(`#${idText}`).value
       : "";
     setCollectionForm({
-      type: "form",
-      form_title: title,
-      form_text: text,
+      type: "theory",
+      content: { title: title, text: text },
     });
   }
   // Отправка объекта с данными из этой формы в общий массив данных
   useEffect(() => {
-    data(collectionForm, countForBlocks);
+    data(collectionForm, idMainBlock);
   }, [collectionForm]);
 
   // // Изменение вспомогательного state
@@ -72,7 +71,7 @@ const TestForm = (props) => {
   // }, [answer_options]);
 
   return (
-    <div className={classes.testBlock} id={idMainBlock}>
+    <div className={classes.MainBlock} id={idMainBlock}>
       <h2 className={classes.blockTitle} id="idTitleBlock"></h2>
 
       <input
@@ -81,6 +80,7 @@ const TestForm = (props) => {
         placeholder="Заголовок"
         id={idTitle}
         onChange={() => changecollectionQue()}
+        required
       />
       <input
         type="text"
@@ -88,6 +88,7 @@ const TestForm = (props) => {
         placeholder="Введите текст"
         id={idText}
         onChange={() => changecollectionQue()}
+        required
       />
 
       <div className={classes.answerInputFileContainer}>

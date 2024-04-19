@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import classes from "./traning.module.css";
+import { Link } from "react-router-dom";
 
 const AccordionTraning = (props) => {
-  const { AccordionSummaryy } = props;
+  const { AccordionSummaryy, que } = props;
   return (
     <div className={classes.AccordionContainer}>
       <Accordion style={{ background: "#202833", boxShadow: "none" }}>
@@ -18,7 +18,7 @@ const AccordionTraning = (props) => {
           <div className={classes.AccordionTitle}>{AccordionSummaryy}</div>
         </AccordionSummary>
         <AccordionDetails>
-          <table className={classes.AccordionTable} cellspacing="0">
+          <table className={classes.AccordionTable} cellSpacing="0">
             <thead>
               <tr className={classes.AccordionTR}>
                 <th>
@@ -36,16 +36,19 @@ const AccordionTraning = (props) => {
               </tr>
             </thead>
             <tbody>
-              <RowTable
+              {que.map((que, index) => (
+                <RowTable
+                  key={index}
+                  nameTest={que.name}
+                  carmaValue={que.required_karma}
+                  expValue={que.min_level}
+                />
+              ))}
+              {/* <RowTable
                 nameTest={"Права ADRS"}
                 carmaValue={100}
                 expValue={700}
-              />
-              <RowTable
-                nameTest={"Права 1C"}
-                carmaValue={100}
-                expValue={800}
-              />
+              /> */}
             </tbody>
           </table>
         </AccordionDetails>
@@ -59,16 +62,24 @@ export default AccordionTraning;
 const RowTable = (props) => {
   const { nameTest, carmaValue, expValue } = props;
   return (
-    <tr className={classes.AccordionTR}>
-      <th>{nameTest}</th>
+    <tr>
+      <th>
+        <Link
+          to={{
+            pathname: "../pages/traning/test",
+            search: "?id=14",
+          }}
+          className={classes.AccordionLink}
+        >
+          {nameTest}
+        </Link>
+      </th>
       <th>
         <span>Карма</span> {">"} {carmaValue}
         <span> Опыт</span> {">"} {expValue}
       </th>
       <th></th>
-      <th>
-        тут иконки {">"}_{"<"}
-      </th>
+      <th>тут иконки</th>
     </tr>
   );
 };

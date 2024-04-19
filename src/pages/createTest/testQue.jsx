@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./test.module.css";
 import CheckBoxDLS from "./checkBoxDLS";
+import TestForm from "./testForm";
 
 const Input = (props) => {
   return (
@@ -10,7 +11,9 @@ const Input = (props) => {
         className={classes.answerInput}
         placeholder="Введите ответ"
         id={props.idInput}
-        onChange={() => props.changeArrInput(props.justCount, props.idInput)}
+        onChange={() =>
+          props.changeArrInput(props.countForAnswer, props.idInput, "input")
+        }
         required
       />{" "}
       {props.customAnswer == false && (
@@ -19,7 +22,7 @@ const Input = (props) => {
           customAnswer={props.customAnswer}
           changeArrInput={props.changeArrInput}
           idInput={props.idInput}
-          justCount={props.justCount}
+          countForAnswer={props.countForAnswer}
         />
       )}
     </div>
@@ -34,7 +37,9 @@ const InputDLS = (props) => {
         className={classes.answerInput}
         placeholder="Введите ответ"
         id={props.idInput}
-        onChange={() => props.changeArrInput(props.justCount, props.idInput)}
+        onChange={() =>
+          props.changeArrInput(props.countForAnswer, props.idInput, "input")
+        }
         required
       />{" "}
       {props.customAnswer == false && (
@@ -43,7 +48,7 @@ const InputDLS = (props) => {
           customAnswer={props.customAnswer}
           changeArrInput={props.changeArrInput}
           idInput={props.idInput}
-          justCount={props.justCount}
+          countForAnswer={props.countForAnswer}
         />
       )}
     </div>
@@ -58,7 +63,12 @@ const TestAnswerCheckbox = (props) => {
         id={props.idCheckBox}
         className={classes.testAnswerCheckbox}
         onChange={() =>
-          props.changeArrInput(props.justCount, props.idInput, props.idCheckBox)
+          props.changeArrInput(
+            props.countForAnswer,
+            props.idInput,
+            "check",
+            props.idCheckBox
+          )
         }
       />
       <label
@@ -88,30 +98,34 @@ const TestQue = (props) => {
     setForRemove,
     idValuePoins,
     data,
-    blockList,
-    idTitleBlock,
+    idcreateTheory,
+    setModalValidTestText,
+    setVisibleModalValidTest,
   } = props;
-  const [justCount, setJustCount] = useState(1);
+  const [countForAnswer, setCountForAnswer] = useState(1);
   const [customAnswer, setcustomAnswer] = useState(false);
   const [limitedTime, setLimitedTime] = useState(false);
   const [annotation, setAnnotation] = useState(false);
   const [fileName, setFileName] = useState("Файл не выбран");
   const [collectionQue, setCollectionQue] = useState({});
-  const [answer_options, setAnswer_options] = useState([]);
+  const [answer_options, setAnswer_options] = useState([
+    {
+      option_text: "",
+      is_correct: false,
+    },
+  ]);
   const [suppAnswer_options, setSuppAnswer_options] = useState([]);
-  const [actualNumberBlock, setActualNumberBlock] = useState();
   const [inputList, setInputList] = useState([
     <Input
       key={0}
       customAnswer={customAnswer}
-      justCount={0}
+      countForAnswer={0}
       idCheckBoxCustom={idCheckBoxCustom}
       idInput={idMainBlock + "IdInput" + 0}
       removeInput={removeInput}
       changeArrInput={changeArrInput}
     />,
   ]);
-
   // Создание объекта с данными из этого вопроса
   function changecollectionQue() {
     let question_type = "error";
@@ -121,10 +135,12 @@ const TestQue = (props) => {
         question_type_counter++;
       }
     }
-    if (question_type_counter == 1) {
+    if (customAnswer) {
+      question_type = "text";
+    } else if (question_type_counter == 1) {
       question_type = "single";
     } else if (question_type_counter > 1) {
-      question_type = "multy";
+      question_type = "multiple";
     }
     let explanationValue = document.querySelector(`#${idExplanation}`)
       ? document.querySelector(`#${idExplanation}`).value
@@ -135,44 +151,48 @@ const TestQue = (props) => {
       : "";
     setCollectionQue({
       type: "question",
-      question_text: document.querySelector(`#${idText}`).value,
-      question_type: question_type,
-      points: document.querySelector(`#${idValuePoins}`).value,
-      explanation: explanationValue,
-      answer_options: answerOptions,
-      time: timeValue,
+      content: {
+        question_text: document.querySelector(`#${idText}`).value,
+        question_type: question_type,
+        points: document.querySelector(`#${idValuePoins}`).value,
+        explanation: explanationValue,
+        answer_options: question_type !== "text" ? answerOptions : [],
+        time: timeValue,
+      },
     });
   }
   // Отправка объекта с данными из этого вопроса в общий массив данных
   useEffect(() => {
-    data(collectionQue, countForBlocks);
-  }, [collectionQue, answer_options]);
+    data(collectionQue, idMainBlock);
+  }, [collectionQue]);
 
   // Изменение вспомогательного state
-  function changeArrInput(index, id, idCheckBox) {
-    let is_correct_answer = false;
-    if (idCheckBox) {
+  function changeArrInput(index, id, who, idCheckBox) {
+    if (who == "check") {
+      let is_correct_answer = false;
       if (document.querySelector(`#${idCheckBox}`).checked == true) {
         is_correct_answer = true;
+      } else {
+        is_correct_answer = false;
       }
+      setSuppAnswer_options(["check", is_correct_answer, index]);
+    } else if (who == "input") {
+      let value = document.querySelector(`#${id}`).value;
+      setSuppAnswer_options(["input", value, index]);
     }
-    let value = document.querySelector(`#${id}`).value;
-    setSuppAnswer_options({
-      option_text: value,
-      index: index,
-      is_correct_answer: is_correct_answer,
-    });
   }
 
   // При изменении вспомогательного state корректируем объект с данными из полей ответа
   useEffect(() => {
-    if (suppAnswer_options.option_text !== undefined) {
+    if (suppAnswer_options[0] !== undefined) {
       let clonedObj = structuredClone(answer_options);
-      clonedObj[suppAnswer_options.index] = {
-        option_text: suppAnswer_options.option_text,
-        is_correct: suppAnswer_options.is_correct_answer,
-      };
+      if (suppAnswer_options[0] == "check") {
+        clonedObj[suppAnswer_options[2]].is_correct = suppAnswer_options[1];
+      } else if (suppAnswer_options[0] == "input") {
+        clonedObj[suppAnswer_options[2]].option_text = suppAnswer_options[1];
+      }
       setAnswer_options(clonedObj);
+      changecollectionQue();
     }
   }, [suppAnswer_options]);
 
@@ -183,43 +203,57 @@ const TestQue = (props) => {
 
   // Если ответ кастомный, то прячем первый чекбокс для отметки правильных ответов, остальные отображаются по условию при рендере
   useEffect(() => {
-    let testAnswerCheckbox = document.querySelector(
-      `#${idMainBlock} > .${classes.answerInputContainer} > .${classes.testAnswerLAbel}`
-    );
-    if (testAnswerCheckbox.length == 0) {
-      testAnswerCheckbox = document.querySelector(
-        `#${idMainBlock} > .${classes.answerInputContainer} > .${classes.hidden}`
+    if (customAnswer) {
+      let testAnswerCheckbox = document.querySelector(
+        `#${idMainBlock} > .${classes.answerInputContainer} > .${classes.testAnswerLAbel}`
       );
-    }
-    testAnswerCheckbox.className = customAnswer
-      ? classes.hidden
-      : classes.testAnswerLAbel;
-  }, [customAnswer]);
-  useEffect(() => {
-    for (let i = 0; i < blockList.length; i++) {
-      if (blockList[i].props.idMainBlock == idMainBlock) {
-        setActualNumberBlock(i);
+      if (testAnswerCheckbox.length == 0) {
+        testAnswerCheckbox = document.querySelector(
+          `#${idMainBlock} > .${classes.answerInputContainer} > .${classes.hidden}`
+        );
       }
+      testAnswerCheckbox.className = customAnswer
+        ? classes.hidden
+        : classes.testAnswerLAbel;
+      let input = document.querySelector(`#${idMainBlock + "IdInput" + 0}`);
+      input.value = "Данный ответ введет тестируемый";
+      input.disabled = true
+
     }
-  }, [blockList]);
+    changecollectionQue()
+  }, [customAnswer]);
+
+  function removeThisBlock(id) {
+    setVisibleModalValidTest(true);
+    setModalValidTestText([
+      "Вы действительно хотите удалить этот блок?",
+      true,
+      "remove block",
+      id,
+    ]);
+  }
   // Содание поля для ответа
   function onAddBtnClick() {
-    setJustCount(justCount + 1);
+    setCountForAnswer(countForAnswer + 1);
 
     if (customAnswer === false) {
       setInputList(
         inputList.concat(
           <InputDLS
-            key={justCount}
+            key={countForAnswer}
             customAnswer={customAnswer}
-            justCount={justCount}
-            idInput={idMainBlock + "IdInput" + justCount}
+            countForAnswer={countForAnswer}
+            idInput={idMainBlock + "IdInput" + countForAnswer}
             removeInput={removeInput}
             changeArrInput={changeArrInput}
           ></InputDLS>
         )
       );
+      let clonedObj = structuredClone(answer_options);
+      clonedObj.push({ option_text: "", is_correct: false });
+      setAnswer_options(clonedObj);
     }
+    changecollectionQue();
   }
   //  Удаление поля для ответа со страницы и из массива для отправки данных
   function removeInput() {
@@ -253,16 +287,19 @@ const TestQue = (props) => {
     };
   });
   return (
-    <div className={classes.testBlock} id={idMainBlock}>
+    <div className={classes.MainBlock} id={idMainBlock}>
       <h2 className={classes.blockTitle} id="idTitleBlock"></h2>
-      <input
-        type="text"
-        id={idText}
-        className={classes.answerInput}
-        placeholder="Введите вопрос"
-        onChange={(value) => changecollectionQue(value)}
-        required
-      />
+      <div className={classes.firstAnswerInputWrapper}>
+        <input
+          type="text"
+          id={idText}
+          className={classes.answerInput}
+          placeholder="Введите вопрос"
+          onChange={(value) => changecollectionQue(value)}
+          required
+        />
+      </div>
+
       {customAnswer ? inputList[0] : inputList}
 
       <input
@@ -272,6 +309,7 @@ const TestQue = (props) => {
         max={100}
         id={idValuePoins}
         onChange={(value) => changecollectionQue(value)}
+        required
       />
       <div className={classes.answerInputFileContainer}>
         <label htmlFor={idfile} className={classes.answerInputFileText}>
@@ -312,7 +350,7 @@ const TestQue = (props) => {
 
       <div
         className={classes.BtnRemoveBlock}
-        onClick={() => setForRemove(idMainBlock)}
+        onClick={() => removeThisBlock(idMainBlock)}
       >
         Удалить
       </div>

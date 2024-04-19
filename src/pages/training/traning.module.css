@@ -27,6 +27,7 @@
     width: 20%;
     height: 3vw;
     border: .2vw solid #469C9A;
+    color: #fff;
     border-radius: 3vw;
     display: flex;
     align-items: center;
@@ -61,10 +62,128 @@
     font-size: 1.1vw;
 }
 
+.AccordionLink {
+    padding: 1vw;
+    display: block;
+    width: 100%;
+    font-size: 1.2vw;
+    color: #fff;
+}
+
+.AccordionLink:active {
+    color: #fff;
+}
+
+.AccordionLink:hover {
+    background: #384454;
+}
+
+.AccordionTR th {
+    padding: 1vw;
+}
 
 th {
-    padding: 1vw;
     border: 1px solid #469C9A;
     color: aliceblue;
     font-weight: 400;
+}
+
+.mainContentBox {
+    margin: 1vw .7vw .5vw .7vw;
+    height: 84vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.theoryContainer {
+    padding: 1.5vw;
+    margin: 0 2vw 1.5vw .7vw;
+    width: calc(94% - 1.3vw);
+    padding-right: 1vw;
+    background: #202833;
+    border-radius: 1vw;
+    text-align: start;
+    position: relative;
+}
+
+.theoryTitle {
+    font-size: 1.8vw;
+}
+
+.theoryText {
+    margin-top: 1vw;
+}
+
+.theoryBtn {
+    width: 15vw;
+    position: absolute !important;
+    bottom: 3vw;
+    right: 2vw;
+    background: #3d4858 !important;
+    font-size: 1.1vw !important;
+}
+
+.QueContainer {
+    margin: 0 2vw 1.5vw .7vw;
+    width: calc(94% - 1.3vw);
+    display: flex;
+    justify-content: space-between;
+}
+.QueTimer{
+font-size: 1.2vw;
+}
+.countQue {
+    width: 30%;
+    border-radius: 1vw;
+}
+.countQueWrapper{
+    
+    padding: 1vw 0;
+    background: #202833;
+    border-radius: 1vw;
+
+}
+.ThisQue {
+    width: 68%;
+    position: relative;
+    background: #202833;
+    border-radius: 1vw;
+}
+.QueTable{
+    margin: .5vw ;
+    display: flex;
+    flex-wrap: wrap;
+}
+.queCircle{
+    margin: .4vw;
+    width: calc(12.5% - .8vw) ;
+    height: 2.5vw;
+    border-radius: 50%;
+    background: #e2ecec;
+}
+.numberQue{
+    margin: 2vw;
+    font-size: 2vw;
+}
+.ThisQueText{
+    margin: 5vw 2vw;
+    text-align: start;
+    font-size: 1.5vw;
+}
+.finalText{
+ margin: 2vw;
+ text-align: center;
+ font-size: 3vw;
+}
+.BtnFinalTest{
+    padding: 0 !important;
+    margin: 0 auto;
+    width: 100%;
+    border: .1vw solid #469C9A !important;
+}
+.linkFinalTest{
+    padding: .3vw;
+    color: #fff;    width: 100%;
+
+    font-size: 1.2vw;
 }

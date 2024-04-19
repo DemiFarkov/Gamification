@@ -15,15 +15,16 @@ export default function AutorizationForm() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-navigate("pages/profil");
     try {
-      const user = await instance.post("api/login/", {
-        username,
-        password,
-      });
+      navigate("pages/profil");
+      const user = await instance
+        .post("api/login/", {
+          username,
+          password,
+        })
+        ;
       dispatch(login(user.data));
     } catch (e) {
-      
       return e;
     }
   };

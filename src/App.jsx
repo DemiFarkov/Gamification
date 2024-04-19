@@ -15,6 +15,7 @@ import ChangeUsers from "./pages/adminPadges/changeUsers/changeUsers";
 import CreateTest from "./pages/createTest/createTest";
 import PrivateRoute from "./components/general/PrivateRoute";
 import MainTraning from "./pages/training/main";
+import Test from "./pages/training/test";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
             <Route path="pages/store" element={<Store />} />
             <Route path="pages/createTest" element={<CreateTest />} />
             <Route path="pages/traning" element={<MainTraning />} />
+            <Route path="pages/traning/test" element={<Test />}></Route>
+
+            
 
           </Route>
           <Route
