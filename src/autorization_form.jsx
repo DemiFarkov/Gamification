@@ -17,17 +17,17 @@ export default function AutorizationForm() {
     e.preventDefault();
     try {
       navigate("pages/profil");
-      const user = await instance
-        .post("api/login/", {
-          username,
-          password,
-        })
-        ;
-      dispatch(login(user.data));
-    } catch (e) {
-      return e;
-    }
-  };
+  //     const user = await instance
+  //       .post("api/login/", {
+  //         username,
+  //         password,
+  //       })
+  //       ;
+  //     dispatch(login(user.data));
+  //   } catch (e) {
+  //     return e;
+  //   }
+  // };
 
   return (
     <div className={classes.mainContainer}>
