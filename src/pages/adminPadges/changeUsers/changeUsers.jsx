@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../../components/general/header";
 import Navigation from "../../../components/general/navigation";
 import classes from "./ChangeUsers.module.css";
 import TableTR from "./tableTR";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Padding } from "@mui/icons-material";
 
 const ChangeUsers = () => {
+  const [roleFilter, SetRoleFilter] = useState("");
+  const [postFilter, SetPostFilter] = useState("");
+
+
+  const styleSelect = {
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#469C9A",
+      color: "#fff",
+      borderRadius: "3vw",
+    },
+    "& label": {
+      color: "#fff ",
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "#fff !important",
+      minWidth: "12vw",
+    },
+    "& svg": {
+      color: "#fff ",
+    },
+    "& .MuiOutlinedInput-root:hover": {
+      color: "#fff",
+      "& > fieldset": {
+        borderColor: "#469C9A",
+      },
+    },
+  };
   return (
     <div>
       <Header />
@@ -15,14 +44,41 @@ const ChangeUsers = () => {
           <div className={classes.filter}>
             <input type="text" className={classes.filterInput} />{" "}
             <div className={classes.filterSelectContainer}>
-              <label htmlFor="select" className={classes.filterSelectLabel}>
-                Фильтр:
-              </label>
-              <select name="" id="select" className={classes.filterSelect}>
-                <option value="">Значение 1</option>
-                <option value="">Значение 2</option>
-                <option value="">Значение 3</option>
-              </select>
+              <FormControl sx={styleSelect}>
+                <InputLabel id="roleFilter">Роль</InputLabel>
+                <Select
+                  id="roleFilter"
+                  value={roleFilter}
+                  onChange={(event) => {
+                    SetRoleFilter(event.target.value);
+                  }}
+                  label="Роль"
+                >
+                  <MenuItem value={"Не выбрано"}>Не выбрано</MenuItem>
+                  <MenuItem value={"Пользователь"}>Пользователь</MenuItem>
+                  <MenuItem value={"Модератор"}>Модератор</MenuItem>
+                  <MenuItem value={"Администратор"}>Администратор</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl sx={styleSelect}>
+                <InputLabel id="postFilter">Должность</InputLabel>
+                <Select
+                  id="postFilter"
+                  value={postFilter}
+                  onChange={(event) => {
+                    SetPostFilter(event.target.value);
+                  }}
+                  label="Должность"
+                  sx={styleSelect}
+                >
+                  <MenuItem value={"Не выбрано"}>Не выбрано</MenuItem>
+                  <MenuItem value={"Оператор ТП"}>Оператор ТП</MenuItem>
+                  <MenuItem value={"Специалист ТП"}>Специалист ТП</MenuItem>
+                  <MenuItem value={"Консультант ТП"}>Консультант ТП</MenuItem>
+                  <MenuItem value={"Координатор ТП"}>Координатор ТП</MenuItem>
+
+                </Select>
+              </FormControl>
             </div>
           </div>
 

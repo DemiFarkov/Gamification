@@ -1,0 +1,389 @@
+th {
+    font-size: 1.1vw !important;
+}
+
+.mainContainer {
+    padding-right: 1vw;
+    margin: 1vw 0.7vw 1.5vw 0.7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContentBox {
+    margin: 1vw .7vw .5vw .7vw;
+    width: 94%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+}
+
+.H1 {
+    padding: 0.7vw;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw
+}
+
+.navTest {
+    margin: 1.5vw auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navBtn {
+    width: 20%;
+    height: 3vw;
+    border: .2vw solid #469C9A;
+    color: #fff;
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2vw;
+    cursor: pointer;
+
+}
+
+.navBtn:hover {
+    background: #212b37;
+}
+
+.mainBlock {
+    padding: 2vw 1vw;
+    border-radius: 1vw;
+    background: #202833;
+}
+
+.selectContainer {
+    margin-bottom: 1vw;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.selectCheckboxWrapper {
+    margin: 8px;
+    display: flex;
+    min-width: 24vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectCheckboxInput {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.selectCheckboxInput:checked+label::before {
+    background-color: #407d7c;
+}
+
+.selectCheckboxLabel {
+    display: flex;
+    text-align: start;
+    align-items: center;
+    user-select: none;
+    font-size: 1.1vw;
+}
+
+.selectCheckboxLabel::before {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 2vw;
+    height: 2vw;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}
+
+.selectBtnReset {
+    margin: 8px !important;
+    width: 24vw !important;
+    color: aliceblue !important;
+    border: .1vw solid #469C9A !important;
+    border-radius: 4px !important;
+    padding: 16.5px 14px !important;
+    font-size: 1rem !important;
+    line-height: normal !important;
+}
+
+.contentGrid {
+    display: grid;
+    grid-template-columns: 85% 15%;
+}
+
+.rowTitle {
+    padding: 0 1vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+@keyframes rowStatistics {
+    0% {
+        transform: translateX(0);
+
+        height: 7.3vw;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    40% {
+        transform: translateX(100px);
+        opacity: 0;
+        margin: 1vw auto;
+        padding: 1vw;
+        height: 7.3vw;
+    }
+
+    100% {
+        transform: translateX(100px);
+        height: 0px;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        display: none;
+
+    }
+}
+
+@keyframes rowStatistics1 {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+
+        opacity: 1;
+
+    }
+}
+
+.rowStatistic {
+    margin: 1vw auto 0 auto;
+    padding: 1vw;
+    width: 100%;
+    position: relative;
+    border-radius: 1vw;
+    background: #46566b2d;
+
+    animation: rowStatistics1 1s forwards;
+}
+
+.modalRow {
+    margin: 1vw auto 0 auto;
+    padding: 1vw;
+    width: 100%;
+    color: aliceblue;
+    position: relative;
+    border-radius: 1vw;
+    background: #46566b2d;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rowStatisticExit {
+    margin: 1vw auto 0 auto;
+    padding: 1vw;
+    width: 100%;
+    position: relative;
+    border-radius: 1vw;
+    background: #46566b2d;
+    transition: all 2s linear;
+    animation: rowStatistics 2s forwards;
+}
+
+.rowTitleItem {
+    background: #469C9A;
+    font-size: 1.2vw;
+    text-align: center;
+    border-radius: 1vw;
+}
+
+
+
+.rowcontainer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1vw;
+    position: relative;
+    transition: all .3s linear;
+}
+
+.rowItem {
+    padding: 1vw .5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #131820;
+    border-radius: 1vw;
+    overflow-x: scroll;
+}
+
+.btnMoreContainer {
+    padding: 1vw 0 0 1vw;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 3vw;
+    height: 3vw;
+    font-size: 1.2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 1vw 0;
+
+
+}
+
+.btnMoreContainer:hover {
+    background: linear-gradient(-40deg, #469C9A, #46566b00 40%);
+}
+
+.btnMore {
+    transform: rotate(-40deg);
+    width: 50%;
+    cursor: pointer;
+    transition: all 2s linear;
+}
+
+.averageScoreContainer {
+    margin-bottom: 1vw;
+    padding: 2vw 0;
+    margin-left: 2vw;
+    background: #202833;
+    border-radius: 1vw;
+}
+
+.averageScore {
+    margin: 2vw auto 0 auto;
+    font-size: 1.5vw;
+    background: #131820;
+    border-radius: 1vw;
+    width: 50%;
+    height: 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.sideBlockTitle {
+    margin: 0 auto;
+    width: 70%;
+    background: #469C9A;
+    font-size: 1.2vw;
+    border-radius: 1vw;
+
+}
+
+.sideBlok {
+    margin: 1vw 0 0 20%;
+    width: 60%;
+    display: flex;
+    font-size: .9vw;
+    align-items: center;
+}
+
+.sideBlok img {
+    width: 1.8vw;
+    margin-right: .3vw;
+}
+
+.sideBlok p {
+
+    margin-right: .3vw;
+}
+
+.sideBlokTop {
+    margin: 2vw 0 0 2vw;
+    padding: .5vw;
+    border: .1vw solid #469C9A;
+    border-radius: 1vw;
+    font-size: 1.1vw;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+.sideBlokTop:hover {
+    background: #2a2e3bc5;
+}
+
+.AccordionTitle {
+    padding: .25vw .4vw .25vw .4vw;
+    min-width: 30%;
+    background: #469C9A;
+    border-radius: 3vw;
+    font-size: 1.2vw;
+}
+
+.AccordionTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.AccordionTR th {
+    padding: 1vw;
+
+}
+
+.AccordionThName {
+    width: 50%;
+}
+
+.AccordionThСonditions {
+    width: 20%;
+}
+
+.AccordionTHReset {
+    width: 30%;
+
+}
+
+.AccordionTHResetBTN {
+    padding: 1vw;
+    font-size: 1.1vw;
+}
+
+.AccordionTHResetBTN:hover {
+    background: #384454;
+    cursor: pointer;
+    
+}
+
+.AccordionSubTitle {
+
+    padding: .25vw 1vw .25vw 1vw;
+    min-width: 30%;
+    border-radius: 3vw;
+    font-size: 1.2vw;
+    background: #202833;
+    color: aliceblue;
+    border: #469C9A .1vw solid;
+}
+
+.AccordionLink {
+    display: block;
+    font-size: 1.1vw;
+    height: 100%;
+    cursor: default;color: #1C2025;
+    height: 100%;
+    width: 100%;
+}
+
+.dialogTitle{
+display: flex;
+justify-content: space-between;
+color: aliceblue;
+}

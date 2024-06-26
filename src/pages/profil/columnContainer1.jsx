@@ -7,6 +7,7 @@ import Сharisma from "../../img/img_profil/image_53.png";
 import Сircle from "../../img/img_profil/Ellipse_7.png";
 import Rog from "../../img/devil-clipart-sticker-9.png";
 import { Link } from "react-router-dom";
+import foto from "../../img/Безымянный.png"
 const ColumnContainer1 = () => {
   // данные для progressBar
   const testData = [{ completed: 60 }];
@@ -22,6 +23,7 @@ const ColumnContainer1 = () => {
       <div className={classes.box2}>
         {/* <img className={classes.rog} src={Rog} alt="" /> */}
         <img src={Avatar} alt="ничего нет" className={classes.box2Img} />
+        {/* <div className={classes.box2IMGBack}><img src={foto} alt="" /></div> */}
       </div>
 
       <div className={classes.box3}>

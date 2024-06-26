@@ -1,0 +1,100 @@
+import React from "react";
+import classes from "./testsStatistics.module.css";
+import { useNavigate } from "react-router-dom";
+import { Dropdown } from "@mui/base/Dropdown";
+import { Menu } from "@mui/base/Menu";
+import { MenuButton, MenuItem, AnimatedListbox } from "../../../components/general/dropDownMui.jsx";
+import "../../../components/general/styles.css";
+const AccordiontStatisticss = (props) => {
+  const {
+    duration,
+    employee_name,
+    end_time,
+    max_score,
+    score,
+    status,
+    test_acoin_reward,
+    test_experience_points,
+    test_id,
+    test_name,
+    theme_name,
+    test_attempt,
+    allEmployee,
+    setArrFilter,
+  } = props;
+  const createHandleMenuClick = (menuItem) => {};
+  const navigate = useNavigate();
+  return (
+    <div className={classes.rowStatistic} id={"id" + test_attempt}>
+      <div className={classes.rowcontainer}>
+        <div className={classes.rowItem} style={{ width: "19%" }}>
+          {employee_name}
+        </div>
+        <div className={classes.rowItem} style={{ width: "19%" }}>
+          {theme_name}
+        </div>
+        <div className={classes.rowItem} style={{ width: "19%" }}>
+          {test_name}
+        </div>
+
+        <div className={classes.rowItem} style={{ width: "7%" }}>
+          {duration}
+        </div>
+        <div className={classes.rowItem} style={{ width: "10%" }}>
+          {end_time && end_time.slice(0, end_time.indexOf(" "))}
+        </div>
+        <div className={classes.rowItem} style={{ width: "13%" }}>
+          {employee_name}
+        </div>
+        <div className={classes.rowItem} style={{ width: "10%" }}>
+          {status == "Не начато" ? (
+            <span style={{ color: "#778080" }}>{status}</span>
+          ) : status == "На модерации" ? (
+            <span style={{ color: "#b7af3a" }}>На модерации</span>
+          ) : status == "Failed" ? (
+            <span style={{ color: "#b5341d" }}>
+              Не пройден <br /> {score}/{max_score}
+            </span>
+          ) : status == "Passed" ? (
+            <span style={{ color: "#4dd12f" }}>
+              Пройден <br /> {score}/{max_score}
+            </span>
+          ) : (
+            status == "In Progress" && (
+              <span style={{ color: "#586577" }}>
+                В процессе <br />
+              </span>
+            )
+          )}
+        </div>
+      </div>
+      <div className={classes.btnMoreContainer}>
+        <div className={classes.btnMore}>
+          <Dropdown>
+            <MenuButton>...</MenuButton>
+            <Menu slots={{ listbox: AnimatedListbox }}>
+              <MenuItem
+                onClick={() =>
+                  navigate({
+                    pathname: "../pages/tests/traning/result",
+                    search: `?id=${test_attempt}`,
+                  })
+                }
+              >
+                Показать результат
+              </MenuItem>
+              <MenuItem>
+                Дополнительно
+              </MenuItem>
+              <MenuItem>
+                Cбросить результат
+              </MenuItem>
+            </Menu>
+          </Dropdown>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AccordiontStatisticss;

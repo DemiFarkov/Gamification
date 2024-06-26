@@ -1,0 +1,199 @@
+th{font-size: 1.1vw !important;}.mainContainer {
+    padding-right: 1vw;
+    margin: 1vw 0.7vw 1.5vw 0.7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContentBox {
+    margin: 1vw .7vw .5vw .7vw;
+    width: 94%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+}
+
+.H1 {
+    padding: 0.7vw;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw
+}
+
+.navTest {
+    margin: 1.5vw auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navBtn {
+    width: 20%;
+    height: 3vw;
+    border: .2vw solid #469C9A;
+    color: #fff;
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2vw;
+    cursor: pointer;
+
+}
+
+.navBtn:hover {
+    background: #212b37;
+}
+
+.mainBlock {
+    padding: 3vw 5vw 3vw 5vw;
+    margin: 0 auto;
+    width: 85%;
+    border-radius: 1vw;
+    background: #202833;
+}
+
+.loadQuery {
+    display: flex;
+    width: 100vw;
+    height: 80vh;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5vw;
+}
+
+.contentContainer {
+    padding: 0 10%;
+    margin: 1vw auto 0 auto;
+    width: 75%;
+    background: #202833;
+    border: 0.1vw solid #469C9A;
+    border-radius: 1vw;
+
+}
+
+.ModerationQuesContainer {
+    padding: 5vw 0;
+}
+
+.ModerationQueNumbercontainer {
+    text-align: end;
+    margin-top: 1vw;
+    font-size: 2vw;
+}
+
+.ModerationQueNumberFlex {
+    justify-content: end;
+    display: flex;
+}
+
+.ModerationQueCircle {
+    width: 3vw;
+    height: 3vw;
+    border: 0.1vw solid #fff;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.ModerationQueText {
+    margin-top: 1vw;
+    text-align: start;
+
+    font-size: 1.5vw;
+}
+
+.maxPointText {
+    margin: .2vw 0 0 13px;
+    text-align: start;
+    font-size: .8vw;
+    color: #fff;
+}
+
+.ModerationQuesAnswerLabel {
+    margin-top: 1vw;
+    text-align: start;
+    font-size: 1.1vw;
+}
+
+.ModerationQuesAnswerText {
+    margin-top: 2vw !important;
+    padding: 1vw;
+    width: 80%;
+}
+
+.AccordionTitle {
+    padding: .25vw .4vw .25vw .4vw;
+    min-width: 30%;
+    background: #469C9A;
+    border-radius: 3vw;
+    font-size: 1.2vw;
+}
+
+.AccordionTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.AccordionTR th {
+    padding: 1vw;
+
+}
+
+.AccordionThName {
+    width: 40%;
+    position: relative;
+}
+
+.AccordionThСonditions {
+    padding: 0 .5vw;
+    width: 50% ;
+}
+
+.AccordionThIcon {
+    width: 10%;
+}
+
+.AccordionLink {
+    padding: 1vw;
+    display: block;
+    font-size: 1.1vw;
+    color: #fff;
+}
+
+.AccordionLink:active {
+    color: #fff;
+}
+
+.AccordionLink:hover {
+    background: #384454;
+}
+
+.BTNEndModerationContainer {
+    margin-bottom: 2vw;
+    width: 100%;
+    text-align: end;
+
+}
+
+.BTNEndModeration {
+    color: #fff !important;
+    border: .1vw solid #fff !important;
+}
+
+.BTNscrollToTop {
+    width: 5vw;
+    position: fixed;
+    top: 80%;
+    left: 91%;
+    cursor: pointer;
+}
+.dialogLink{
+    color: #469C9A;
+    background: #7380943c !important;
+    padding: .5vw;
+    border-radius: .5vw;
+
+}

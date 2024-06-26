@@ -1,11 +1,12 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../hooks/reduxHooks";
+import { getIsLoggedUseAuth } from "../../hooks/reduxHooks";
 
 const PrivateRoute = () => {
-  // const auth = useAuth();
+  const auth = getIsLoggedUseAuth();
 
-  const auth = true;
+  // const auth = true;
+  console.log(auth)
   return (  auth ? <Outlet /> : <Navigate to="/" />
   )
 };

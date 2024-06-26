@@ -1,0 +1,654 @@
+th {
+    font-size: 1.1vw !important;
+}
+
+.CircularProgressBox {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainContainer {
+    padding-right: 1vw;
+    margin: 1vw 0.7vw 1.5vw 0.7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+}
+
+
+
+.navTest {
+    margin: 1.5vw auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navBtn {
+    width: 20%;
+    height: 3vw;
+    border: .2vw solid #469C9A;
+    color: #fff;
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2vw;
+    cursor: pointer;
+
+}
+
+.navBtn:hover {
+    background: #212b37;
+}
+
+.mainBlock {
+    padding: 3vw 5vw 3vw 5vw;
+    margin: 0 auto;
+    width: 85%;
+    border-radius: 1vw;
+    background: #202833;
+}
+
+.AccordionTable {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.TitleThemeContiner {
+    position: relative;
+}
+
+.RemoveThemeTestContainer {
+    display: inline-block;
+    font-size: 1.2vw;
+}
+
+.changeTestBtns {
+    padding: .5vw;
+    display: inline-block;
+    transition: all .2s linear;
+    cursor: pointer;
+
+}
+
+.changeTestBtns:hover {
+    background: #2b3543;
+}
+
+.AccordionTitle {
+    padding: .25vw .4vw .25vw .4vw;
+    min-width: 30%;
+    background: #469C9A;
+    border-radius: 3vw;
+    font-size: 1.2vw;
+}
+
+.AccordionLink {
+    padding: 1vw;
+    display: block;
+    font-size: 1.1vw;
+    color: #fff;
+}
+
+th {
+    font-size: 1.1vw !important;
+}
+
+.AccordionLink:active {
+    color: #fff;
+}
+
+.AccordionLink:hover {
+    background: #384454;
+}
+
+.AccordionTR th {
+    padding: 1vw;
+
+}
+
+th {
+    border: 1px solid #469C9A;
+    color: aliceblue;
+    font-weight: 400;
+    font-size: 1.3vw;
+}
+
+
+
+.changeTestContainer {
+    position: absolute;
+    right: 100.5%;
+    font-size: 0.8vw;
+    max-height: 3.8vw;
+    overflow: hidden;
+    visibility: hidden;
+
+}
+
+.changeTestBtn {
+    padding: .13vw;
+    background: #6db8b6;
+    font-size: 1.05vw;
+    position: relative;
+    left: 100%;
+    transition: all .18s linear;
+    cursor: pointer;
+    box-shadow: -11vw 0 2.5vw -10vw #0a0808b2 inset;
+}
+
+
+
+.changeTestBtn:last-child {
+    border-top: .1vw solid #384454;
+}
+
+.changeTestBtn:hover {
+    background: #202833;
+}
+
+.AccordionThName {
+    width: 40%;
+}
+
+.AccordionThСonditions {
+    width: 20%;
+}
+
+.AccordionThStatus {
+
+    width: 20%;
+}
+
+.AccordionThIcon {
+    width: 20%;
+}
+
+.testNoavailable {
+    padding: .82vw;
+        width: 250.2%;
+        height: 100%;
+    position: absolute;
+    display: flex;
+align-items: center;
+
+justify-content: end;
+    top: 0;
+    font-size: 1.4vw;
+    background: linear-gradient(0.25turn, #20283300, #536379df 50%);
+}
+
+.mainContentBox {
+    margin: 1vw .7vw .5vw .7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.theoryContainer {
+    padding: 1.5vw;
+    margin: 0 2vw 1.5vw .7vw;
+    width: calc(94% - 1.3vw);
+    padding-right: 1vw;
+    background: #202833;
+    border-radius: 1vw;
+    text-align: start;
+    position: relative;
+    border: .1vw solid #469C9A;
+
+}
+
+.theoryTitle {
+    font-size: 1.8vw;
+}
+
+.theoryText {
+    margin: 1vw 0 5vw 0;
+}
+
+.theoryBtn {
+    position: absolute !important;
+    bottom: 3vw;
+    right: 2vw;
+    background: #3d4858 !important;
+    font-size: 1.1vw !important;
+}
+
+
+.QueContainer {
+    margin: 0 2vw 1.5vw .7vw;
+    width: calc(94% - 1.3vw);
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.QueTimer {
+    font-size: 1.2vw;
+}
+
+.countQue {
+    width: 30%;
+    border-radius: 1vw;
+}
+
+.countQueWrapper {
+
+    padding: 1vw 0;
+    background: #202833;
+    border-radius: 1vw;
+    border: .1vw solid #469C9A;
+
+
+}
+
+.ThisQue {
+    padding-bottom: 3vw;
+    width: 68%;
+    position: relative;
+    background: #202833;
+    border-radius: 1vw;
+    border: .1vw solid #469C9A;
+
+}
+
+.QueTitleCOntainer {
+    margin: 2vw;
+    display: flex;
+    width: 100%;
+    height: 5vw;
+    align-items: center;
+}
+
+.QueTable {
+    margin: .5vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.queCircleContainer {
+    margin: .4vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: calc(12.5% - .8vw);
+}
+
+.queCircleCount {
+    border-radius: 0.25em 0.25em 0 0;
+
+    font-size: 1vw;
+    /* width: calc(12.5% - .8vw); */
+    border: .1vw solid #ece2e2;
+}
+
+.queCircle {
+    /* width: calc(12.5% - .8vw); */
+    height: 2.5vw;
+    border-radius: 0 0 0.25em 0.25em;
+    background: #ece2e2;
+}
+
+.timerQueContainer {
+    padding: .2vw;
+    font-size: 1.7vw;
+    transition: all .5s linear;
+    border-radius: 1vw;
+}
+
+.timerQueContainertest {
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5vw;
+}
+
+.numberQue {
+    font-size: 2.5vw;
+}
+
+.TimeDuration {
+    width: 30%;
+    font-size: 2.5vw;
+}
+
+.ThisQueText {
+    margin: 5vw 0 2vw 0;
+    text-align: start;
+    font-size: 1.5vw;
+}
+
+.finalText {
+    margin: 2vw;
+    text-align: center;
+    font-size: 3vw;
+}
+
+.BtnFinalTest {
+    padding: 0 !important;
+    margin: 0 auto;
+    width: 40%;
+    display: inline-block;
+    border: .1vw solid #469C9A !important;
+}
+
+.BtnFinalTestContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.linkFinalTest {
+    padding: .3vw;
+    color: #fff;
+    width: 100%;
+    font-size: 1.2vw;
+}
+
+.descriptionContainer {
+    padding: 2vw 2vw 10vw 2vw;
+    margin: 0 auto;
+    position: relative;
+    width: 65%;
+    border: .1vw solid #469C9A;
+    text-align: start;
+    font-size: 1.2vw;
+    background: #202833;
+    border-radius: 1vw;
+}
+
+.descriptionGoodLuck {
+    margin: 0 auto;
+    margin-top: 1.5vw;
+    width: 100%;
+    text-align: center;
+    font-size: 2vw;
+    position: absolute;
+    bottom: 6vw;
+    left: 0;
+}
+
+.descriptionBtnContainer {
+    position: absolute;
+    bottom: 2vw;
+    right: 2vw;
+}
+
+.descriptionBtn {
+    padding: .5vw !important;
+    margin-right: 1vw !important;
+    border: .1vw solid #469C9A !important;
+    color: #fff !important;
+    font-size: 1.1vw !important;
+}
+
+.descriptionBtn:first-child {
+    padding: 0 !important;
+}
+
+.descriptionBtnLink {
+    padding: .5vw;
+    width: 100%;
+    text-decoration: none;
+    color: #fff;
+}
+
+.queContent {
+    margin: 5vw 2vw;
+}
+
+.answersContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.answerParticular {
+    position: relative;
+    display: inline-block;
+}
+
+.checkboxInput {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.checkboxLabel {
+    display: flex;
+    text-align: start;
+    width: 100%;
+
+    align-items: center;
+    user-select: none;
+    padding: .5vw 0 .5vw 0;
+    font-size: 1.1vw;
+}
+
+.checkboxLabelCheck {
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #adb5bd;
+    margin-right: 1vw;
+}
+
+.checkboxInput:checked+label .checkboxLabelCheck {
+    background-color: #407d7c;
+}
+
+.checkboxInput:checked+label .checkboxLabelCheckError {
+    background-color: #407d7c;
+}
+
+.checkboxLabelCheckError {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #f34a2c;
+    box-shadow: 0 0 1vw #f34a2c;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}
+
+.warningText {
+    margin-top: 1vw;
+    text-align: start;
+    color: #f34a2c;
+    font-size: 1.5vw;
+}
+
+.checkboxInput:checked+label::before {
+    background-color: #407d7c;
+}
+
+.textAreaQue {
+    padding: .7vw;
+    font-size: 1.2vw;
+    border-radius: 1vw;
+    resize: none;
+
+}
+
+.loadQuery {
+    display: flex;
+    width: 100vw;
+    height: 80vh;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5vw;
+}
+
+
+/*!!!  Результаты теста  !!!*/
+.moderationTest {
+    padding: 2vw;
+    border-radius: 1vw;
+    font-size: 2vw;
+    border: .1vw solid #469C9A;
+}
+
+.btnGoTestsContainer {
+    margin: 1vw 1.5vw 0 0;
+    text-align: end;
+}
+
+.btnGoTests {
+    font-size: 1.2vw !important;
+    padding: .7vw !important;
+    border: .1vw solid #469C9A !important;
+    border-radius: 1vw !important;
+
+}
+
+.btnGoTests a {
+    color: #D9D9D9;
+}
+
+.H1 {
+    padding: .7vw;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw;
+}
+
+.contentContainer {
+    margin: 1vw auto 0 auto;
+    width: 75%;
+
+}
+
+.achievementContainer {
+    background: #469C9A;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 1vw;
+
+
+}
+
+.achievementImg {
+    width: 4vw;
+}
+
+.achievementText {
+    font-size: 1.3vw;
+}
+
+.achievementName {
+    color: #FFE500;
+    text-shadow: rgb(0, 0, 0) 1px 0 10px;
+}
+
+.ResultsBlockContainer {
+    position: relative;
+    margin: 1.5vw;
+    padding: 1vw;
+    border: .1vw solid #469C9A;
+    border-radius: 1vw;
+    font-size: 1.2vw;
+    padding-bottom: 2vw;
+    background: #202833;
+}
+
+.saveInPdf {
+    position: absolute !important;
+    bottom: 1vw !important;
+    right: 2vw !important;
+    color: #fff !important;
+    border: .1vw solid #469C9A !important;
+    font-size: 1vw !important;
+}
+
+.ResultsBlockContent {
+    margin: 0 auto;
+    width: 75%;
+    text-align: center;
+}
+
+.ResultsBlockScore {
+    padding-bottom: .5vw;
+    margin-bottom: 1vw;
+    font-size: 1.6vw;
+    display: flex;
+    justify-content: center;
+}
+
+.titleBlockWrapper {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 1vw;
+    font-size: 1.5vw;
+}
+
+.titleBlockScores {
+    margin-left: 1vw;
+    color: #f34a2c;
+}
+
+.timeOut {
+    font-size: 1.4vw;
+    margin-top: 20%;
+}
+
+.ResultsBlockQueText {
+    margin-bottom: 3vw;
+    text-align: start;
+    font-size: 1.3vw;
+}
+
+.ResultsQuesContainer {
+    margin-top: 1vw;
+    display: flex;
+    align-items: center;
+    font-size: 1.2vw;
+}
+
+.ResultsQuesAnswer {
+    margin-right: .6vw;
+    width: .5vw;
+    height: .5vw;
+    background: #FFB800;
+    border-radius: 50%;
+}
+
+.ResultsQuesCorrectAnswerTrue {
+    margin-right: 1vw;
+    width: 2vw;
+    height: 2vw;
+    background: #00FF38;
+}
+
+.ResultsQuesCorrectAnswerFalse {
+    margin-right: 1vw;
+    width: 2vw;
+    height: 2vw;
+    background: #fdf8ed;
+}
+
+.ResultsBlockExplanation {
+    margin-top: 2vw;
+    margin-bottom: 1vw;
+    text-align: start;
+    padding: 1vw;
+    background: #D9D9D9;
+    color: #212b37;
+    font-size: 1.2vw;
+    border-radius: 1vw;
+}
+
+.RemoveThemeTestContainer {}

@@ -1,0 +1,727 @@
+::-webkit-input-placeholder {
+    color: #999;
+}
+
+::-moz-placeholder {
+    color: #999;
+}
+
+:-ms-input-placeholder {
+    color: #999;
+}
+
+:-o-input-placeholder {
+    color: #faea3eca;
+}
+
+.testContainer {
+    margin: 1vw .7vw 1.5vw .7vw;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.testMainContent {
+    width: 94%;
+}
+
+.mainContentGrid {
+    display: grid;
+    grid-template-columns: 23% 2fr 1.2fr;
+}
+
+.H1 {
+    padding: .7vw;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw;
+}
+
+.mainCheckbox {
+    padding: 1vw 1vw 1vw 1.5vw;
+    margin: 1vw 2vw 0 0;
+    border: .1vw solid #469C9A;
+    border-radius: 3vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none;
+}
+
+.testAnswerCheckbox {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.testAnswerCheckbox:checked+label {
+    background-color: #407d7c;
+
+}
+
+.testAnswerLAbel {
+    position: absolute;
+    flex-shrink: 0;
+    flex-grow: 0;
+    left: 105%;
+    top: calc(50% - 1.3vw);
+    display: inline-block;
+    width: 2.6vw;
+    height: 2.6vw;
+    border: 1px solid #d6dde3;
+    border-radius: 0.25em;
+}
+
+.testAnswerLAbel::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -180%;
+    width: 4.5vw;
+    height: .1vw;
+    background: #fff;
+}
+
+.mainCheckboxWrapper {
+    margin: 1vw 0 0 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.mainCheckboxWrapper:first-child {
+    margin-top: 0;
+}
+
+.mainCheckboxInput {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.mainCheckboxLabel {
+    display: flex;
+    text-align: start;
+    align-items: center;
+    user-select: none;
+    font-size: 1.1vw;
+}
+
+.mainCheckboxLabel::before {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}
+
+.mainCheckboxInput:checked+label::before {
+    background-color: #407d7c;
+}
+
+.mainCheckboxLabelDls {
+    display: flex;
+    text-align: start;
+    width: 100%;
+    align-items: center;
+    user-select: none;
+    padding: .5vw 2vw .5vw 1.5vw;
+    margin-bottom: 1vw;
+    border: 1px solid #469C9A;
+    border-radius: 3vw;
+    font-size: 1.1vw;
+
+}
+
+.mainCheckboxLabelDls::before {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}
+
+.mainCheckboxInputDls:checked+label::before {
+    background-color: #407d7c;
+}
+
+.mainCheckboxInputDls {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.mainCheckboxDLS {
+    top: 0;
+    right: calc(100% + 2vw);
+    width: calc(50% - 2vw);
+    position: absolute;
+}
+
+.addBtn {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    user-select: none;
+    padding: 0.5vw 2vw 0.5vw 2vw;
+    margin-bottom: 1vw;
+    cursor: pointer;
+    border: 1px solid #469C9A;
+    border-radius: 3vw;
+    font-size: 1.1vw;
+
+}
+
+.addBtnNoActive {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    user-select: none;
+    padding: 0.5vw 2vw 0.5vw 2vw;
+    margin-bottom: 1vw;
+    cursor: not-allowed;
+    border: 1px solid #469C9A;
+    border-radius: 3vw;
+    font-size: 1.1vw;
+    opacity: 40%;
+}
+
+.MainBlock {
+    position: relative;
+    padding: 2vw 0 2vw 0;
+    margin: 1vw auto 0 auto;
+
+    background: #202833;
+    border-radius: 3vw;
+}
+
+.theoryBlock input,
+.theoryBlock .answerInputFileContainer {
+    width: 94%;
+}
+
+
+
+.firstAnswerInputWrapper {
+    margin-top: 1vw;
+    position: relative;
+}
+
+.TestName {
+    padding: 1vw 0 2vw 0;
+    margin: 1vw auto 0 auto;
+
+    background: #202833;
+    border-radius: 3vw;
+
+}
+
+.TestNameInputContainer {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.TestNameInput {
+    padding: .7vw;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    background: #D9D9D9;
+}
+
+
+
+
+.answerInputContainer {
+    margin: 1vw auto 0 auto;
+    position: relative;
+}
+
+.svgPlus {
+    width: 3vw;
+    position: absolute;
+    left: -.5%;
+    cursor: pointer;
+}
+
+.answerInput {
+    padding: .7vw 2vw;
+    margin: 1vw auto 0 auto;
+    width: 90%;
+    display: block;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    background: #D9D9D9;
+
+}
+
+.titleContainer {
+    margin: 0 auto;
+    display: flex;
+    width: 90%;
+    align-items: center;
+}
+
+.blockTitle {
+    margin: 0 auto;
+    width: 90%;
+    text-align: start;
+    font-size: 1.5vw;
+}
+
+.arrowsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.arrow {
+    position: relative;
+    font-Size: medium !important;
+}
+
+@keyframes arrowUP {
+    0% {
+        bottom: 0px;
+    }
+
+    100% {
+        bottom: 5px;
+    }
+}
+
+.arrowUp {
+    position: relative;
+    width: 3vw;
+    transition: all .2s linear;
+    border-radius: 1vw 1vw 0 0;
+}
+
+.arrowUp:hover {
+    cursor: pointer;
+    background: #999;
+    border-radius: 1vw 1vw 0 0;
+    animation: arrowUP 1s infinite !important;
+}
+
+@keyframes arrowDown {
+    0% {
+        bottom: 0px;
+    }
+
+    100% {
+        bottom: -5px;
+    }
+}
+
+.arrowDown {
+    position: relative;
+    width: 3vw;
+    transition: all .2s linear;
+    border-radius: 0 0 1vw 1vw;
+}
+
+.arrowDown:hover {
+    cursor: pointer;
+    background: #999;
+    border-radius: 0 0 1vw 1vw;
+    animation: arrowDown 1s infinite !important;
+}
+
+.TestNameInputWrapper {
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.TestNameInputTitle {
+    text-align: start;
+    font-size: 1.8vw;
+}
+
+.saveTestBtn {
+    margin: 1vw 2vw 0 0;
+    padding: 0.8vw;
+    background: #202833;
+    border: 1px solid #469C9A;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s linear;
+    color: #fff;
+    cursor: pointer;
+}
+
+.TestSettingsBlock {
+    padding: 1vw 0 2vw 0;
+    margin: 1vw auto 0 auto;
+
+    background: #202833;
+    border-radius: 3vw;
+}
+
+.TestSettingsInputBlock {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.TestSettingsinputWrapper {
+    margin-top: .5vw;
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.TestSettingsinputName {
+    margin: 0 0 .2vw 1vw;
+    text-align: start;
+    font-size: .9vw;
+}
+
+.TestSettingsInputTitle {
+    text-align: start;
+    width: 100%;
+    font-size: 1.8vw;
+}
+
+.TestSettingsinput {
+    padding: 0.7vw;
+    font-size: .95vw;
+    border-radius: 3vw;
+    background: #D9D9D9;
+}
+
+.TestSettingsDivWrapper {
+    position: relative;
+}
+
+.TestSettingsDivWrapperAch {
+    position: relative;
+}
+
+.TestSettingsDiv {
+    padding: 0.5vw 0.9vw 0.5vw 0.7vw;
+    font-size: 1.2vw;
+    display: flex;
+    justify-content: space-between;
+    text-align: start;
+    height: 3.2vw;
+    overflow: hidden;
+    background: #D9D9D9;
+    cursor: pointer;
+    color: #202833;
+    display: none;
+    border: .1vw solid #469C9A;
+    background: #d42929;
+    color: #fff;
+    width: 100%;
+    position: absolute;
+    transition: all .5s;
+}
+
+.TestSettingsDiv:nth-child(n+2) {
+    top: 0;
+    position: absolute;
+    z-index: 100;
+    border: .1vw solid #469C9A;
+    background: #8c2323;
+    color: #fff;
+    transition: .5s;
+}
+
+.textareaContainer {
+    padding: 1vw 1vw 1vw 1vw;
+    margin: 1vw 0 0 2vw;
+    background: #202833;
+    border-radius: 3vw;
+}
+
+.textareaTitle {
+    font-size: 1.5vw;
+}
+
+.textareaCOntent {
+    padding: 1vw;
+    margin-top: 1vw;
+    background: #D9D9D9;
+    border-radius: 1vw;
+    resize: none;
+    font-size: 1.1vw;
+
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.answerInput:first-child {
+    margin-top: 0;
+}
+
+.answerInputFileContainer {
+    position: relative;
+    padding: .3vw;
+    margin: 1vw auto 0 auto;
+    width: 90%;
+    display: block;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    background: #D9D9D9;
+}
+
+.answerInputFile {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.answerInputFileText {
+    padding: .4vw;
+    background: #9B9B9B;
+    border-radius: 3vw;
+    border: 1px solid #202833;
+    font-size: 1.2vw;
+    transition: all .1s;
+}
+
+.answerInputFileText:hover {
+    background: #d2d1d1;
+}
+
+.answerInputFileName {
+    vertical-align: middle;
+    margin-left: 1vw;
+    color: #757575;
+    font-size: 1.2vw;
+}
+
+.wrapperRemoveBlock {
+    margin: 1vw auto 0 auto;
+    width: 90%;
+    text-align: end;
+    display: flex;
+    justify-content: end;
+}
+
+.BtnRemoveBlock {
+    padding: .5vw;
+    position: absolute;
+    top: 0;
+    left: 105%;
+    width: 30%;
+    cursor: pointer;
+    border: .1vw solid #8c2323;
+    border-radius: 3vw;
+    font-size: 1.2vw;
+    text-align: center;
+
+}
+
+.BtnRemoveBlock:hover {
+    border: .1vw solid #9e35355e;
+    background: #9e35355e;
+}
+
+.btnContainer {
+    margin: 2vw auto 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.btnContainerBtn {
+    padding: .8vw;
+    width: 47%;
+    background: #202833;
+    border: 1px solid #469C9A;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.btnContainerBtn:hover {
+    background: #4a5b74;
+}
+
+.btnContainerBtnForm {
+    margin: 1vw auto 0 auto;
+    padding: .8vw;
+    width: 70%;
+    background: #202833;
+    border: 1px solid #469C9A;
+    font-size: 1.2vw;
+    border-radius: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+    color: #fff;
+    cursor: pointer;
+
+}
+
+.btnContainerBtnForm:hover {
+    background: #4a5b74;
+    border: 1px solid #469C9A;
+
+}
+
+
+
+.validDialogTitle {
+    width: 100%;
+    text-align: center;
+}
+
+.selectOptionWrapper {
+    position: absolute;
+    margin-top: .3vw;
+    width: 100%;
+    z-index: 100;
+    height: 15vw;
+    overflow: scroll;
+    border-radius: 1vw;
+}
+
+.AccordionLink {
+    width: 100%;
+    height: 100%;
+}
+
+.dialogLink {
+    padding: 0 1vw;
+    color: #469C9A;
+    background: #7380943c !important;
+    padding: .5vw;
+    border-radius: .5vw;
+
+}
+
+.dialogBtn {
+    color: #259492 !important;
+    background: #7380943c !important;
+}
+
+.TestSettingsDivTheme {
+    padding: 0.5vw 0.9vw 0.5vw 0.7vw;
+    font-size: 1.2vw;
+    display: flex;
+    justify-content: space-between;
+    text-align: start;
+    height: 3.2vw;
+    overflow: hidden;
+    background: #D9D9D9;
+    cursor: pointer;
+    color: #202833;
+    border: .1vw solid #469C9A;
+    background: #8c2323;
+    color: #fff;
+    width: 100%;
+    position: absolute;
+    transition: all .5s;
+}
+
+.MuiPaper-root {
+    background: #407d7c !important;
+}
+
+.TestSettingsSelectTheme {
+    padding: 0.5vw 0.9vw 0.5vw 0.7vw;
+    font-size: 1.2vw;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 3vw;
+    text-align: start;
+    background: #D9D9D9;
+    cursor: pointer;
+    color: #202833;
+}
+
+.validDialog {
+    margin-bottom: 1vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3vw;
+}
+
+.addTheory {
+    margin: .3vw 0 0 0;
+    display: flex;
+    left: 105%;
+    top: 0;
+    width: 40%;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    padding: .5vw 2vw .5vw 1.5vw;
+    border: 1px solid #469C9A;
+    border-radius: 3vw;
+    font-size: 1.1vw;
+}
+
+.createThemeText {
+    font-size: 1.5vw;
+}
+
+.createThemeInput {
+    padding: .6vw;
+    border: .2vw solid #407d7c;
+    width: 60%;
+    border-radius: 3vw;
+    font-size: 1.2vw;
+}
+
+.createThemeBtn {
+    color: #202833 !important;
+}
+
+.errorThemeAlradyisCreated {
+    margin-left: .6vw;
+    color: #a92d2d;
+    font-size: 1.5vw;
+    font-weight: 400;
+}
+
+.svgDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BTNscrollToTop {
+    width: 5vw;
+    position: fixed;
+    top: 80%;
+    left: 91%;
+    cursor: pointer;
+}

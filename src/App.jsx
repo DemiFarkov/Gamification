@@ -12,10 +12,15 @@ import Main from "./pages/main/main";
 import Players from "./pages/players/players";
 import Store from "./pages/store/store";
 import ChangeUsers from "./pages/adminPadges/changeUsers/changeUsers";
-import CreateTest from "./pages/createTest/createTest";
+import CreateTest from "./pages/tests/createTest/createTest";
 import PrivateRoute from "./components/general/PrivateRoute";
-import MainTraning from "./pages/training/main";
-import Test from "./pages/training/test";
+import MainTraning from "./pages/tests/training/main";
+import Test from "./pages/tests/training/test";
+import Results from "./pages/tests/training/results";
+import ModerationTest from "./pages/tests/moderationTest/moderationTest";
+import ModerationProcess from "./pages/tests/moderationTest/moderationProcess";
+import TestsStatistics from "./pages/tests/testsStatistics/testsStatistics";
+import CreatingUser from "./pages/creatingUser/creatingUser";
 
 function App() {
   return (
@@ -30,11 +35,19 @@ function App() {
             <Route path="*" element={<Not />} />
             <Route path="pages/players" element={<Players />} />
             <Route path="pages/store" element={<Store />} />
-            <Route path="pages/createTest" element={<CreateTest />} />
-            <Route path="pages/traning" element={<MainTraning />} />
-            <Route path="pages/traning/test" element={<Test />}></Route>
-
-            
+            <Route path="pages/tests/createTest" element={<CreateTest />} />
+            <Route path="pages/tests/traning" element={<MainTraning />} />
+            <Route path="pages/tests/traning/test" element={<Test />}></Route>
+            <Route path="pages/tests/traning/result" element={<Results />}></Route>
+            <Route path="pages/tests/moderationTest" element={<ModerationTest />} />  
+            <Route path="pages/tests/moderationTest/moderationProces" element={<ModerationProcess />} />  
+            <Route path="pages/tests/testsStatistics" element={<TestsStatistics/>} />   
+            <Route path="pages/creatingUser/creatingUser" element={<CreatingUser/>} />           
+        
+        
+        
+     
+      
 
           </Route>
           <Route

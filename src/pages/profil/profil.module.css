@@ -6,6 +6,7 @@ body {
     width: calc(94% + 17px);
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
+    
 }
 
 .mainContentBox {
@@ -17,6 +18,7 @@ body {
 
 .columnContainer1 {
     margin: 0 1vw 0 1vw;
+
     display: flex;
     align-content: space-between;
     flex-wrap: wrap;
@@ -24,6 +26,7 @@ body {
 
 .columnContainer2 {
     display: flex;
+
     align-content: space-between;
     flex-wrap: wrap;
 
@@ -31,6 +34,7 @@ body {
 
 .columnContainer3 {
     margin: 0 0 0 1vw;
+
     display: flex;
     align-content: space-between;
     flex-wrap: wrap;
@@ -92,6 +96,7 @@ body {
 .box3 {
     height: 23%;
     width: 100%;
+
     background: #202833;
     font-size: 40px;
     border-radius: 1vw;
@@ -195,4 +200,23 @@ body {
 .resursesItem img {
     width: 2.5vw;
     margin-right: .65vw;
+}
+
+.box2IMGBack {
+    top: -40%;
+    left: -60%;
+    width: 70vw;
+    position: absolute;
+}
+
+.box2IMGBack img {
+    animation: rotate 20s linear infinite;
+    
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100%{transform: rotate(360deg);}
 }

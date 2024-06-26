@@ -1,0 +1,133 @@
+/* меню header */
+
+.headerNav {
+    position: absolute;
+    top: 130%;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    z-index: 100;
+    background: #697b95;
+    border-radius: .5vw;
+}
+
+@keyframes visibleNav {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+
+    }
+}
+
+.headerNav.entering {
+    animation: visibleNav .3s forwards;
+}
+
+.headerNav.exiting {
+    animation: visibleNav .3s reverse both;
+}
+
+/* меню навигации слева */
+
+.menuContainer {
+    position: absolute;
+    top: 1vw;
+    left: 3vw;
+    overflow: hidden;
+    font-size: 1.5vw;
+    z-index: -200;
+}
+
+
+.menuContainer.entering {
+    opacity: 1;
+}
+
+.menuContainer.exited {
+    opacity: 0;
+}
+
+.menuName {
+    padding: 0 1.2vw .2vw 2vw;
+    position: relative;
+    left: -11vw;
+    transition: all .3s;
+    background: #394557;
+    border-radius: 0 1vw 1vw 0;
+    font-size: 1.6vw;
+    color: #fff;
+    transition: all .2 linear;
+}
+
+.menuName.entering {
+    left: 0;
+}
+
+.menuName.entered {
+    left: 0;
+}
+
+.menuName.exiting {
+    left: -11vw;
+}
+
+
+@keyframes rowStatistics {
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100px);
+
+        opacity: 0;
+
+    }
+}
+@keyframes rowStatistics1 {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+
+        opacity: 1;
+
+    }
+}
+
+.rowStatistic {
+    margin: 1vw auto;
+    padding: 1vw;
+    width: 100%;
+    position: relative;
+    border-radius: 1vw;
+    background: #46566b2d;
+    transition: all .5s linear;
+}
+
+
+
+
+.rowStatistic.enter-active {
+    
+    animation: rowStatistics1 .5s forwards;
+}
+
+/* .rowStatistic.enter-done {
+    background: #fff !important;
+} */
+
+
+.rowStatistic.exit-active {
+    animation: rowStatistics .5s forwards;
+}

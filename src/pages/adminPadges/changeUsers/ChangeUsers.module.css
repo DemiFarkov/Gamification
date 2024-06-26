@@ -22,9 +22,10 @@
     margin-top: 1vw;
     display: flex;
     justify-content: start;
-    padding: .7vw;
+    padding: 1vw;
     border: .1vw solid #469C9A;
     border-radius: 1vw;
+    align-items: center;
 }
 
 .filterInput {
@@ -34,9 +35,12 @@
 }
 
 .filterSelectContainer {
+    width: 35%;
+    height: 60%;
     margin-left: 3vw;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .filterSelectLabel {
@@ -184,4 +188,9 @@
 
 .tableMenuContent:last-child:hover {
     border-radius: 0 0 1vw 1vw;
+}
+
+.modalContentContainer {
+    display: flex;
+    flex-direction: column;
 }

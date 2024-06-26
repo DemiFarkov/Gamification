@@ -5,12 +5,14 @@ import "./index.css";
 import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./toolkitRedux";
+import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  
-    <Provider store={store}>
-      <HashRouter>
+  <Provider store={store}>
+    <HashRouter>
+      <CookiesProvider defaultSetOptions={{ path: '/' }}>
         <App />
-      </HashRouter>
-    </Provider>
+      </CookiesProvider>
+    </HashRouter>
+  </Provider>
 );

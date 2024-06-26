@@ -1,0 +1,39 @@
+.mainContainer {
+    margin: 1vw .7vw 1.5vw .7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    padding: .7vw;
+    color: #fff;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw;
+}
+.MidlleContent{
+    padding: 2vw;
+    margin: 2vw auto;
+    width: 50%;
+    background: #202833;
+    border:  .1vw solid #469C9A;
+    border-radius: 1vw;
+}
+.MidlleContentDataBlock{
+    display: flex;
+    flex-direction: column;
+    
+}
+.BtnContainer{
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+
+}

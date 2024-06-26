@@ -15,12 +15,14 @@ const LoginForm = (props) => {
             className={classes.formInput}
             onChange={(e) => props.setUsername(e.target.value)}
             placeholder="Введите логин"
+            autoComplete="on"
           />
           <input
             type="password"
             className={classes.formInput}
             onChange={(e) => props.setPassword(e.target.value)}
             placeholder="Введите пароль"
+            autoComplete="on"
           />
           <button type="submin" className={classes.button}>
             Вход
@@ -28,8 +30,8 @@ const LoginForm = (props) => {
         </form>
         <div className={classes.data}>
           <h2>Данные для входа: </h2>
-          <div>Логин: n.gorbenko</div>
-          <div>Пароль: mKf5YMkLpZ</div>
+          <div>Логин: oleg</div>
+          <div>Пароль: oleg</div>
         </div>
       </section>
     </>

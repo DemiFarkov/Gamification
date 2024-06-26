@@ -1,0 +1,38 @@
+.animationCross {
+    padding-top: 2px;
+    animation: cross 1.5s infinite;
+}
+
+.dialogContent {
+    width: 18vw;
+    font-Size: 2vw;
+    display: flex;
+    justify-Content: space-between;
+    align-Items: center;
+}
+
+@keyframes cross {
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(2.5);
+
+    }
+
+    40% {
+        transform: scale(1);
+
+    }
+
+    80% {
+        transform: scale(2.5);
+
+    }
+}
+.btn{
+    color: rgb(118, 132, 132) !important;
+    width: 8vw !important;
+}
+

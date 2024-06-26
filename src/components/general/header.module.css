@@ -1,8 +1,5 @@
-body {
-    overflow-x: hidden;
-}
-
 .mainContainer {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -34,17 +31,20 @@ body {
     cursor: pointer;
 }
 
-.nav {
-    position: absolute;
-    top: 130%;
-    display: flex;
-    flex-direction: column;
-    right: 0;
-    z-index: 100;
-    background: #697b95;
-    border-radius: .5vw;
-    transition: .1s;
+@keyframes visibleNav {
+    0% {
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+
+    }
 }
+
+
 
 .navHidden {
     position: absolute;
@@ -63,12 +63,26 @@ body {
 .link {
     width: 15vw;
     padding: .5vw;
+    position: relative;
     color: #fff;
     font-size: 1.2vw;
     display: block;
     transition: .2s;
+    font-weight: 400;
+}
+
+.link:first-child {
+    border-radius: .5vw .5vw 0 0;
+}
+
+.link:last-child {
+    border-radius: 0 0 .5vw .5vw;
 }
 
 .link:hover {
     background: #3a4759;
+}
+
+.androidIcon{
+    width: 50vw !important;
 }

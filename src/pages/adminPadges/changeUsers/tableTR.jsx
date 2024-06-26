@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 import classes from "./ChangeUsers.module.css";
 import arrow from "../../../img/Arrow27.svg";
+import { Menu } from "@mui/base/Menu";
+import { Dropdown } from "@mui/base/Dropdown";
+
+import {
+  MenuButton,
+  MenuItem,
+  AnimatedListbox,
+} from "../../../components/general/dropDownMui.jsx";
+import { Transform } from "@mui/icons-material";
+import MakeHangesModal from "./makeСhangesModal.jsx";
 
 const TableTR = () => {
-  const [visibleMenu, setVisibleMenu] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const [visibleMenu, setVisibleMenu] = useState(true);
   function visibilityMenu(visibleMenu) {
     let closeMenu = document.querySelectorAll(`.${classes.tableMenuContainer}`);
     for (i = 0; i < closeMenu.length; i++) {
       console.log(i);
     }
+
     setVisibleMenu(!visibleMenu);
   }
   return (
@@ -22,31 +35,16 @@ const TableTR = () => {
       <div className={classes.tableRow}>06.03.2024</div>
       <div className={classes.tableRowFlex}>
         <div className={classes.tableFlexRow}>Администратор </div>
-        <img
-          src={arrow}
-          className={classes.tableRowArrow}
-          onClick={() => visibilityMenu(visibleMenu)}
-          alt=""
-        />
-        <div
-          className={
-            visibleMenu
-              ? classes.tableMenuContainer
-              : classes.tableMenuContainerHidden
-          }
-        >
-          <div className={classes.tableMenuContent}>Деактивировать</div>
-          <div className={classes.tableMenuContent}>Управление ролями</div>
-          <div className={classes.tableMenuContent}>Сброс пароля</div>
-          <div className={classes.tableMenuContent}>
-            Обновить адрес электронной почты
-          </div>
-          <div className={classes.tableMenuContent}>Отмена сессии</div>
-          <div className={classes.tableMenuContent}>
-            Редактировать инвентарь
-          </div>
-        </div>
+        <Dropdown>
+          <MenuButton sx={{ transform: "rotate(90deg)" }}>...</MenuButton>
+          <Menu slots={{ listbox: AnimatedListbox }}>
+            <MenuItem onClick={() => setModalOpen(true)}>Изменить</MenuItem>
+            <MenuItem>Сбросить пароль</MenuItem>
+            <MenuItem>Деактивировать</MenuItem>
+          </Menu>
+        </Dropdown>
       </div>
+      <MakeHangesModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </>
   );
 };

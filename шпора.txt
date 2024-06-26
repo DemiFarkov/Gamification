@@ -1,90 +1,95 @@
-Доступ по FTP
-IP: 109.95.210.183 Порт: 21
-Пользователь: u164529
-Пароль: NqmYdyRIyevL
+IP: 109.95.211.29 
+Порт: 21
+Пользователь: u167189
+Пароль: V5r0qnXkqszy
+
+
+*Создание темы только после создания самого теста, если тест не создался, то и тема тоже
+*цвет загрузки в  цвет сайта
+*после создания теста тебя перекидывает на страницу с тестами
 
 {
-  "name": "Тест на знание Python",
-  "description": "Тест для проверки знаний языка программирования Python",
-  "duration_seconds": 1800,
-  "unlimited_time": false,
-  "show_correct_answers": false,
-  "allow_retake": true,
-  "theme": "Python",
-  "required_karma": 100,
-  "passing_score": 70,
-  "experience_points": 50,
-  "acoin_reward": 10,
-  "questions": [
+  name: "Тест на знание Python",
+  description: "Тест для проверки знаний языка программирования Python",
+  duration_seconds: 1800,
+  unlimited_time: false,
+  show_correct_answers: false,
+  allow_retake: true,
+  heme: "Python",
+  required_karma: 100,
+  passing_score: 70,
+  experience_points: 50,
+  acoin_reward: 10,
+  block: [
     {
-      "question_text": "Что такое Python?",
-      "question_type": "single",
-      "points": 1,
-      "explanation": "Python - это высокоуровневый язык программирования, который отличается простотой синтаксиса и мощными возможностями.",
-      "answer_options": [
+      question_text: "Что такое Python?",
+      question_type: "single",
+      points: 1,
+      explanation: "Python - это высокоуровневый язык программирования, который отличается простотой синтаксиса и мощными возможностями.",
+      answer_options: [
         {
-          "option_text": "Язык программирования",
-          "is_correct": true
+          option_text: "Язык программирования",
+          is_correct: true
         },
         {
-          "option_text": "База данных",
-          "is_correct": false
+          option_text: "База данных",
+          is_correct: false
         },
         {
-          "option_text": "Видеоигра",
-          "is_correct": false
+          option_text: "Видеоигра",
+          is_correct: false
         },
         {
-          "option_text": "Операционная система",
-          "is_correct": false
+          option_text: "Операционная система",
+          is_correct: false
         }
       ]
     },
     {
-      "question_text": "Как создать список в Python?",
-      "question_type": "single",
-      "points": 1,
-      "explanation": "Список в Python можно создать с помощью квадратных скобок.",
-      "answer_options": [
+      question_text: "Как создать список в Python?",
+      question_type: "single",
+      points: 1,
+      explanation: "Список в Python можно создать с помощью квадратных скобок.",
+      answer_options: [
         {
-          "option_text": "list()",
-          "is_correct": false
+          option_text: "list()",
+          is_correct: false
         },
         {
-          "option_text": "[]",
-          "is_correct": true
+          option_text: "[]",
+          is_correct: true
         },
         {
-          "option_text": "{}",
-          "is_correct": false
+          option_text: "{}",
+          is_correct: false
         },
         {
-          "option_text": "()",
-          "is_correct": false
+          option_text: "()",
+          is_correct: false
         }
       ]
     },
     {
-      "question_text": "Что делает оператор 'for' в Python?",
-      "question_type": "single",
-      "points": 1,
-      "explanation": "Оператор 'for' используется для итерации по элементам последовательности, такой как список, кортеж или строка.",
-      "answer_options": [
+      question_text: "Что делает оператор 'for' в Python?",
+      question_type: "single",
+      points: 1,
+      explanation: "Оператор 'for' используется для итерации по элементам последовательности, такой как список, кортеж или строка.",
+      answer_options: [
         {
-          "option_text": "Проверяет условие",
-          "is_correct": false
+          option_text: "Проверяет условие",
+          is_correct: false
         },
         {
-          "option_text": "Выполняет цикл определенное количество раз",
-          "is_correct": false
+          option_text: "Выполняет цикл определенное количество раз",
+          is_correct: false
         },
         {
-          "option_text": "Итерирует по элементам последовательности",
-          "is_correct": true
+          option_text: "Итерирует по элементам последовательности",
+          is_correct: true
         },
         {
-          "option_text": "Останавливает выполнение программы",
-          "is_correct": false
+          option_text: "Останавливает выполнение программы",
+          is_correct: false
         }
       ]
     }
