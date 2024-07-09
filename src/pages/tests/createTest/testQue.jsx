@@ -9,8 +9,7 @@ import {
 } from "./inputComponent";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import {
-  Unstable_NumberInput as BaseNumberInput,
-  numberInputClasses,
+  Unstable_NumberInput as BaseNumberInput
 } from "@mui/base/Unstable_NumberInput";
 const Input = (props) => {
   const { content, idInput, countForAnswer } = props;
@@ -186,7 +185,9 @@ const TestQue = (props) => {
     idCheckBoxAbout,
     setForRemove,
     idValuePoins,
-    content,setUpOrDown,
+    getBase64,
+    content,
+    setUpOrDown,
     data,
     setModalValidTestText,
     setVisibleModalValidTest,
@@ -196,6 +197,7 @@ const TestQue = (props) => {
   const [limitedTime, setLimitedTime] = useState(false);
   const [annotation, setAnnotation] = useState(false);
   const [df, setDf] = useState(1);
+  const [fileImg, setFileImg] = useState("");
 
   const [fileName, setFileName] = useState();
   const [collectionQue, setCollectionQue] = useState({});
@@ -222,11 +224,10 @@ const TestQue = (props) => {
   // Вывод сохранненого вопроса
   useEffect(() => {
     if (content) {
-      console.log(content);
       document.querySelector(`#${idText}`).value = content.question_text;
       setDf(content.points);
       document.querySelector(`#${idValuePoins}`).value = Number(content.points);
-      console.log(document.querySelector(`#${idValuePoins}`));
+
       if (content.answer_options.length > 0) {
         setAnswer_options(content.answer_options);
       } else {
@@ -308,7 +309,7 @@ const TestQue = (props) => {
       }
     }
     changecollectionQue();
-  }, [annotation, limitedTime]);
+  }, [annotation, limitedTime, fileImg]);
 
   // Создание объекта с данными из этого вопроса
   function changecollectionQue() {
@@ -334,10 +335,11 @@ const TestQue = (props) => {
     let timeValue = document.querySelector(`#${idTime}`)
       ? Number(document.querySelector(`#${idTime}`).value)
       : 0;
+      console.log(fileName)
     setCollectionQue({
       type: "question",
       content: {
-        // image: fileName,
+        image: null,
         question_text: document.querySelector(`#${idText}`).value,
         question_type: question_type,
         points: Number(document.querySelector(`#${idValuePoins}`).value),
@@ -462,6 +464,7 @@ const TestQue = (props) => {
   // Изменение цвета названия файла при выборе файла
   function handleChange(event) {
     setFileName(event.target.files[0]);
+    getBase64(event.target.files[0]).then((value) => setFileImg(value));
     document.getElementById(`${idfileColor}`).style = "color: #000";
   }
 
@@ -478,13 +481,23 @@ const TestQue = (props) => {
       <div className={classes.titleContainer}>
         <h2 className={classes.blockTitle} id="idTitleBlock"></h2>
         <div className={classes.arrowsContainer}>
-          <div className={classes.arrowUp} onClick={()=>{setUpOrDown(['up', countForBlocks])}}>
+          <div
+            className={classes.arrowUp}
+            onClick={() => {
+              setUpOrDown(["up", countForBlocks]);
+            }}
+          >
             <ArrowBackIosNewIcon
               sx={{ transform: "rotate(90deg)" }}
               className={classes.arrow}
             />
           </div>
-          <div className={classes.arrowDown} onClick={()=>{setUpOrDown(['down', countForBlocks])}}>
+          <div
+            className={classes.arrowDown}
+            onClick={() => {
+              setUpOrDown(["down", countForBlocks]);
+            }}
+          >
             <ArrowBackIosNewIcon
               sx={{ transform: "rotate(-90deg)" }}
               className={classes.arrow}

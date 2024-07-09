@@ -3,8 +3,13 @@ import classes from "./testsStatistics.module.css";
 import { useNavigate } from "react-router-dom";
 import { Dropdown } from "@mui/base/Dropdown";
 import { Menu } from "@mui/base/Menu";
-import { MenuButton, MenuItem, AnimatedListbox } from "../../../components/general/dropDownMui.jsx";
+import {
+  MenuButton,
+  MenuItem,
+  AnimatedListbox,
+} from "../../../components/general/dropDownMui.jsx";
 import "../../../components/general/styles.css";
+import { instance } from "../../../utils/axios/index.js";
 const AccordiontStatisticss = (props) => {
   const {
     duration,
@@ -20,10 +25,16 @@ const AccordiontStatisticss = (props) => {
     theme_name,
     test_attempt,
     allEmployee,
-    setArrFilter,
   } = props;
   const createHandleMenuClick = (menuItem) => {};
   const navigate = useNavigate();
+  function resetAttempt() {
+    instance
+      .delete(`attempts/delete/${test_attempt}/`)
+      .then(function (response) {
+        document.querySelector(`#${"id" + test_attempt}`).remove();
+      });
+  }
   return (
     <div className={classes.rowStatistic} id={"id" + test_attempt}>
       <div className={classes.rowcontainer}>
@@ -83,11 +94,9 @@ const AccordiontStatisticss = (props) => {
               >
                 Показать результат
               </MenuItem>
-              <MenuItem>
-                Дополнительно
-              </MenuItem>
-              <MenuItem>
-                Cбросить результат
+              <MenuItem>Дополнительно</MenuItem>
+              <MenuItem onClick={() => resetAttempt()}>
+                Cбросить попытку
               </MenuItem>
             </Menu>
           </Dropdown>

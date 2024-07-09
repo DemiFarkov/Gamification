@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from "./test.module.css";
 
 const MainCheckbox = (props) => {
@@ -33,7 +33,7 @@ const MainCheckbox = (props) => {
           className={classes.mainCheckboxInput}
         />
         <label htmlFor="checkbox2" className={classes.mainCheckboxLabel}>
-          Показывать верные ответы и пояснения по завершению теста
+          Показывать результаты по завершении теста
         </label>
       </div>
       <div className={classes.mainCheckboxWrapper}>

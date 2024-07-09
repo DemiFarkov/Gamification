@@ -21,7 +21,6 @@ const Timer = (props) => {
   const [timeTime, setTimeTime] = useState(timeQue);
   useEffect(() => {
     if (timerStop) {
-      console.log("close");
     }
   }, [timerStop]);
   const getTimeRemaining = (e) => {
@@ -89,7 +88,6 @@ const Timer = (props) => {
       startTimer(deadline);
     }, 1000);
     Ref.current = id;
-    console.log(id);
     if (whichTimer == "forTest") {
       setRefTimer(id);
     }
@@ -110,7 +108,6 @@ const Timer = (props) => {
   };
 
   useEffect(() => {
-    console.log(timeQue);
     if (!timerStop) {
       setTimeTime;
 

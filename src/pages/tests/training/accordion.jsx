@@ -3,8 +3,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import classes from "./traning.module.css";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 
@@ -16,6 +15,7 @@ const AccordionTraning = (props) => {
     countTheme,
     removeCuttentTheme,
     theme_id,
+    group,
   } = props;
   const ref = useRef(null);
   function removeTheme() {
@@ -68,7 +68,9 @@ const AccordionTraning = (props) => {
                     countTheme={countTheme}
                     status={que.status}
                     test_available={que.test_available}
-                    remaining_days={que.remaining_days}
+                    remaining_time={que.remaining_time}
+                    AccordionSummaryy={AccordionSummaryy}
+                    group={group}
                   />
                 ))}
               </tbody>
@@ -108,7 +110,8 @@ const RowTable = (props) => {
     countForID,
     countTheme,
     test_available,
-    remaining_days,
+    remaining_time,
+    AccordionSummaryy,group,
 
     status,
   } = props;
@@ -116,7 +119,38 @@ const RowTable = (props) => {
     false,
     "",
   ]);
-
+  const [days, setDays] = useState(0);
+  const [hour, setHour] = useState(0);
+  const [timeSRT, setTimeSRT] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    let arrTime = remaining_time.split(" ");
+    setDays(arrTime[0]);
+    setHour(arrTime[1]);
+    let daysEnding = "";
+    let hourEnding = "";
+    if (arrTime[0] % 10 == 1) {
+      daysEnding = "день";
+    } else if (arrTime[0] % 10 > 1 && arrTime[0] % 10 < 5) {
+      daysEnding = "дня";
+    } else if (arrTime[0] % 10 > 4 && arrTime[0] % 10 < 9) {
+      daysEnding = "дней";
+    }
+    if (arrTime[1] % 10 == 1) {
+      hourEnding = "час";
+    } else if (arrTime[1] % 10 > 1 && arrTime[1] % 10 < 5) {
+      hourEnding = "часа";
+    } else if (arrTime[1] % 10 > 4 && arrTime[1] % 10 < 9) {
+      hourEnding = "часов";
+    }
+    if (arrTime[0] > 0) {
+      setTimeSRT(
+        `Тест недоступен ${arrTime[0]} ${daysEnding} и ${arrTime[1]} ${hourEnding}`
+      );
+    } else if (arrTime[0] == 0) {
+      setTimeSRT(`Тест недоступен ${arrTime[1]} ${hourEnding}`);
+    }
+  }, []);
   function removeRow() {
     removeTest(id);
     document
@@ -141,54 +175,67 @@ const RowTable = (props) => {
 
   const karma = Cookies.get("karma");
   const experience = Cookies.get("experience");
-
+  function changeStyleСonditions() {
+    if (karma >= carmaValue && experience >= expValue) {
+      navigate({
+        pathname: "../pages/tests/traning/test",
+        search: `?id=${id}`,
+      });
+    } else {
+      document.querySelector(`#${"Сonditions" + id}`).style.boxShadow =
+        "0 0 2vw .5vw rgba(221, 61, 61, 0.436) inset";
+      setTimeout(() => {
+        document.querySelector(`#${"Сonditions" + id}`).style.boxShadow =
+          "none";
+      }, 400);
+    }
+  }
   return (
     <>
       <tr
         id={"theme" + countTheme + "row" + countForID}
         style={{ position: "relative" }}
+        className={classes.trTable}
       >
         <th
           className={classes.AccordionThName}
           style={{ position: "relative" }}
-          onMouseOver={() => openSettingsTest()}
-          onMouseLeave={() => closeSettingsTest()}
+          onMouseOver={() => group == "Администраторы" && openSettingsTest()}
+          onMouseLeave={() => group == "Администраторы" && closeSettingsTest()}
         >
-          {remaining_days > 0 && (
-            <div className={classes.testNoavailable}>
-              Тест недоступен {remaining_days} дней
+          {(days > 0 || hour > 0) && (
+            <div className={classes.testNoavailable}>{timeSRT}</div>
+          )}
+          {group == "Администраторы" && (
+            <div id={"idTest" + id} className={classes.changeTestContainer}>
+              <div className={classes.changeTestBtn}>
+                <Link
+                  to={{
+                    pathname: "../pages/tests/createTest",
+                    search: `?id=${id}`,
+                  }}
+                  style={{ color: "#fff", fontWeight: "400" }}
+                >
+                  Изменить
+                </Link>
+              </div>
+              <div
+                className={classes.changeTestBtn}
+                onClick={() => setVisibleRemoveTestDialog([true, nameTest])}
+              >
+                Удалить
+              </div>
             </div>
           )}
-          <div id={"idTest" + id} className={classes.changeTestContainer}>
-            <div className={classes.changeTestBtn}>
-              <Link
-                to={{
-                  pathname: "../pages/tests/createTest",
-                  search: `?id=${id}`,
-                }}
-                style={{ color: "#fff", fontWeight: "400" }}
-              >
-                Изменить
-              </Link>
-            </div>
-            <div
-              className={classes.changeTestBtn}
-              onClick={() => setVisibleRemoveTestDialog([true, nameTest])}
-            >
-              Удалить
-            </div>
-          </div>
-          <Link
-            to={{
-              pathname: "../pages/tests/traning/test",
-              search: `?id=${id}`,
-            }}
+
+          <p
+            onClick={() => changeStyleСonditions()}
             className={classes.AccordionLink}
           >
             {nameTest}
-          </Link>
+          </p>
         </th>
-        <th className={classes.AccordionThСonditions}>
+        <th className={classes.AccordionThСonditions} id={"Сonditions" + id}>
           <span
             style={
               karma >= carmaValue
@@ -230,7 +277,7 @@ const RowTable = (props) => {
             )
           )}
         </th>
-        <th className={classes.AccordionThIcon}>тут иконки</th>
+        <th className={classes.AccordionThIcon}>{/* тут иконки */}</th>
       </tr>
       <RemoveTestDialog
         visibleRemoveTestDialog={visibleRemoveTestDialog}

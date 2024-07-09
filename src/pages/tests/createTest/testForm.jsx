@@ -13,16 +13,22 @@ const TestForm = (props) => {
     idTitle,
     data,
     setUpOrDown,
-    content,countForBlocks,
+    content,
+    countForBlocks,
+    getBase64,
   } = props;
   const [fileName, setFileName] = useState("Файл не выбран");
   const [collectionForm, setCollectionForm] = useState({});
   const [value, setValue] = useState("");
+  const [fileImg, setFileImg] = useState("");
+
   useEffect(() => {
     changecollectionQue();
   }, [value]);
   function handleChange(event) {
     setFileName(event.target.files[0].name);
+    getBase64(event.target.files[0]).then((value) => setFileImg(value));
+
     document.getElementById(`${idfileColor}`).style = "color: #000";
   }
   // Создание объекта с данными из этого вопроса
@@ -36,12 +42,12 @@ const TestForm = (props) => {
     //   : "";
     setCollectionForm({
       type: "theory",
+      image: fileImg,
       content: { title: title, text: text },
     });
   }
   // Отправка объекта с данными из этой формы в общий массив данных
   useEffect(() => {
-    console.log(collectionForm)
     data(collectionForm, idMainBlock);
   }, [collectionForm]);
 
@@ -166,6 +172,7 @@ const TestForm = (props) => {
           type="file"
           onChange={handleChange}
           className={classes.answerInputFile}
+          accept="image/jpeg,image/png"
         />
       </div>
 

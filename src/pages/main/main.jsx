@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/general/header";
 import classes from "./main.module.css";
 import Navigation from "../../components/general/navigation";
@@ -6,12 +6,13 @@ import CenterBox from "./centerBox/centerBox";
 import Tasks from "./tasks";
 import Rating from "./rating";
 import ModalNoAccess from "../../components/general/modalNoAccess";
+import { getGroupsAuth } from "../../hooks/reduxHooks";
 
 const Main = () => {
-  const [access] = useState(false);
+  const group = getGroupsAuth();
   return (
     <div>
-      {access ? (
+      {group == "Администраторы" ? (
         <>
           <Header skrol="17" />
           <div className={classes.mainContentBox}>

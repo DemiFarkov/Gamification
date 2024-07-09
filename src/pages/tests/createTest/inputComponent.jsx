@@ -1,5 +1,5 @@
-import { alpha, styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import { styled } from "@mui/material/styles";
+import React from "react";
 import {
   Unstable_NumberInput as BaseNumberInput,
   numberInputClasses,

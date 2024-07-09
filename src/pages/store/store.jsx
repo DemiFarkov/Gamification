@@ -5,12 +5,13 @@ import Navigation from "../../components/general/navigation";
 import StoreCard from "./storeCard";
 import HistoryCard from "./historyCard";
 import ModalNoAccess from "../../components/general/modalNoAccess";
+import { getGroupsAuth } from "../../hooks/reduxHooks";
 
 const Store = () => {
-  const [access] = useState(false);
+  const group = getGroupsAuth();
   return (
     <div>
-      {access ? (
+      {group == "Администраторы" ? (
         <>
           <Header skrol="0" />
           <div className={classes.mainContentBox}>

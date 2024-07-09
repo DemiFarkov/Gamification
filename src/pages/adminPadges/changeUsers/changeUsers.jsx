@@ -1,16 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../../components/general/header";
 import Navigation from "../../../components/general/navigation";
 import classes from "./ChangeUsers.module.css";
 import TableTR from "./tableTR";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Padding } from "@mui/icons-material";
+import { instance } from "../../../utils/axios";
 
 const ChangeUsers = () => {
+  const [userData, SetUserData] = useState([]);
+  const [userDataFilter, SetUserDataFilter] = useState([]);
+
   const [roleFilter, SetRoleFilter] = useState("");
   const [postFilter, SetPostFilter] = useState("");
-
-
+  const [positions, setPositions] = useState([]);
+  const [groups, setGroups] = useState([]);
+  function filter(el) {
+    let good = true;
+    if (postFilter !== "") {
+      if (el.position !== postFilter) {
+        good = false;
+      }
+    }
+    if (roleFilter !== "") {
+      if (el.groups[0] !== roleFilter) {
+        good = false;
+      }
+    }
+    return good;
+  }
+  useEffect(() => {
+    if (userDataFilter) {
+      SetUserDataFilter(
+        userData.filter(function (el, index) {
+          return filter(el);
+        })
+      );
+    }
+  }, [postFilter, roleFilter]);
+  useEffect(() => {
+    instance.get("users/").then(function (response) {
+      SetUserData(response.data);
+      SetUserDataFilter(response.data);
+      console.log(response.data);
+    });
+    instance.get("positions/").then(function (response) {
+      setPositions(response.data.positions);
+    });
+    instance.get("groups/").then(function (response) {
+      setGroups(response.data);
+      
+    });
+  }, []);
   const styleSelect = {
     "& .MuiOutlinedInput-notchedOutline": {
       borderColor: "#469C9A",
@@ -54,10 +95,12 @@ const ChangeUsers = () => {
                   }}
                   label="Роль"
                 >
-                  <MenuItem value={"Не выбрано"}>Не выбрано</MenuItem>
-                  <MenuItem value={"Пользователь"}>Пользователь</MenuItem>
-                  <MenuItem value={"Модератор"}>Модератор</MenuItem>
-                  <MenuItem value={"Администратор"}>Администратор</MenuItem>
+                  <MenuItem value={""}>Не выбрано</MenuItem>
+                  {groups.map((el, index) => (
+                    <MenuItem value={el.id} key={index}>
+                      {el.name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
               <FormControl sx={styleSelect}>
@@ -71,12 +114,13 @@ const ChangeUsers = () => {
                   label="Должность"
                   sx={styleSelect}
                 >
-                  <MenuItem value={"Не выбрано"}>Не выбрано</MenuItem>
-                  <MenuItem value={"Оператор ТП"}>Оператор ТП</MenuItem>
-                  <MenuItem value={"Специалист ТП"}>Специалист ТП</MenuItem>
-                  <MenuItem value={"Консультант ТП"}>Консультант ТП</MenuItem>
-                  <MenuItem value={"Координатор ТП"}>Координатор ТП</MenuItem>
+                  <MenuItem value={""}>Не выбрано</MenuItem>
 
+                  {positions.map((el, index) => (
+                    <MenuItem value={el} key={index}>
+                      {el}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </div>
@@ -89,26 +133,19 @@ const ChangeUsers = () => {
             <div className={classes.tableCoin}>A-coin</div>
             <div className={classes.tableXP}>Опыт</div>
             <div className={classes.tableJob}>Должность</div>
-            <div className={classes.tableDate}>Дата регистрации</div>
+            <div className={classes.tableDate}>День рождения</div>
             <div className={classes.tableRol}>Роль </div>
           </div>
           <div className={classes.tableContainer}>
             <div className={classes.tableContent}>
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
-              <TableTR />
+              {userDataFilter.map((el, index) => (
+                <TableTR
+                  key={index}
+                  positions={positions}
+                  groups={groups}
+                  data={el}
+                />
+              ))}
             </div>
           </div>
         </div>

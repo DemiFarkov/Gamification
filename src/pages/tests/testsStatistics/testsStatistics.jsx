@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import Header from "../../../components/general/header";
 import { Link } from "react-router-dom";
-import AccordiontStatistics from "./AccordiontStatistics";
 import Navigation from "../../../components/general/navigation";
 import { instance } from "../../../utils/axios/index.js";
 import AccordiontStatisticss from "./AccordiontStatistics";
@@ -20,6 +19,9 @@ import exp from "../../../img/Vector.svg";
 import acoin from "../../../img/image64.svg";
 import "../../../components/general/styles.css";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { getGroupsAuth } from "../../../hooks/reduxHooks.js";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 
 const TestsStatisticss = () => {
   const [allEmployee, setAllEmployee] = useState();
@@ -28,6 +30,7 @@ const TestsStatisticss = () => {
   const [requestSuccessful, setRequestSuccessful] = useState(true);
   const [openModalAllTop, setOpenModalAllTop] = useState(false);
   const [openModalTop, setOpenModalTop] = useState(false);
+
   const [contentForModal, setContentForModal] = useState([
     "Топ верных вопросов",
     1,
@@ -39,9 +42,14 @@ const TestsStatisticss = () => {
   const [questionCorrectStat, setQuestionCorrectStat] = useState();
 
   const [questionErrorsStat, setQuestionErrorsStat] = useState();
+  const [averageScore, setAverageScore] = useState();
+  const [sortMode, setSortMode] = useState([]);
+
+  const [acoins, setAcoins] = useState("");
+  const [expV, setExp] = useState("");
 
   const [lastAttempt, setLastAttempt] = useState(false);
-
+  const group = getGroupsAuth();
   const [arrFilter, setArrFilter] = useState("");
   function resetFilter() {
     setSelectEmployee("");
@@ -130,7 +138,6 @@ const TestsStatisticss = () => {
       .then((response) => {
         setAllEmployee(response.data);
         setArrFilter(response.data.statistics);
-        console.log(response.data);
       })
       .catch((response) => {
         setRequestSuccessful(false);
@@ -142,7 +149,6 @@ const TestsStatisticss = () => {
         setQuestionCorrectStat(response.data);
       })
       .catch((response) => {
-        console.log(response);
       });
     instance
       .get("question_errors_stat/")
@@ -150,7 +156,6 @@ const TestsStatisticss = () => {
         setQuestionErrorsStat(response.data);
       })
       .catch((response) => {
-        console.log(response);
       });
 
     instance
@@ -159,13 +164,104 @@ const TestsStatisticss = () => {
         setTop_participants(response.data);
       })
       .catch((response) => {
-        console.log(response);
       })
       .finally(() => {
         setLoad(false);
       });
   }, []);
-
+  useEffect(() => {
+    if (arrFilter) {
+      let score = 0;
+      let maxScore = 0;
+      let acoin = 0;
+      let exp = 0;
+      arrFilter.map(
+        (el) => (
+          (score = score + el.score),
+          (maxScore = maxScore + el.max_score),
+          (acoin = acoin + el.test_acoin_reward),
+          (exp = exp + el.test_experience_points)
+        )
+      );
+      setAverageScore(((score / maxScore) * 100).toFixed(0));
+      setAcoins(acoin);
+      setExp(exp);
+    }
+  }, [arrFilter]);
+  useEffect(() => {
+    if (sortMode.length > 0) {
+      if (sortMode[0] == "test") {
+        let sortArr = structuredClone(arrFilter).sort((a, b) =>
+          a.test_name == b.test_name
+            ? 0
+            : a.test_name > b.test_name
+            ? 1
+            : a.test_name < b.test_name && -1
+        );
+        if (sortMode[1] == 1) {
+          setArrFilter(sortArr);
+        } else if (sortMode[1] == 2) {
+          setArrFilter(sortArr.reverse());
+        }
+      }
+      if (sortMode[0] == "theme") {
+        let sortArr = structuredClone(arrFilter).sort((a, b) =>
+          a.theme_name == b.theme_name
+            ? 0
+            : a.theme_name > b.theme_name
+            ? 1
+            : a.theme_name < b.theme_name && -1
+        );
+        if (sortMode[1] == 1) {
+          setArrFilter(sortArr);
+        } else if (sortMode[1] == 2) {
+          setArrFilter(sortArr.reverse());
+        }
+      }
+      if (sortMode[0] == "FIO") {
+        let sortArr = structuredClone(arrFilter).sort((a, b) =>
+          a.employee_name == b.employee_name
+            ? 0
+            : a.employee_name > b.employee_name
+            ? 1
+            : a.employee_name < b.employee_name && -1
+        );
+        if (sortMode[1] == 1) {
+          setArrFilter(sortArr);
+        } else if (sortMode[1] == 2) {
+          setArrFilter(sortArr.reverse());
+        }
+      }
+      if (sortMode[0] == "moder") {
+        let sortArr = structuredClone(arrFilter).sort((a, b) =>
+          a.moderator == b.moderator
+            ? 0
+            : a.moderator > b.moderator
+            ? 1
+            : a.moderator < b.moderator && -1
+        );
+        if (sortMode[1] == 1) {
+          setArrFilter(sortArr);
+        } else if (sortMode[1] == 2) {
+          setArrFilter(sortArr.reverse());
+        }
+      }
+      if (sortMode[0] == "date") {
+        let sortArr = structuredClone(arrFilter).sort((a, b) =>
+          a.end_time.slice(0, a.end_time.indexOf(" ")).replaceAll("-", "") == b.end_time.slice(0, b.end_time.indexOf(" ")).replaceAll("-", "")
+            ? 0
+            : a.end_time.slice(0, a.end_time.indexOf(" ")).replaceAll("-", "") > b.end_time.slice(0, b.end_time.indexOf(" ")).replaceAll("-", "")
+            ? 1
+            : a.end_time.slice(0, a.end_time.indexOf(" ")).replaceAll("-", "") < b.end_time.slice(0, b.end_time.indexOf(" ")).replaceAll("-", "") && -1
+        );
+        if (sortMode[1] == 1) {
+          setArrFilter(sortArr);
+        } else if (sortMode[1] == 2) {
+          setArrFilter(sortArr.reverse());
+        }
+      }
+    }
+  }, [sortMode]);
   return (
     <div>
       <Header />
@@ -174,24 +270,40 @@ const TestsStatisticss = () => {
         <div className={classes.mainContent}>
           <h1 className={classes.H1}>Статистика </h1>
           <div className={classes.navTest}>
-            <Link to={"../pages/tests/traning"} className={classes.navBtn}>
-              <div>Тесты</div>
-            </Link>
-            <Link
-              to={"../pages/tests/moderationTest"}
-              className={classes.navBtn}
-            >
-              <div>Модерация тестов</div>
-            </Link>
-            <Link to={"../pages/tests/createTest"} className={classes.navBtn}>
-              <div>Создать тест</div>
-            </Link>
-            <Link
-              to={"../pages/tests/testsStatistics"}
-              className={classes.navBtn}
-            >
-              <div>Статистика</div>
-            </Link>
+            {(group == "Администраторы" || group == "М") && (
+              <>
+                <Link to={"../pages/tests/traning"} className={classes.navBtn}>
+                  <div>Тесты</div>
+                </Link>
+              </>
+            )}
+            {(group == "Администраторы" || group == "М") && (
+              <>
+                <Link
+                  to={"../pages/tests/moderationTest"}
+                  className={classes.navBtn}
+                >
+                  <div>Модерация тестов</div>
+                </Link>
+              </>
+            )}
+            {group == "Администраторы" && (
+              <>
+                <Link
+                  to={"../pages/tests/createTest"}
+                  className={classes.navBtn}
+                >
+                  <div>Создать тест</div>
+                </Link>
+                <Link
+                  to={"../pages/tests/testsStatistics"}
+                  className={classes.navBtn}
+                >
+                  <div>Статистика</div>
+                </Link>
+                
+              </>
+            )}
           </div>
           <div className={classes.contentGrid}>
             <div className={classes.mainBlock}>
@@ -317,18 +429,33 @@ const TestsStatisticss = () => {
                       style={{ width: "19%" }}
                     >
                       ФИО
+                      <ArrowBlock
+                        name={"FIO"}
+                        sortMode={sortMode}
+                        setSortMode={setSortMode}
+                      />
                     </div>
                     <div
                       className={classes.rowTitleItem}
                       style={{ width: "19%" }}
                     >
                       Тема
+                      <ArrowBlock
+                        name={"theme"}
+                        sortMode={sortMode}
+                        setSortMode={setSortMode}
+                      />
                     </div>
                     <div
                       className={classes.rowTitleItem}
                       style={{ width: "19%" }}
                     >
                       Тесты
+                      <ArrowBlock
+                        name={"test"}
+                        sortMode={sortMode}
+                        setSortMode={setSortMode}
+                      />
                     </div>
 
                     <div
@@ -342,12 +469,22 @@ const TestsStatisticss = () => {
                       style={{ width: "10%" }}
                     >
                       Дата
+                      <ArrowBlock
+                        name={"date"}
+                        sortMode={sortMode}
+                        setSortMode={setSortMode}
+                      />
                     </div>
                     <div
                       className={classes.rowTitleItem}
                       style={{ width: "13%" }}
                     >
                       Модератор
+                      <ArrowBlock
+                        name={"moder"}
+                        sortMode={sortMode}
+                        setSortMode={setSortMode}
+                      />
                     </div>
                     <div
                       className={classes.rowTitleItem}
@@ -384,7 +521,6 @@ const TestsStatisticss = () => {
                               theme_name={el.theme_name}
                               test_attempt={el.test_attempt}
                               key={index}
-                              setArrFilter={setArrFilter}
                               allEmployee={allEmployee}
                             />
                           </CSSTransition>
@@ -419,16 +555,22 @@ const TestsStatisticss = () => {
             </div>
             <div>
               <div className={classes.averageScoreContainer}>
-                <div className={classes.sideBlockTitle}>Средний балл</div>
-                <div className={classes.averageScore}>17,5</div>
+                <div className={classes.sideBlockTitle}>% прохождения</div>
+                <div className={classes.averageScore}>
+                  {averageScore !== "Infinity" ? (
+                    averageScore
+                  ) : (
+                    <CloseRoundedIcon sx={{ fontSize: "2.5vw" }} />
+                  )}
+                </div>
               </div>
               <div className={classes.averageScoreContainer}>
                 <div className={classes.sideBlockTitle}>Награды</div>
                 <div className={classes.sideBlok}>
-                  <img src={acoin} alt="" /> <span> A-coin -</span> {" 100"}
+                  <img src={acoin} alt="" /> <p> A-coin - </p> <p>{acoins}</p>
                 </div>
                 <div className={classes.sideBlok}>
-                  <img src={exp} alt="" /> <p> Опыт -</p> <p>{"100"}</p>
+                  <img src={exp} alt="" /> <p> Опыт -</p> <p>{expV}</p>
                 </div>
               </div>
               <div
@@ -466,3 +608,39 @@ const TestsStatisticss = () => {
 };
 
 export default TestsStatisticss;
+
+const ArrowBlock = (props) => {
+  const { name, sortMode, setSortMode } = props;
+  const arrowUp = {
+    position: "absolute",
+    right: ".5vw",
+    top: "0",
+    fontSize: "1vw",
+    transform: "rotate(90deg)",
+    cursor: "pointer",
+  };
+  const arrowDown = {
+    position: "absolute",
+    right: ".5vw",
+    bottom: "0",
+    fontSize: "1vw",
+    transform: "rotate(-90deg)",
+    cursor: "pointer",
+  };
+  return (
+    <div
+      onClick={() => {
+        sortMode[0] == name && sortMode[1] == 1
+          ? setSortMode([name, 2])
+          : setSortMode([name, 1]);
+      }}
+    >
+      {((sortMode[0] == name && sortMode[1] !== 1) || sortMode[0] !== name) && (
+        <ArrowBackIosNewRoundedIcon sx={arrowUp} />
+      )}
+      {((sortMode[0] == name && sortMode[1] !== 2) || sortMode[0] !== name) && (
+        <ArrowBackIosNewRoundedIcon sx={arrowDown} />
+      )}
+    </div>
+  );
+};

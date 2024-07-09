@@ -6,21 +6,27 @@ import ColumnContainer3 from "./ColumnContainer3";
 import Header from "../../components/general/header";
 import Navigation from "../../components/general/navigation";
 import ModalNoAccess from "../../components/general/modalNoAccess";
+import { getGroupsAuth } from "../../hooks/reduxHooks";
 
 const Profil = () => {
-  const [access] = useState(false);
+  const group = getGroupsAuth();
   return (
     <>
-    {access ? <><Header/>
-      <div className={classes.mainContentBox}>
-        <Navigation />
-        <div className={classes.mainContainer}>
-          <ColumnContainer1 />
-          <ColumnContainer2 />
-          <ColumnContainer3 />
-        </div>
-      </div></> : <ModalNoAccess />}
-      
+      {group == "Администраторы" ? (
+        <>
+          <Header />
+          <div className={classes.mainContentBox}>
+            <Navigation />
+            <div className={classes.mainContainer}>
+              <ColumnContainer1 />
+              <ColumnContainer2 />
+              <ColumnContainer3 />
+            </div>
+          </div>
+        </>
+      ) : (
+        <ModalNoAccess />
+      )}
     </>
   );
 };

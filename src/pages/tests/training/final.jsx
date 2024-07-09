@@ -18,28 +18,19 @@ const Final = (props) => {
     );
   }
   return (
-    <div className={classes.theoryContainer}>
-      <div className={classes.finalText}>Вы молодец!!!</div>
+    <div className={classes.finalContainer}>
+      <div className={classes.finalText}>Тест завершен</div>
+      <div className={classes.finalText} style={{fontSize:"1.3vw"}}>Просмотр результатов недоступен</div>
       <div className={classes.BtnFinalTestContainer}>
         <Button onClick={() => nav()} className={classes.BtnFinalTest}>
           <Link
             className={classes.linkFinalTest}
             style={{ textDecoration: "none" }}
-            to="../pages/traning"
+            to="../pages/tests/traning"
           >
-            Вернуться назад
+            Вернуться к тестам
           </Link>{" "}
         </Button>
-        <Button onClick={() => nav()} className={classes.BtnFinalTest}>
-          <Link
-            className={classes.linkFinalTest}
-            style={{ textDecoration: "none" }}
-            to="../pages/traning/result"
-          >
-            Посмотреть результаты
-          </Link>{" "}
-        </Button>
-        <Button onClick={() => click()}>asdfad</Button>
       </div>
     </div>
   );

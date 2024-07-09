@@ -18,22 +18,29 @@
     border-radius: 1vw;
 }
 .MidlleContent{
-    padding: 2vw;
+    min-height: 31vw;
+    position: relative;
     margin: 2vw auto;
+    overflow: hidden;
     width: 50%;
     background: #202833;
     border:  .1vw solid #469C9A;
     border-radius: 1vw;
 }
-.MidlleContentDataBlock{
-    display: flex;
-    flex-direction: column;
-    
-}
+
 .BtnContainer{
     margin: 0 auto;
     width: 50%;
     display: flex;
     justify-content: space-between;
 
+}
+
+.successCreatedTitle{
+    margin-top: 2vw;
+    font-size: 2vw;
+}
+.successCreatedContanerData{
+    display: flex;
+    flex-direction: column;
 }

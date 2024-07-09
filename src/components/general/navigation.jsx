@@ -3,6 +3,8 @@ import classes from "./navigation.module.css";
 import Logo from "../../img/img_navigation/image_77.png";
 import { Link } from "react-router-dom";
 import { Transition } from "react-transition-group";
+import { getGroupsAuth } from "../../hooks/reduxHooks";
+import ChecklistRoundedIcon from "@mui/icons-material/ChecklistRounded";
 
 const Navigation = () => {
   const [MainOpen, setMainOpen] = useState(false);
@@ -17,13 +19,14 @@ const Navigation = () => {
   const [StoreVisible, setStoreVisible] = useState(false);
   const [PlayersVisible, setPlayersVisible] = useState(false);
   const [TestVisible, setTestVisible] = useState(true);
-
+  const group = getGroupsAuth();
   useEffect(() => {
-    if (false) {
+    if (group == "Администраторы") {
       setProfileVisible(true),
         setStoreVisible(true),
         setPlayersVisible(true),
-        setMainVisible(true)
+        setMainVisible(true);
+      setTestVisible(true);
     }
   }, []);
   return (
@@ -39,7 +42,7 @@ const Navigation = () => {
           <Transition in={MainOpen} timeout={200} mountOnEnter unmountOnExit>
             {(state) => (
               <div className={`menuContainer ${state}`}>
-                <div className={`menuName ${state}`}>Главная</div>
+                <div className={`menuName ${state}`}>Главная </div>
               </div>
             )}
           </Transition>
@@ -103,7 +106,8 @@ const Navigation = () => {
           onMouseOver={() => setTestOpen(true)}
           onMouseOut={() => setTestOpen(false)}
         >
-          <img src={Logo} alt="" className={classes.mainContainerImg} />
+          <ChecklistRoundedIcon sx={{ fontSize: "2.4vw", margin: "1vw 0 .5vw 0", color:"#fff" }} />
+
           <Transition in={TestOpen} timeout={200} mountOnEnter unmountOnExit>
             {(state) => (
               <div className={`menuContainer ${state}`}>

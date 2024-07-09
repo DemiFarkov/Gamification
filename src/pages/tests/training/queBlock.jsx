@@ -9,6 +9,7 @@ import {
   useFormControl,
 } from "@mui/material";
 import Timer from "./timer";
+import { image } from "@uiw/react-md-editor";
 
 const QueBlock = (props) => {
   const {
@@ -53,7 +54,6 @@ const QueBlock = (props) => {
     }
   }, [timer]);
   useEffect(() => {
-    console.log(countQue);
     if (data.content.duration_seconds > 0) {
       setTimerComponent(
         <Timer
@@ -178,7 +178,6 @@ const QueBlock = (props) => {
     }
   }
   useEffect(() => {
-    console.log(duration_seconds);
   }, []);
 
   return (
@@ -207,8 +206,10 @@ const QueBlock = (props) => {
               >
                 Вопрос № {countQue}
               </h1>
+              
             </div>
-
+            {data.content.image && 
+              <img className={classes.img} src={data.content.image} alt="ой" />}
             <div className={classes.queContent}>
               <div className={classes.ThisQueText}>
                 {data.content.question_text}

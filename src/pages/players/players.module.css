@@ -18,20 +18,62 @@
 }
 
 .mainContentCards {
-
     display: flex;
     flex-wrap: wrap;
 }
-
-
 
 .cardContainer {
     margin: .938%;
     margin-top: 1.5vw;
     width: 18.5%;
-    background: #202833;
     border-radius: 1vw;
-    transition: .3s all;
+    transition: .999s all;
+    width: 18%;
+    height: 20vw;
+    perspective: 1000px;
+}
+
+.cardInner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.999s;
+}
+
+.cardFront,
+.cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.cardFront {
+    background: #202833;
+    color: #fff;
+    align-items: center;
+    border: .1vw solid #469C9A;
+    border-radius: 10px;
+    font-size: 24px;
+    transform: rotateY(0deg);
+}
+
+.cardBack {
+    background-color: #469C9A;
+    color: #fff;
+    align-items: center;
+    border: 10px solid #469C9A;
+    border-radius: 10px;
+    font-size: 24px;
+    transform: rotateY(180deg);
+}
+
+.cardContainer:hover .cardInner {
+    transform: rotateY(180deg);
+    box-shadow: 0 0 2vw #469c9b90;
+    border-radius: 1vw;
+
 }
 
 .cardContainer:nth-child(5n) {
@@ -43,8 +85,7 @@
 }
 
 .cardContainer:hover {
-    transform: scale(105%);
-    box-shadow: 0 0 2vw #6276919e;
+    transform: scale(110%);
 }
 
 .title {
@@ -77,12 +118,10 @@
 
 .resurses {
     margin: 1vw 0;
-    justify-content: center;
-    display: flex;
 }
 
 .resursesItem {
-    margin-right: 1.1vw;
+    margin: 1vw 0 0 1.1vw;
     display: flex;
     align-items: center;
     font-size: 1.3vw;

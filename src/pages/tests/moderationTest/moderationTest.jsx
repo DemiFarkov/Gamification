@@ -7,18 +7,18 @@ import { Link } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { instance } from "../../../utils/axios/index.js";
 import AccordionModeration from "./accordionModeration";
-
+import { getGroupsAuth } from "../../../hooks/reduxHooks.js";
 
 const ModerationTest = () => {
   const [allThemes, setAllThemes] = useState([]);
   const [load, setLoad] = useState(true);
   const [requestSuccessful, setRequestSuccessful] = useState(true);
+  const group = getGroupsAuth();
   useEffect(() => {
-     instance
+    instance
       .get("test_attempts/moderation/")
       .then((response) => {
         setAllThemes(response.data);
-        console.log(response.data);
       })
       .catch((response) => {
         setRequestSuccessful(false);
@@ -35,18 +35,39 @@ const ModerationTest = () => {
         <div className={classes.mainContent}>
           <h1 className={classes.H1}>Модерация тестов</h1>
           <div className={classes.navTest}>
-          <Link to={"../pages/tests/traning"} className={classes.navBtn}>
-                <div>Тесты</div>
-              </Link>
-              <Link to={"../pages/tests/moderationTest"} className={classes.navBtn}>
-              <div>Модерация тестов</div>
-            </Link>
-            <Link to={"../pages/tests/createTest"} className={classes.navBtn}>
-              <div>Создать тест</div>
-            </Link>
-            <Link to={"../pages/tests/testsStatistics"} className={classes.navBtn}>
-              <div>Статистика</div>
-            </Link>
+            {(group == "Администраторы" || group == "М") && (
+              <>
+                <Link to={"../pages/tests/traning"} className={classes.navBtn}>
+                  <div>Тесты</div>
+                </Link>
+              </>
+            )}
+            {(group == "Администраторы" || group == "М") && (
+              <>
+                <Link
+                  to={"../pages/tests/moderationTest"}
+                  className={classes.navBtn}
+                >
+                  <div>Модерация тестов</div>
+                </Link>
+              </>
+            )}
+            {group == "Администраторы" && (
+              <>
+                <Link
+                  to={"../pages/tests/createTest"}
+                  className={classes.navBtn}
+                >
+                  <div>Создать тест</div>
+                </Link>
+                <Link
+                  to={"../pages/tests/testsStatistics"}
+                  className={classes.navBtn}
+                >
+                  <div>Статистика</div>
+                </Link>
+              </>
+            )}
           </div>
 
           <div className={classes.mainBlock}>

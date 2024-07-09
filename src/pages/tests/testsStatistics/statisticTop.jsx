@@ -77,6 +77,7 @@ const StatisticTop = (props) => {
                   : "% не правильных ответов"}
               </div>
             </div>
+            
             {questionStat.most_common.map((el, index) => (
               <div key={index} className={classes.modalRow}>
                 <TextField

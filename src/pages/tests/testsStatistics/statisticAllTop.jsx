@@ -25,7 +25,6 @@ useEffect(()=>{},[])
         instance
           .get(`top_participants/?test_id=${selectTest} `)
           .then((response) => {
-            console.log(response.data);
             setTop_participantsocal(response.data);
           });
   }, [selectTest]);

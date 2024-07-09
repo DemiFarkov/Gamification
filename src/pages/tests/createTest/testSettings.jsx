@@ -1,22 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import TestSettingsInput from "./testSettingsInput";
 import classes from "./test.module.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useRef, useEffect } from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {  MenuItem, Select } from "@mui/material";
 
 const TestSettings = (props) => {
   const {
     inputAchievement,
-    // setValueAchievementSelect,
-    // valueAchievementSelect,
-    setVisibleAchievementSelect,
-    visibleAchievementSelect,
+    achievementsOption,
+    valueAchievementSelect,
+    setValueAchievementSelect,
   } = props;
 
-  const [selectOption, setSelectOption] = useState([1, 2, 3]);
-  const [valueAchievementSelect, setValueAchievementSelect] =
-    useState("Без достижения");
   return (
     <div className={classes.TestSettingsInputBlock}>
       <div className={classes.TestSettingsInputTitle}>Настройки</div>
@@ -74,18 +69,18 @@ const TestSettings = (props) => {
           sx={{
             borderRadius: "3vw",
             lineHeight: "normal",
-            minHeight:"1px",
+            minHeight: "1px",
             "& .MuiSelect-outlined": {
               padding: ".7vw",
               fontSize: ".95vw",
-              minHeight:"1em !important",
+              minHeight: "1em !important",
               background: "#D9D9D9",
               borderRadius: "3vw",
               color: "#000",
               outline: "none",
               textAlign: "start",
-              display:"flex",
-              alignItems:"center"
+              display: "flex",
+              alignItems: "center",
             },
             "& fieldset": {
               padding: ".7vw",
@@ -94,19 +89,19 @@ const TestSettings = (props) => {
               border: "none",
               outline: "none",
             },
-            "& .MuiSelect-select":{minHeight:"1px !important"},
+            "& .MuiSelect-select": { minHeight: "1px !important" },
             "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus":
               {
                 borderRadius: "3vw",
                 outline: "none",
               },
-              "& .Mui-error":{border:"#d42929 .15vw solid", color:"#d42929"}
+            "& .Mui-error": { border: "#d42929 .15vw solid", color: "#d42929" },
           }}
         >
           <MenuItem value={"Без достижения"}>Без достижения</MenuItem>
-          {selectOption.map((el, index) => (
-            <MenuItem key={index} value={el}>
-              {el}
+          {achievementsOption.map((el, index) => (
+            <MenuItem key={index} value={el.id}>
+              {el.name}
             </MenuItem>
           ))}
         </Select>
@@ -117,7 +112,7 @@ const TestSettings = (props) => {
               <ExpandMoreIcon color="action" sx={{ fontSize: "1.1vw" }} />
             </div>
           )}
-        </div>       
+        </div>
       </div>
       <TestSettingsInput
         type={"number"}

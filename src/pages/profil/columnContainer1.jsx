@@ -1,29 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./profil.module.css";
-import Avatar from "../../img/image_51.png";
 import ProgressBar from "./progressBar/progressBar";
 import Coin from "../../img/img_profil/image_52.png";
 import Сharisma from "../../img/img_profil/image_53.png";
 import Сircle from "../../img/img_profil/Ellipse_7.png";
-import Rog from "../../img/devil-clipart-sticker-9.png";
-import { Link } from "react-router-dom";
-import foto from "../../img/Безымянный.png"
+import Cookies from "js-cookie";
 const ColumnContainer1 = () => {
+  const [acoin] = useState(Cookies.get("acoin"));
+  const [karma] = useState(Cookies.get("karma"));
+
   // данные для progressBar
   const testData = [{ completed: 60 }];
   return (
     <div className={classes.columnContainer1}>
       <div className={classes.box1}>
         <img src={Сircle} alt="" />
-        <Link to="../pages/main" className={classes.button}>
-          <div className={classes.buttonText}>Михаил Саранчук</div>
-        </Link>
+
+        <div className={classes.buttonText}>
+          {Cookies.get("first_name") +" " + Cookies.get("last_name")}
+        </div>
       </div>
 
       <div className={classes.box2}>
-        {/* <img className={classes.rog} src={Rog} alt="" /> */}
-        <img src={Avatar} alt="ничего нет" className={classes.box2Img} />
-        {/* <div className={classes.box2IMGBack}><img src={foto} alt="" /></div> */}
+        <div className={classes.bgr}></div>
+        {/* <img src={Avatar} alt="ничего нет" className={classes.box2Img} /> */}
       </div>
 
       <div className={classes.box3}>
@@ -33,10 +33,10 @@ const ColumnContainer1 = () => {
         ))}
         <div className={classes.resurses}>
           <div className={classes.resursesItem}>
-            <img src={Coin} alt="" /> 1000
+            <img src={Coin} alt="" /> {acoin}
           </div>
           <div className={classes.resursesItem}>
-            <img src={Сharisma} alt="" /> 100
+            <img src={Сharisma} alt="" /> {karma}
           </div>
         </div>
       </div>

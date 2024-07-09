@@ -34,8 +34,6 @@ const ModuleAddTheme = (props) => {
     if (!themeAlradyisCreated) {
       const user = await instance
         .post("create_theme/", { name: name })
-        .then(function (response) {
-        });
       setVisibleModalAddTheme(false);
       refreshThemes(name);
     } else {

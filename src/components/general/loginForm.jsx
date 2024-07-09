@@ -2,37 +2,42 @@ import React from "react";
 import classes from "./form.module.css";
 import { Link } from "react-router-dom";
 const LoginForm = (props) => {
+  const { loginError, handleSubmit, setUsername, setPassword } = props;
   return (
     <>
-      <section className={classes.formContainer}>
+      <section
+        className={classes.formContainer}
+        style={loginError ? { borderRadius: "0 0 1vw 1vw" } : {}}
+      >
+        <div className={classes.loginErrorContainer}>
+          {" "}
+          {loginError && (
+            <div className={classes.loginError}>
+              Не правильный логин или пароль
+            </div>
+          )}
+        </div>
         <form
           action=""
           className={classes.form_container}
-          onSubmit={props.handleSubmit}
+          onSubmit={handleSubmit}
         >
           <input
             type="text"
             className={classes.formInput}
-            onChange={(e) => props.setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="Введите логин"
-            autoComplete="on"
           />
           <input
             type="password"
             className={classes.formInput}
-            onChange={(e) => props.setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Введите пароль"
-            autoComplete="on"
           />
           <button type="submin" className={classes.button}>
             Вход
           </button>
         </form>
-        <div className={classes.data}>
-          <h2>Данные для входа: </h2>
-          <div>Логин: oleg</div>
-          <div>Пароль: oleg</div>
-        </div>
       </section>
     </>
   );

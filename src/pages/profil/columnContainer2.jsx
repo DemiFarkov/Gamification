@@ -7,6 +7,7 @@ const ColumnContainer2 = () => {
   const [visible, setVisible] = useState(false);
   return (
     <div className={classes.columnContainer2}>
+      <div className={classes.status}>Как принято считать, независимые государства формируют глобальную экономическую сеть.</div>
       <div className={classes.box5}>
         {" "}
         <h2 className={classes.titile}>Анкета</h2>

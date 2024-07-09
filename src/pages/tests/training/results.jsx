@@ -16,11 +16,9 @@ const Results = () => {
     const user = instance
       .get(`test_attempt/test_results/${idTest}`)
       .then(function (response) {
-        console.log(response.data);
         setData(response.data);
       })
       .catch(function (response) {
-        console.log(response);
       })
       .finally(() => {
         setLoad(false);
@@ -225,7 +223,7 @@ const ResultsBlock = (props) => {
             <TextField
                   multiline
                   fullWidth
-                  helperText="Пояснение модератора"
+                  helperText="Ответ"
                   InputProps={{
                     readOnly: true,
                     value: `${text_answer}`,

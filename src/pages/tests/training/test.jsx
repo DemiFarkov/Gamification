@@ -11,7 +11,7 @@ import { CircularProgress } from "@mui/material";
 import Timer from "./timer";
 import MessageError from "../../../components/general/messageError";
 
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 const CountQue = (count) => {
   return (
     <div className={classes.queCircleContainer}>
@@ -37,16 +37,11 @@ const Test = (props) => {
   const [timeOver, setTimeOver] = useState(false);
   const [openMessageError, setOpenMessageError] = useState(false);
   const [refTimer, setRefTimer] = useState(0);
-
-  // console.log(minutes + ":" + seconds);
   const [timeForTest, setTimeForTest] = useState();
+
   useEffect(() => {
     if (mainData) {
       if (!mainData.test.unlimited_time) {
-        console.log(
-          "mainData.test.unlimited_time=",
-          mainData.test.unlimited_time
-        );
         setTimeForTest(
           <Timer
             timeQue={mainData.test.duration_seconds * 60}
@@ -59,6 +54,7 @@ const Test = (props) => {
           />
         );
       }
+
     }
   }, [mainData]);
   useEffect(() => {
@@ -77,19 +73,15 @@ const Test = (props) => {
     } else {
       clearInterval(refTimer);
     }
-    console.log("asd");
   }, [minutes, seconds]);
   useEffect(() => {
     if (timeOver) {
       let clonedObj = structuredClone(dataForQuery);
 
-      console.log(clonedObj);
-
       let localCountQue = countQue;
       for (let i = countForData; i < mainData.blocks.length; i++) {
         if (mainData.blocks[i].type == "question") {
           {
-            console.log();
             if (mainData.blocks[i].content.question_type == "single") {
               clonedObj[localCountQue] = "-1";
             } else if (mainData.blocks[i].content.question_type == "multiple") {
@@ -111,7 +103,6 @@ const Test = (props) => {
       .get(`api/test/${idTest}/`)
       .then(function (response) {
         setMainData(response.data);
-        console.log(response);
       })
       .finally(() => {
         setLoad(false);
@@ -121,11 +112,8 @@ const Test = (props) => {
     if (!visibleDescription) {
       const user = instance
         .post(`start_test/2/${idTest}/`)
-        .then(function (response) {
-          console.log(response.data);
-        })
+        .then(function (response) {})
         .catch(function (response) {
-          console.log(response);
           setOpenMessageError(true);
         });
     }
@@ -135,15 +123,14 @@ const Test = (props) => {
   function dataСollection(data, index) {
     let clonedObj = structuredClone(dataForQuery);
     clonedObj[index + 1] = data;
-    console.log(clonedObj);
     setDataForQuery(clonedObj);
   }
   useEffect(() => {
     if (!load) {
-      let count = 0
+      let count = 0;
       for (let i = 0; i < mainData.blocks.length; i++) {
         if (mainData.blocks[i].type == "question") {
-          count++
+          count++;
           setList((prevList) =>
             prevList.concat(<CountQue key={i} count={prevList.length + 1} />)
           );
@@ -173,18 +160,22 @@ const Test = (props) => {
     }
   }, [countForData, dataForQuery]);
   const quaryGo = async () => {
-    console.log(dataForQuery);
     const user = await instance
-      .post(`complete_test/${Cookies.get("employee_id")}/${idTest}/`, dataForQuery)
+      .post(
+        `complete_test/${Cookies.get("employee_id")}/${idTest}/`,
+        dataForQuery
+      )
       .then(function (response) {
-        console.log(response);
-        navigate({
-          pathname: "../pages/tests/traning/result",
-          search: `?id=${response.data.test_attempt_id}`,
-        });
+        mainData.test.show_correct_answers
+          ? navigate({
+              pathname: "../pages/tests/traning/result",
+              search: `?id=${response.data.test_attempt_id}`,
+            })
+          : navigate({
+              pathname: "../pages/tests/traning/final",
+            });
       })
       .catch(function (response) {
-        console.log(response);
         setOpenMessageError(true);
       })
       .finally(() => {});
@@ -214,6 +205,7 @@ const Test = (props) => {
             <Description
               setVisibleDescription={setVisibleDescription}
               text={mainData.test.description}
+              img={mainData.test.image}
             />
           ) : countForData !== mainData.blocks.length ? (
             !timeOver ? (

@@ -4,12 +4,13 @@ import classes from "./players.module.css";
 import Navigation from "../../components/general/navigation";
 import CardPlayer from "./cardPlayer";
 import ModalNoAccess from "../../components/general/modalNoAccess";
+import { getGroupsAuth } from "../../hooks/reduxHooks";
 
 const Players = () => {
-  const [access] = useState(false);
+  const group = getGroupsAuth();
   return (
     <>
-      {access ? (
+      {group == "Администраторы" ? (
         <>
           <Header skrol="17" />
           <div className={classes.mainContentBox}>
@@ -26,6 +27,9 @@ const Players = () => {
                 <CardPlayer />
                 <CardPlayer />
                 <CardPlayer />
+                <CardPlayer />
+                <CardPlayer />
+
               </div>
             </div>
           </div>

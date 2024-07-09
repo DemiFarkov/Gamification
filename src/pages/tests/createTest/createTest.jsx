@@ -6,7 +6,6 @@ import classes from "./test.module.css";
 import Navigation from "../../../components/general/navigation";
 import TestSettings from "./testSettings";
 import MainCheckbox from "./mainCheckbox";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import ModuleAddTheme from "./moduleAddTheme";
@@ -21,6 +20,8 @@ const CreateTest = (props) => {
   const [upOrDown, setUpOrDown] = useState([]);
   const [countForBlocks, setCountForBlocks] = useState(0);
   const [fileName, setFileName] = useState("Файл не выбран");
+  const [fileImg, setFileImg] = useState("");
+
   const [forRemove, setForRemove] = useState();
   const [errorSelect, setErrorSelect] = useState(false);
 
@@ -32,11 +33,13 @@ const CreateTest = (props) => {
   const [suppCollection, setSuppCollection] = useState([]);
   const [actionForm, setActionForm] = useState();
   const [inputTime, setInputTime] = useState(true);
-  const [inputAttemptTwice, setInputAttemptTwice] = useState(false);
-  const [valueAchievementSelect, setValueAchievementSelect] = useState(["", 0]);
+  const [inputAttemptTwice, setInputAttemptTwice] = useState(true);
+  const [valueAchievementSelect, setValueAchievementSelect] =
+    useState("Без достижения");
   const [visibleAchievementSelect, setVisibleAchievementSelect] =
     useState(false);
   const [selectOption, setSelectOption] = useState([]);
+  const [achievementsOption, setAchievementsOption] = useState([]);
   const [blockList, setBlockList] = useState([]);
   const [visible, setVisible] = useState(false);
   const [changeQuery, setChangeQuery] = useState(false);
@@ -67,6 +70,7 @@ const CreateTest = (props) => {
       setVisibleModalValidTest={setVisibleModalValidTest}
       setModalValidTestText={setModalValidTestText}
       changeMinPointsForTest={changeMinPointsForTest}
+      getBase64={getBase64}
     />
   );
   const toggleVisible = () => {
@@ -86,42 +90,25 @@ const CreateTest = (props) => {
   };
   function fillingInTheData(oldData, fromQuary) {
     if (!fromQuary) {
-      console.log(oldData);
       oldData = {
         blocks: oldData.blocks,
         test: {
           achievement: oldData.achievement,
-
           acoin_reward: oldData.acoin_reward,
-
           can_attempt_twice: oldData.can_attempt_twice,
-
           description: oldData.description,
-
           duration_seconds: oldData.duration_seconds,
-
           experience_points: oldData.experience_points,
-
           max_score: oldData.max_score,
-
           min_experience: oldData.min_experience,
-
           name: oldData.name,
-
           passing_score: oldData.passing_score,
-
           required_karma: oldData.required_karma,
-
           retry_delay_days: oldData.retry_delay_days,
-
           send_results_to_email: oldData.send_results_to_email,
-
           show_correct_answers: oldData.show_correct_answers,
-
           theme: oldData.theme,
-
           unlimited_time: oldData.unlimited_time,
-
           without_achievement: oldData.without_achievement,
         },
       };
@@ -134,7 +121,6 @@ const CreateTest = (props) => {
         "#btnContainerBtnForm"
       ).innerHTML = `Сохранить изменения`;
     }
-    console.log(oldData);
     if (oldData.test.unlimited_time == true) {
       document.querySelector(`#checkbox1`).checked = true;
     }
@@ -147,12 +133,7 @@ const CreateTest = (props) => {
     if (oldData.test.send_results_to_email == true) {
       document.querySelector(`#checkbox4`).checked = true;
     }
-
     document.querySelector(`#TestNameInput`).value = oldData.test.name;
-    selectOption.map(
-      (el) => el.id == oldData.test.theme && setValueSelect(el.id)
-    );
-    // setValueSelect([data[index].name, data[index].id])
 
     if (oldData.test.unlimited_time == false) {
       document.querySelector(`#timeForTest`).value =
@@ -197,6 +178,7 @@ const CreateTest = (props) => {
                 content={el.content}
                 setSuppCollection={setSuppCollection}
                 setUpOrDown={setUpOrDown}
+                getBase64={getBase64}
               />
             ) : (
               <TestQue
@@ -225,6 +207,7 @@ const CreateTest = (props) => {
                 content={el.content}
                 setSuppCollection={setSuppCollection}
                 setUpOrDown={setUpOrDown}
+                getBase64={getBase64}
               />
             )
           )
@@ -234,53 +217,59 @@ const CreateTest = (props) => {
     setCollectionDataBlock(oldData.blocks);
     setCountForBlocks(oldData.blocks.length);
   }
-  useEffect(() => {
-    if (selectOption.length !== 0) {
-      let oldData = null;
-      const idTest = searchParams.get("id");
-      if (idTest) {
-        const oldDataAxios = instance
-          .get(`api/test/${idTest}/`)
-          .then(function (response) {
-            fillingInTheData(response.data, true);
-          })
-          .catch((err) => err);
-        console.log(oldData);
-        // oldData = oldDataAxios.response.data
-      } else if (localStorage.getItem("key") !== null) {
-        oldData = JSON.parse(localStorage.getItem("key"));
-        fillingInTheData(oldData, false);
-      }
-    }
-  }, [selectOption]);
+
   // Получаем имеющиеся темы для теста
   function refreshThemes(nameNewTheme) {
-    document.querySelector("#checkbox3").checked = true;
+    // document.querySelector("#checkbox3").checked = true;
     const themes_with_tests = instance.get("themes/").then((response) => {
-      let data = [
-        { id: 0, setValueSelect: setValueSelect, name: "Создать новую" },
-      ];
+      let data = [];
       let index = 0;
       data = data.concat(response.data);
       setSelectOption(data);
+      localStorage.getItem("key") !== null &&
+        data.map(
+          (el) =>
+            el.id == JSON.parse(localStorage.getItem("key")).theme &&
+            setValueSelect(el.id)
+        );
       if (nameNewTheme) {
         for (let i = 0; i < data.length; i++) {
           if (data[i].name == nameNewTheme) {
             index = i;
           }
         }
-        setValueSelect([data[index].name, data[index].id]);
+        setValueSelect(data[index].id);
       }
     });
   }
   useEffect(() => {
     refreshThemes();
+    instance.get("achievements/").then((response) => {
+      setAchievementsOption(response.data);
+    });
   }, []);
   // Закрытие select при нажатии вне его
   const refBtn = useRef(null);
   useClickOutside(refBtn, () => {
     setCountClickReset(0);
   });
+  useEffect(() => {
+    let oldData = null;
+    const idTest = searchParams.get("id");
+    if (idTest) {
+      const oldDataAxios = instance
+        .get(`api/test/${idTest}/`)
+        .then(function (response) {
+          fillingInTheData(response.data, true);
+        })
+        .catch((err) => err);
+    } else if (localStorage.getItem("key") !== null) {
+      oldData = JSON.parse(localStorage.getItem("key"));
+      console.log(selectOption);
+
+      fillingInTheData(oldData, false);
+    }
+  }, []);
   // Блокировка поля указания времени для теста при необходимости
   useEffect(() => {
     let inputTimeCheck = document.querySelector("#timeForTest");
@@ -332,7 +321,6 @@ const CreateTest = (props) => {
     if (valid) {
       for (let i = 0; i < collectionDataBlock.length; i++) {
         if (collectionDataBlock[i].type == "question") {
-          console.log(collectionDataBlock[i].content.question_type);
           if (collectionDataBlock[i].content.question_type == "text") {
             valid = true;
             continue;
@@ -355,7 +343,6 @@ const CreateTest = (props) => {
             collectionDataBlock[i].content.text == "" ||
             collectionDataBlock[i].content.title == ""
           ) {
-            console.log(collectionDataBlock);
             valid = false;
             setVisibleModalValidTest(true);
             let text = `Не все поля заполнены в ${i + 1} блоке`;
@@ -365,45 +352,11 @@ const CreateTest = (props) => {
         }
       }
     }
-    // Проверка, чтобы не были все ответы правильными в вопросе
-    if (valid) {
-      for (let i = 0; i < collectionDataBlock.length; i++) {
-        if (collectionDataBlock[i].type == "question") {
-          if (collectionDataBlock[i].content.question_type == "text") {
-            valid = true;
-            break;
-          }
-          let currentValid = false;
-          for (
-            let j = 0;
-            j < collectionDataBlock[i].content.answer_options.length;
-            j++
-          ) {
-            if (
-              collectionDataBlock[i].content.answer_options[j].is_correct ==
-              false
-            ) {
-              currentValid = true;
-            }
-          }
-          if (!currentValid) {
-            valid = false;
-            setVisibleModalValidTest(true);
-            let text = `Все ответы были выбраны правильными в  ${i + 1} блоке`;
-            setModalValidTestText([text, false]);
-            break;
-          }
-        }
-        if (!valid) {
-          break;
-        }
-      }
-    }
 
     if (valid) {
       setVisibleModalValidTest(true);
       setModalValidTestText([
-        "!!!Перед созданем рекомендуется сохранить тест!!!  Вы действительно хотите создать этот тест? ",
+        "Вы действительно хотите создать этот тест?",
         true,
         "create test",
       ]);
@@ -435,32 +388,19 @@ const CreateTest = (props) => {
     }
   }, [suppCollection]);
 
-  function getBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      console.log(file);
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        let encoded = reader.result.toString().replace(/^data:(.*,)?/, "");
-        if (encoded.length % 4 > 0) {
-          encoded += "=".repeat(4 - (encoded.length % 4));
-        }
-        resolve(encoded);
-      };
-      reader.onerror = (error) => reject(error);
-    });
-  }
+  const _handleReaderLoaded = (readerEvt) => {
+    let binaryString = readerEvt.target.result;
+  };
   function objectFormation() {
-    
-
     // collectionDataBlock.forEach((el, index) => {
-    //   el.content.image = getBase64(el.content.image);
+    //   el.content.image ? getBase64(el.content.image).then((value) => (el.content.image = "value")) :el.content.image = "";
     // });
     let name = document.querySelector("#TestNameInput").value;
     let description = document.querySelector("#testDescription").value;
-    let valueAchievementSelect = document.querySelector(
-      "#valueAchievementSelect"
-    ).value;
+    let valueAchievement =
+      valueAchievementSelect == "Без достижения"
+        ? null
+        : valueAchievementSelect;
     let duration_seconds = inputTime
       ? Number(document.querySelector("#timeForTest").value)
       : 1;
@@ -476,6 +416,7 @@ const CreateTest = (props) => {
     let experience_points = Number(
       document.querySelector("#quantityEXP").value
     );
+    // let img = getBase64(fileName).then((value) => (return value));
 
     let unlimited_time = document.querySelector("#checkbox1").checked;
     let show_correct_answers = document.querySelector("#checkbox2").checked;
@@ -492,25 +433,32 @@ const CreateTest = (props) => {
     let without_achievement =
       valueAchievementSelect !== "Без достижения" ? false : true;
     let max_score = Number(value);
-    // const formData = new FormData();
-    // formData.append("name", name);
-    // formData.append("description", description);
-    // formData.append("passing_score", passing_score);
-    // formData.append("duration_seconds", duration_seconds);
-    // formData.append("unlimited_time", unlimited_time);
-    // formData.append("show_correct_answers", show_correct_answers);
-    // formData.append("theme", valueSelect);
-    // formData.append("required_karma", required_karma);
-    // formData.append("experience_points", experience_points);
-    // formData.append("acoin_reward", acoin_reward);
-    // formData.append("min_experience", min_experience);
-    // formData.append("can_attempt_twice", can_attempt_twice);
-    // formData.append("send_results_to_email", send_results_to_email);
-    // formData.append("achievement", 3);
-    // formData.append("retry_delay_days", retry_delay_days);
-    // formData.append("without_achievement", without_achievement);
-    // formData.append("blocks", collectionDataBlock);
-    // formData.append("max_score", max_score);
+    let formData = new FormData();
+    console.log("collectionDataBlock------------", collectionDataBlock)
+
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("passing_score", passing_score);
+    formData.append("duration_seconds", duration_seconds);
+    formData.append("unlimited_time", unlimited_time);
+    formData.append("show_correct_answers", show_correct_answers);
+    formData.append("theme", valueSelect);
+    formData.append("required_karma", required_karma);
+    formData.append("experience_points", experience_points);
+    formData.append("acoin_reward", acoin_reward);
+    formData.append("min_experience", min_experience);
+    formData.append("can_attempt_twice", can_attempt_twice);
+    formData.append("send_results_to_email", send_results_to_email);
+    formData.append("achievement", valueAchievement);
+    formData.append("retry_delay_days", retry_delay_days);
+    formData.append("without_achievement", without_achievement);
+    formData.append("blocks", JSON.stringify(collectionDataBlock));
+    formData.append("max_score", max_score);
+    formData.append("image", fileName);
+    for (let [name, value] of formData) {
+      name !== "image" && console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
+    }
+    console.log(formData.get("blocks"))
 
     let dataForTest = {
       name: name,
@@ -526,14 +474,14 @@ const CreateTest = (props) => {
       min_experience: min_experience,
       can_attempt_twice: can_attempt_twice,
       send_results_to_email: send_results_to_email,
-      achievement: 3,
+      achievement: valueAchievement,
       retry_delay_days: retry_delay_days,
-      without_achievement:
-        valueAchievementSelect !== "Без достижения" ? false : true,
+      without_achievement: without_achievement,
       blocks: collectionDataBlock,
       max_score: max_score,
+      image: null,
     };
-    console.log(dataForTest);
+    // console.log(JSON.stringify(dataForTest));
     return dataForTest;
   }
 
@@ -544,8 +492,6 @@ const CreateTest = (props) => {
     }
   }, [actionForm]);
   const createTest = async (dataForTest) => {
-    console.log(dataForTest);
-    const idTest = searchParams.get("id");
     changeQuery
       ? await instance
           .put(`update_test_and_content/${idTest}/`, dataForTest)
@@ -558,9 +504,9 @@ const CreateTest = (props) => {
             ]);
           })
           .catch(function (response) {
-            console.log(response);
             setVisibleModalValidTest(true);
             setActionForm(false);
+            console.log(response);
             setModalValidTestText([
               "Что-то пошло не так... Тест не создан",
               false,
@@ -571,6 +517,8 @@ const CreateTest = (props) => {
           .post("create_test/", dataForTest)
           .then(function (response) {
             setVisibleModalValidTest(true);
+            console.log(response);
+
             setModalValidTestText([
               "Тест успешно создан",
               false,
@@ -578,9 +526,10 @@ const CreateTest = (props) => {
             ]);
           })
           .catch(function (response) {
-            console.log(response);
             setVisibleModalValidTest(true);
             setActionForm(false);
+            console.log(response);
+
             setModalValidTestText([
               "Что-то пошло не так... Тест не создан",
               false,
@@ -588,9 +537,20 @@ const CreateTest = (props) => {
             ]);
           });
   };
+  function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
   // Изменение цвета названия выбранного файла
   function handleChange(event) {
-    setFileName(event.target.files[0].name);
+    setFileName(event.target.files[0]);
+    getBase64(event.target.files[0]).then((value) => setFileImg(value));
+
     document.getElementById("logoTestColor").style = "color: #000";
   }
   // Поиск фактического индекса блока
@@ -621,7 +581,6 @@ const CreateTest = (props) => {
       let countForBlockslocal = upOrDown[1];
       let clonedObj = blockList.slice();
       let clonedObj2 = structuredClone(collectionDataBlock);
-      console.log(clonedObj2);
       let currentIndexBlock = findeIndex(
         clonedObj,
         countForBlockslocal,
@@ -659,6 +618,7 @@ const CreateTest = (props) => {
             blockList={blockList}
             setForRemove={setForRemove}
             setUpOrDown={setUpOrDown}
+            getBase64={getBase64}
           />
         )
       );
@@ -768,7 +728,7 @@ const CreateTest = (props) => {
                   <div className={classes.TestNameInputWrapper}>
                     <div className={classes.TestNameInputTitle}>Тема</div>
                     <Select
-                      id="valueAchievementSelect"
+                      id="valueThemeSelect"
                       value={valueSelect}
                       onChange={(event) => {
                         setValueSelect(event.target.value);
@@ -810,6 +770,15 @@ const CreateTest = (props) => {
                       }}
                     >
                       <MenuItem value={"Не выбрано"}>Не выбрано </MenuItem>
+                      <MenuItem
+                        value={"0"}
+                        onClick={() => setVisibleModalAddTheme(true)}
+                      >
+                        Создать новую{" "}
+                        <AddCircleOutlineIcon
+                          sx={{ fontSize: "1.5vw", marginLeft: ".5vw" }}
+                        />
+                      </MenuItem>
                       {selectOption.map((el, index) => (
                         <MenuItem key={index} value={el.id}>
                           {el.name}
@@ -829,7 +798,7 @@ const CreateTest = (props) => {
                     className={classes.answerInputFileName}
                     id="logoTestColor"
                   >
-                    {fileName}
+                    {fileName ? fileName.name : "Файл не выбран"}
                   </div>
                   <input
                     id="logoTest"
@@ -844,8 +813,7 @@ const CreateTest = (props) => {
                 <TestSettings
                   setValueAchievementSelect={setValueAchievementSelect}
                   valueAchievementSelect={valueAchievementSelect}
-                  visibleAchievementSelect={visibleAchievementSelect}
-                  setVisibleAchievementSelect={setVisibleAchievementSelect}
+                  achievementsOption={achievementsOption}
                 />
               </div>
               {blockList}
@@ -908,7 +876,6 @@ const CreateTest = (props) => {
         <ModalValidTest
           visibleModalValidTest={visibleModalValidTest}
           setVisibleModalValidTest={setVisibleModalValidTest}
-          setModalValidTestText={setModalValidTestText}
           ModalValidTestText={ModalValidTestText}
           setActionForm={setActionForm}
           setForRemove={setForRemove}

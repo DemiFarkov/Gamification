@@ -96,6 +96,7 @@ th {
     display: block;
     font-size: 1.1vw;
     color: #fff;
+    cursor: pointer;
 }
 
 th {
@@ -161,6 +162,7 @@ th {
 
 .AccordionThСonditions {
     width: 20%;
+    transition: all .2s linear;
 }
 
 .AccordionThStatus {
@@ -172,15 +174,30 @@ th {
     width: 20%;
 }
 
+@keyframes testNoavailableOpen {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.trTable:hover .testNoavailable {
+    animation: testNoavailableOpen .3s forwards;
+}
+
 .testNoavailable {
+    opacity: 0;
     padding: .82vw;
-        width: 250.2%;
-        height: 100%;
+    width: 250.2%;
+    height: 100%;
     position: absolute;
     display: flex;
-align-items: center;
+    align-items: center;
 
-justify-content: end;
+    justify-content: end;
     top: 0;
     font-size: 1.4vw;
     background: linear-gradient(0.25turn, #20283300, #536379df 50%);
@@ -194,7 +211,7 @@ justify-content: end;
 
 .theoryContainer {
     padding: 1.5vw;
-    margin: 0 2vw 1.5vw .7vw;
+    margin: 0vw 2vw 1.5vw .7vw;
     width: calc(94% - 1.3vw);
     padding-right: 1vw;
     background: #202833;
@@ -221,6 +238,18 @@ justify-content: end;
     font-size: 1.1vw !important;
 }
 
+.finalContainer {
+
+    padding: 1.5vw;
+    margin: 5vw 2vw 1.5vw .7vw;
+    width: 50vw;
+    padding-right: 1vw;
+    background: #202833;
+    border-radius: 1vw;
+    text-align: start;
+    position: relative;
+    border: .1vw solid #469C9A;
+}
 
 .QueContainer {
     margin: 0 2vw 1.5vw .7vw;
@@ -329,9 +358,9 @@ justify-content: end;
 .finalText {
     margin: 2vw;
     text-align: center;
-    font-size: 3vw;
+    font-size: 2vw;
 }
-
+.img{width: 100%;}
 .BtnFinalTest {
     padding: 0 !important;
     margin: 0 auto;

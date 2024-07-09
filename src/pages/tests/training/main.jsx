@@ -4,43 +4,38 @@ import Navigation from "../../../components/general/navigation";
 import classes from "./traning.module.css";
 import AccordionTraning from "./accordion";
 import { Link } from "react-router-dom";
-import { instance } from "../../../utils/axios/index.js";
+import { Config, instance } from "../../../utils/axios/index.js";
 import { CircularProgress, LinearProgress } from "@mui/material";
-import Cookies from "js-cookie";
 import {
   getEmployee_idUseAuth,
-  getTokenUseAuth,
+  getGroupsAuth,
 } from "../../../hooks/reduxHooks.js";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const MainTraning = () => {
   const [allThemes, setAllThemes] = useState([]);
   const [load, setLoad] = useState(true);
   document.cookie = "user=John";
-  console.log(useSelector((state) => state.auth));
   const [requestSuccessful, setRequestSuccessful] = useState(true);
   const Employee_id = getEmployee_idUseAuth();
+  const group = getGroupsAuth();
   function removeCuttentTheme(theme_id) {
-    console.log(theme_id);
     instance
       .delete(`themes/${theme_id}/delete`)
       .then(function (response) {})
       .catch(function (response) {
-        console.log(response);
       });
   }
-  console.log(allThemes);
 
   useEffect(() => {
-    instance
-      .get(`themes-with-tests/`)
+    axios
+      .get(`https://solevoi.pythonanywhere.com/themes-with-tests/`, Config)
       .then((response) => {
         setAllThemes(response.data);
-        console.log(response.data);
       })
       .catch((response) => {
         setRequestSuccessful(false);
-        console.log(response);
       })
       .finally(() => {
         setLoad(false);
@@ -51,7 +46,6 @@ const MainTraning = () => {
       .delete(`delete_test/${id}/`)
       .then(function (response) {})
       .catch(function (response) {
-        console.log(response);
       });
   };
   return (
@@ -62,24 +56,39 @@ const MainTraning = () => {
         <div className={classes.mainContent}>
           <h1 className={classes.H1}>Обучение и тестирование</h1>
           <div className={classes.navTest}>
-            <Link to={"../pages/tests/traning"} className={classes.navBtn}>
-              <div>Тесты</div>
-            </Link>
-            <Link
-              to={"../pages/tests/moderationTest"}
-              className={classes.navBtn}
-            >
-              <div>Модерация тестов</div>
-            </Link>
-            <Link to={"../pages/tests/createTest"} className={classes.navBtn}>
-              <div>Создать тест</div>
-            </Link>
-            <Link
-              to={"../pages/tests/testsStatistics"}
-              className={classes.navBtn}
-            >
-              <div>Статистика</div>
-            </Link>
+            {(group == "Администраторы" || group == "Модераторы") && (
+              <>
+                <Link to={"../pages/tests/traning"} className={classes.navBtn}>
+                  <div>Тесты</div>
+                </Link>
+              </>
+            )}
+            {(group == "Администраторы" || group == "Модераторы") && (
+              <>
+                <Link
+                  to={"../pages/tests/moderationTest"}
+                  className={classes.navBtn}
+                >
+                  <div>Модерация тестов</div>
+                </Link>
+              </>
+            )}
+            {group == "Администраторы" && (
+              <>
+                <Link
+                  to={"../pages/tests/createTest"}
+                  className={classes.navBtn}
+                >
+                  <div>Создать тест</div>
+                </Link>
+                <Link
+                  to={"../pages/tests/testsStatistics"}
+                  className={classes.navBtn}
+                >
+                  <div>Статистика</div>
+                </Link>
+              </>
+            )}
           </div>
 
           <div className={classes.mainBlock}>
@@ -96,6 +105,7 @@ const MainTraning = () => {
                   countTheme={index}
                   removeCuttentTheme={removeCuttentTheme}
                   theme_id={theme.theme_id}
+                  group={group}
                 />
               ))
             ) : (

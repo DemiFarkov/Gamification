@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import classes from "./test.module.css";
 import { Link } from "react-router-dom";
 
@@ -13,15 +13,13 @@ const ModalValidTest = (props) => {
   const {
     visibleModalValidTest,
     setVisibleModalValidTest,
-    setModalValidTestText,
     ModalValidTestText,
     setActionForm,
     setForRemove,
   } = props;
   const text = ModalValidTestText[0];
   const needConfirm = ModalValidTestText[1];
-  const whatDo = ModalValidTestText[2];    
-  const createdTest = ModalValidTestText[3];
+  const whatDo = ModalValidTestText[2];   
 
   const idForRemove = ModalValidTestText[3];
   function ClickOk() {

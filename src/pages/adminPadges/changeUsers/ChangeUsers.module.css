@@ -126,15 +126,18 @@
 .tableRow {
     padding: 1vw;
     font-size: 1.2vw;
+    overflow-x: scroll;
 }
 
 .tableRowFlex {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
 .tableFlexRow {
+    width: 85%;
     padding: .8vw;
     font-size: 1.2vw;
     border: none !important;
@@ -193,4 +196,10 @@
 .modalContentContainer {
     display: flex;
     flex-direction: column;
+}
+.modalError{
+    width: 60%;
+    font-size: 1.2vw;
+    color: #d32f2f;
+    display: none;
 }

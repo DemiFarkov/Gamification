@@ -91,6 +91,7 @@
 
     }
 }
+
 @keyframes rowStatistics1 {
     0% {
         transform: translateX(-100px);
@@ -119,7 +120,7 @@
 
 
 .rowStatistic.enter-active {
-    
+
     animation: rowStatistics1 .5s forwards;
 }
 
@@ -130,4 +131,94 @@
 
 .rowStatistic.exit-active {
     animation: rowStatistics .5s forwards;
+}
+
+
+/* Анимация создания пользователя */
+.MidlleContentDataBlock {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes successCreatedOpen {
+    0% {
+        left: -100%;
+    }
+
+    35% {
+        left: 0;
+    }
+
+    55% {
+        left: -5%;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+.successCreated {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: #3abb8e;
+    border-radius: 1vw;
+    min-height: 31vw;
+    border: .1vw solid #3abb8e;
+}
+
+.successCreated-enter {
+    animation: successCreatedOpen 1.5s ease;
+}
+
+/* Изменение пользователей */
+@keyframes openSendMessage {
+    0% {
+        top: -4.5vw;
+    }
+
+    100% {
+        top: 0;
+    }
+
+}
+
+.modalErrorContainer {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.45vw;
+    color: white;
+}
+
+.modalError {
+    position: relative;
+    padding: 1vw;
+    border-radius: 4px 4px 0 0;
+    background: #61e649;
+    width: 100%;
+    top: -4.5vw;
+}
+
+.modalError-enter-active {
+    
+    top: -4.5vw;
+    animation: openSendMessage .5s forwards;
+}
+
+.modalError-enter-done {
+    top: 0;
+}
+
+.modalError-exit-active {
+    animation: openSendMessage .5s reverse both;
+}
+
+.modalError-exit-done {
+    top: -4.5vw;
 }

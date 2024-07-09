@@ -3,17 +3,13 @@ import Header from "../../../components/general/header";
 import Navigation from "../../../components/general/navigation";
 import { Button, CircularProgress, TextField } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { blueGrey, lime, orange, purple, red } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
 import classes from "./moderationTest.module.css";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import ArrowUp from "../../../img/up-arrow.svg";
 import NumberInputIntroduction from "./inputComponent.jsx";
 import { instance } from "../../../utils/axios/index.js";
 import ModalModeration from "./modalModeration";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import InputBase from "@mui/material/InputBase";
-import Box from "@mui/material/Box";
 
 const ModerationProcess = () => {
   const [load, setLoad] = useState(true);
@@ -26,7 +22,6 @@ const ModerationProcess = () => {
       .get(`test_moderation_result/${idTest}/`)
       .then((response) => {
         setTestData(response.data);
-        console.log(response);
         setLoad(false);
       })
       .catch((response) => {
@@ -62,13 +57,8 @@ const Content = (props) => {
   const { testData, idTest } = props;
   const [dataForRequest, setDataForRequest] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [inputIsCorrect, setInputIsCorrect] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
-  function changeInputIsCorrect(index) {
-    let arr = [true, true];
-    setInputIsCorrect((prevInputIsCorrect) => prevInputIsCorrect.concat(arr));
-  }
 
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
@@ -106,7 +96,6 @@ const Content = (props) => {
     ).value;
 
     clonedObj[index - 1] = localModeration_comment;
-    console.log(clonedObj);
 
     setDataForRequest(clonedObj);
   }
@@ -117,12 +106,9 @@ const Content = (props) => {
     await instance
       .post(`test_attempts/${Number(idTest)}/moderate/`, data)
       .then(function (response) {
-        console.log(data);
         setModalOpen(true);
       })
       .catch(function (response) {
-        console.log(response);
-        console.log(data);
       });
   };
 
@@ -138,12 +124,6 @@ const Content = (props) => {
           >
             {testData.answers_info.map(
               (el, index) => (
-                console.log(
-                  "index: ",
-                  index + 1,
-                  "length: ",
-                  testData.answers_info.length
-                ),
                 (
                   <ModerationQues
                     key={index}
@@ -161,8 +141,6 @@ const Content = (props) => {
                     idexplanation={"idInputexplanation" + index}
                     changeDataForRequest={changeDataForRequest}
                     question_number={el.question_number}
-                    inputIsCorrect={inputIsCorrect}
-                    changeInputIsCorrect={changeInputIsCorrect}
                   />
                 )
               )
@@ -211,18 +189,15 @@ const ModerationQues = (props) => {
     idpoint,
     idexplanation,
     text_answer,
-    changeInputIsCorrect,
     arrIndex,
     question_number,
     max_question_score,
     changeDataForRequest,
-    inputIsCorrect,
   } = props;
   const refPoits = useRef(null);
   const refExplanation = useRef(null);
 
   useEffect(() => {
-    changeInputIsCorrect(LastIndex);
     changeDataForRequest(arrIndex, idpoint, idexplanation, question_number);
     document
       .querySelectorAll(".base-NumberInput-incrementButton")
@@ -234,9 +209,6 @@ const ModerationQues = (props) => {
       .forEach((el) => {
         el.type = "button";
       });
-    console.log(
-      document.querySelector(".base-NumberInput-decrementButton").type
-    );
   }, []);
   const errorStyle = {
     marginTop: "2vw",

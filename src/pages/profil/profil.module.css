@@ -4,9 +4,10 @@ body {
 
 .mainContainer {
     width: calc(94% + 17px);
+
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
-    
+
 }
 
 .mainContentBox {
@@ -61,6 +62,8 @@ body {
     background: #202833;
     font-size: 1.8vw;
     border-radius: 1vw;
+    border: #66FCF1 .1vw solid;
+
 }
 
 .box1 img {
@@ -79,9 +82,26 @@ body {
     background: #202833;
     font-size: 40px;
     border-radius: 1vw;
+    border: #66FCF1 .1vw solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     /* box-shadow: 0 0 105px #c95243; */
 }
+.bgr{
+    padding-top: 15%;
+    width: 100%;
+    height: 100%;    border-radius: 1vw;
 
+    background-image:  linear-gradient(90deg,
+        #b2c1b807 ,
+        #74807d92 
+      );
+      background-size: 100% 100px;
+      font-size: 2.2vw;
+      background-repeat: repeat-y;
+}
 .box2Img {
     width: 100%;
 }
@@ -96,10 +116,12 @@ body {
 .box3 {
     height: 23%;
     width: 100%;
+    border: #66FCF1 .1vw solid;
 
     background: #202833;
     font-size: 40px;
     border-radius: 1vw;
+    
 }
 
 .box3H3 {
@@ -113,13 +135,27 @@ body {
     background: #202833;
     font-size: 1.8vw;
     border-radius: 1vw;
+    border: #66FCF1 .1vw solid;
+
 }
 
 .box5 {
-    height: 71%;
+    height: 56%;
     width: 100%;
     background: #202833;
     border-radius: 1vw;
+    border: #66FCF1 .1vw solid;
+}
+
+.status {
+    padding: .5vw;
+    height: 11%;
+    width: 100%;
+    background: #202833;
+    border-radius: 1vw;
+    border: #66FCF1 .1vw solid;
+    text-align: start;
+font-size: .9vw;
 }
 
 .box6 {
@@ -128,6 +164,8 @@ body {
     background: #202833;
     font-size: 40px;
     border-radius: 1vw;
+    border: #66FCF1 .1vw solid;
+
 }
 
 .box6Wrapper {
@@ -167,12 +205,22 @@ body {
     transition: all .3s;
 }
 
-.box7 {
-    padding-left: 2vw;
-    height: 71%;
+.avations {
+    height: 11%;
     width: 100%;
     background: #202833;
     border-radius: 1vw;
+    border: #66FCF1 .1vw solid;
+}
+
+.box7 {
+    padding-left: 2vw;
+    height: 56%;
+    width: 100%;
+    background: #202833;
+    border-radius: 1vw;
+    border: #66FCF1 .1vw solid;
+
 }
 
 .box8 {
@@ -180,6 +228,8 @@ body {
     width: 100%;
     background: #202833;
     font-size: 40px;
+    border: #66FCF1 .1vw solid;
+
     border-radius: 1vw;
 }
 
@@ -191,6 +241,7 @@ body {
 }
 
 .resursesItem {
+    width: 50%;
     margin-right: 1.5vw;
     display: flex;
     align-items: center;
@@ -211,12 +262,15 @@ body {
 
 .box2IMGBack img {
     animation: rotate 20s linear infinite;
-    
+
 }
 
 @keyframes rotate {
     0% {
         transform: rotate(0deg);
     }
-    100%{transform: rotate(360deg);}
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

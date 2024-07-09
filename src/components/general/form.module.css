@@ -11,6 +11,7 @@
     box-shadow: 0 0 150px #61cdcb93;
     border-radius: 15px;
     position: relative;
+    transition: 1s linear;
 
 }
 
@@ -58,14 +59,31 @@
     font-size: 1.4vw;
 }
 
-.data {
+@keyframes loginErrorAni {
+    0% {
+        top: 2.3;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+.loginErrorContainer{
+    width: 100%;
+    top: -2.3vw;    position: absolute;
+height: 2.3vw;
+    left: 0;
+    overflow: hidden;
+}
+.loginError {
+    width: 100%;
+    border-radius: 1vw 1vw 0 0;
     position: absolute;
-    top: 0;
-    left: 100%;
-    width: 15vw;
-    padding: 2vw;
-    background-color: #fff;
-    color: #202833;
-    text-align: start;
-    
+    top: 2vw;
+    left: 0;
+    font-size: 1.2vw;
+    line-height: 2.3vw;
+    background: #d34040;
+    transition: top 1s linear;
+    animation: loginErrorAni 1s forwards;
 }

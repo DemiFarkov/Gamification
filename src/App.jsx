@@ -21,6 +21,7 @@ import ModerationTest from "./pages/tests/moderationTest/moderationTest";
 import ModerationProcess from "./pages/tests/moderationTest/moderationProcess";
 import TestsStatistics from "./pages/tests/testsStatistics/testsStatistics";
 import CreatingUser from "./pages/creatingUser/creatingUser";
+import Final from "./pages/tests/training/final";
 
 function App() {
   return (
@@ -39,10 +40,11 @@ function App() {
             <Route path="pages/tests/traning" element={<MainTraning />} />
             <Route path="pages/tests/traning/test" element={<Test />}></Route>
             <Route path="pages/tests/traning/result" element={<Results />}></Route>
+            <Route path="pages/tests/traning/final" element={<Final/>} />                   
             <Route path="pages/tests/moderationTest" element={<ModerationTest />} />  
             <Route path="pages/tests/moderationTest/moderationProces" element={<ModerationProcess />} />  
             <Route path="pages/tests/testsStatistics" element={<TestsStatistics/>} />   
-            <Route path="pages/creatingUser/creatingUser" element={<CreatingUser/>} />           
+            <Route path="pages/creatingUser/creatingUser" element={<CreatingUser/>} />   
         
         
         
