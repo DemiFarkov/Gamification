@@ -4,16 +4,27 @@ import Header from "../../../components/general/header";
 import classes from "./moderationTest.module.css";
 import Navigation from "../../../components/general/navigation";
 import { Link } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Skeleton } from "@mui/material";
 import { instance } from "../../../utils/axios/index.js";
 import AccordionModeration from "./accordionModeration";
 import { getGroupsAuth } from "../../../hooks/reduxHooks.js";
+import { isMobile } from "../../../hooks/react-responsive.js";
 
 const ModerationTest = () => {
   const [allThemes, setAllThemes] = useState([]);
   const [load, setLoad] = useState(true);
   const [requestSuccessful, setRequestSuccessful] = useState(true);
+  const isMobileWidth = isMobile()
   const group = getGroupsAuth();
+  const styleSkeleton = {
+    padding: ".25vw .4vw .25vw .4vw",
+    margin: "12px 16px",
+    bgcolor: "#2d3846",
+    height: "2.3vw",
+    width: "29%",
+    borderRadius: "3vw",
+    clear: "both",
+  };
   useEffect(() => {
     instance
       .get("test_attempts/moderation/")
@@ -31,7 +42,7 @@ const ModerationTest = () => {
     <div>
       <Header />
       <div className={classes.mainContainer}>
-        <Navigation />
+      {!isMobileWidth && <Navigation />}
         <div className={classes.mainContent}>
           <h1 className={classes.H1}>Модерация тестов</h1>
           <div className={classes.navTest}>
@@ -73,7 +84,13 @@ const ModerationTest = () => {
           <div className={classes.mainBlock}>
             {" "}
             {load ? (
-              <CircularProgress />
+              <div style={{ display: "flex", flexDirection: "column" }}>
+              <Skeleton variant="rounded" sx={styleSkeleton} />
+              <Skeleton variant="rounded" sx={styleSkeleton} />
+              <Skeleton variant="rounded" sx={styleSkeleton} />
+              <Skeleton variant="rounded" sx={styleSkeleton} />
+              <Skeleton variant="rounded" sx={styleSkeleton} />
+            </div>
             ) : requestSuccessful ? (
               allThemes.map((theme, index) => (
                 <AccordionModeration

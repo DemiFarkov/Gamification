@@ -12,6 +12,7 @@ import Timer from "./timer";
 import MessageError from "../../../components/general/messageError";
 
 import Cookies from "js-cookie";
+import { isMobile } from "../../../hooks/react-responsive.js";
 const CountQue = (count) => {
   return (
     <div className={classes.queCircleContainer}>
@@ -38,7 +39,8 @@ const Test = (props) => {
   const [openMessageError, setOpenMessageError] = useState(false);
   const [refTimer, setRefTimer] = useState(0);
   const [timeForTest, setTimeForTest] = useState();
-
+  const isMobileWidth = isMobile();
+  console.log(mainData);
   useEffect(() => {
     if (mainData) {
       if (!mainData.test.unlimited_time) {
@@ -54,7 +56,6 @@ const Test = (props) => {
           />
         );
       }
-
     }
   }, [mainData]);
   useEffect(() => {
@@ -100,8 +101,13 @@ const Test = (props) => {
   const idTest = searchParams.get("id");
   useEffect(() => {
     const user = instance
-      .get(`api/test/${idTest}/`)
+      .get(`test/${idTest}/`)
       .then(function (response) {
+        !response.data.test_available &&
+          navigate({
+            pathname: "../pages/tests/traning",
+          });
+          console.log(response.data.test_available)
         setMainData(response.data);
       })
       .finally(() => {
@@ -200,7 +206,7 @@ const Test = (props) => {
           setOpenMessageError={setOpenMessageError}
         />
         <div className={classes.mainContentBox}>
-          <Navigation />
+          {!isMobileWidth && <Navigation />}
           {visibleDescription ? (
             <Description
               setVisibleDescription={setVisibleDescription}

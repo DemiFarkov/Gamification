@@ -1,0 +1,35 @@
+.containerStyles {
+    width: 85%;
+    margin: 0 auto;
+    background-Color: #e0e0de;
+    position: relative;
+}
+
+.labelStyles {
+    font-Size: 13px;
+    color: black;
+    width: 100%;
+    top: 0;
+    position: absolute;
+    font-Weight: bold;
+    transition: all .2s linear;
+}
+@media (max-width: 1550px){
+    .fillerStyles{
+        height: 30px !important;
+    }
+    .labelStyles{
+        font-size: 20px;
+    }
+}
+@media (max-width: 1000px){
+    .containerStyles{
+        width: 100%;
+    }
+    .fillerStyles{
+        height: 40px !important;
+    }
+    .labelStyles{
+        font-size: 25px;
+    }
+}

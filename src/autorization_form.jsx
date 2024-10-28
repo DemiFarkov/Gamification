@@ -8,6 +8,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import PrivateRoute from "./components/general/PrivateRoute";
 import { useCookies } from "react-cookie";
 import Cookies from "js-cookie";
+import.meta.env.VITE_MY_TOKEN;
 
 export default function AutorizationForm() {
   const [username, setUsername] = useState("");
@@ -15,12 +16,14 @@ export default function AutorizationForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState(false);
+  const [load, setLoad] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoad(true)
     try {
       const user = instancee
-        .post("api/login/", {
+        .post("login/", {
           username,
           password,
         })
@@ -34,18 +37,23 @@ export default function AutorizationForm() {
           Cookies.set("employee_id", response.data.employee_id);
           Cookies.set("first_name", response.data.first_name);
           Cookies.set("last_name", response.data.last_name);
-          localStorage.setItem("userToken", response.data.token);
+          // console.log(response.data.token);
 
           dispatch(login(response.data));
 
-          navigate("pages/tests/traning");
+          navigate("../pages/tests/traning");
         })
         .catch(function (response) {
+          // console.log(response);
+          // console.log(response.response.data.message);
+
           response.response.data.message == "Invalid username or password" &&
             setLoginError(true);
+        }).finally(()=>{
+          setLoad(false)
         });
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
   useEffect(() => {
@@ -63,6 +71,7 @@ export default function AutorizationForm() {
         setPassword={setPassword}
         handleSubmit={(e) => handleSubmit(e)}
         loginError={loginError}
+        load={load}
       />
     </div>
   );

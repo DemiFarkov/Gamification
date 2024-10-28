@@ -4,55 +4,65 @@ import Navigation from "../../../components/general/navigation";
 import classes from "./traning.module.css";
 import AccordionTraning from "./accordion";
 import { Link } from "react-router-dom";
-import { Config, instance } from "../../../utils/axios/index.js";
-import { CircularProgress, LinearProgress } from "@mui/material";
+import { instance } from "../../../utils/axios/index.js";
+import { Skeleton } from "@mui/material";
 import {
   getEmployee_idUseAuth,
   getGroupsAuth,
 } from "../../../hooks/reduxHooks.js";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { isMobile } from "../../../hooks/react-responsive.js";
 
 const MainTraning = () => {
   const [allThemes, setAllThemes] = useState([]);
   const [load, setLoad] = useState(true);
-  document.cookie = "user=John";
+  const [dataUser, setDataUser] = useState({});
+
+  const isMobileWidth = isMobile();
   const [requestSuccessful, setRequestSuccessful] = useState(true);
-  const Employee_id = getEmployee_idUseAuth();
   const group = getGroupsAuth();
+  const styleSkeleton = {
+    padding: ".25vw .4vw .25vw .4vw",
+    margin: "12px 16px",
+    bgcolor: "#2d3846",
+    height: "2.3vw",
+    width: "29%",
+    borderRadius: "3vw",
+    clear: "both",
+  };
   function removeCuttentTheme(theme_id) {
-    instance
-      .delete(`themes/${theme_id}/delete`)
-      .then(function (response) {})
-      .catch(function (response) {
-      });
+    instance.delete(`themes/${theme_id}/delete`);
   }
 
   useEffect(() => {
-    axios
-      .get(`https://solevoi.pythonanywhere.com/themes-with-tests/`, Config)
+    getData().then(() => {
+      setLoad(false);
+    });
+  }, []);
+  const getData = async () => {
+    await instance
+      .get(`themes-with-tests/`)
       .then((response) => {
         setAllThemes(response.data);
+        console.log(response.data);
       })
-      .catch((response) => {
+      .catch(() => {
         setRequestSuccessful(false);
       })
-      .finally(() => {
-        setLoad(false);
-      });
-  }, []);
+    await instance.get(`get-exp-karma/`).then((response) => {
+      setDataUser(response.data);
+      console.log(response.data);
+    });
+  };
   const removeTest = async (id) => {
-    await instance
-      .delete(`delete_test/${id}/`)
-      .then(function (response) {})
-      .catch(function (response) {
-      });
+    await instance.delete(`delete_test/${id}/`);
   };
   return (
     <div>
       <Header />
       <div className={classes.mainContainer}>
-        <Navigation />
+        {!isMobileWidth && <Navigation />}
         <div className={classes.mainContent}>
           <h1 className={classes.H1}>Обучение и тестирование</h1>
           <div className={classes.navTest}>
@@ -94,7 +104,13 @@ const MainTraning = () => {
           <div className={classes.mainBlock}>
             {" "}
             {load ? (
-              <CircularProgress />
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <Skeleton variant="rounded" sx={styleSkeleton} />
+                <Skeleton variant="rounded" sx={styleSkeleton} />
+                <Skeleton variant="rounded" sx={styleSkeleton} />
+                <Skeleton variant="rounded" sx={styleSkeleton} />
+                <Skeleton variant="rounded" sx={styleSkeleton} />
+              </div>
             ) : requestSuccessful ? (
               allThemes.map((theme, index) => (
                 <AccordionTraning
@@ -106,6 +122,7 @@ const MainTraning = () => {
                   removeCuttentTheme={removeCuttentTheme}
                   theme_id={theme.theme_id}
                   group={group}
+                  dataUser={dataUser}
                 />
               ))
             ) : (

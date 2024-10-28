@@ -206,7 +206,7 @@
 }
 
 .modalError-enter-active {
-    
+
     top: -4.5vw;
     animation: openSendMessage .5s forwards;
 }
@@ -221,4 +221,207 @@
 
 .modalError-exit-done {
     top: -4.5vw;
+}
+
+/* menuBar */
+
+.container {
+    cursor: pointer;
+}
+
+.menuBar {
+    width: 2vw;
+    height: .29vw;
+    margin: .25vw .5vw;
+    border-radius: 4px;
+    box-shadow: 0 2px 2px hsla(0, 0%, 0%, .2);
+    background-color: white;
+
+    transform-origin: center;
+    animation-duration: .8s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes topBarOpen {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(.54vw);
+    }
+
+    100% {
+        transform: translateY(.54vw) rotate(45deg);
+    }
+}
+
+@keyframes bottomBarOpen {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-.54vw);
+    }
+
+    100% {
+        transform: translateY(-.54vw) rotate(135deg);
+    }
+}
+
+@keyframes middleBarOpen {
+    0% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(.5)
+    }
+
+    51% {
+        transform: scale(0)
+    }
+
+    100% {
+        transform: scale(0)
+    }
+}
+
+
+@keyframes topBarClose {
+    0% {
+        transform: translateY(.54vw) rotate(45deg);
+    }
+
+    50% {
+        transform: translateY(.54vw);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes bottomBarClose {
+    0% {
+        transform: translateY(-.54vw) rotate(135deg);
+    }
+
+    50% {
+        transform: translateY(-.54vw);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes middleBarClose {
+    0% {
+        transform: scale(0)
+    }
+
+    50% {
+        transform: scale(0)
+    }
+
+    51% {
+        transform: scale(.5)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+.isOpen .menuBar:first-child {
+    animation-name: topBarOpen;
+}
+
+.isOpen .menuBar:last-child {
+    animation-name: bottomBarOpen;
+}
+
+.isOpen .menuBar:nth-child(2) {
+    animation-name: middleBarOpen;
+}
+
+.isClosed .menuBar:first-child {
+    animation-name: topBarClose;
+}
+
+.isClosed .menuBar:last-child {
+    animation-name: bottomBarClose;
+}
+
+.isClosed .menuBar:nth-child(2) {
+    animation-name: middleBarClose;
+}
+
+@media (max-width: 1000px) {
+    .menuBar {
+        width: 5vw;
+        height: .4vw;
+        margin: 1vw .5vw;
+
+    }
+
+    @keyframes topBarOpen {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(14px);
+        }
+
+        100% {
+            transform: translateY(14px) rotate(45deg);
+        }
+    }
+
+    @keyframes bottomBarOpen {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-14px);
+        }
+
+        100% {
+            transform: translateY(-14px) rotate(135deg);
+        }
+    }
+
+    @keyframes topBarClose {
+        0% {
+            transform: translateY(14px) rotate(45deg);
+        }
+
+        50% {
+            transform: translateY(14px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes bottomBarClose {
+        0% {
+            transform: translateY(-14px) rotate(135deg);
+        }
+
+        50% {
+            transform: translateY(-14px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
 }

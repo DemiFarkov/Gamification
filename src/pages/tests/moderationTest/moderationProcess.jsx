@@ -10,8 +10,11 @@ import ArrowUp from "../../../img/up-arrow.svg";
 import NumberInputIntroduction from "./inputComponent.jsx";
 import { instance } from "../../../utils/axios/index.js";
 import ModalModeration from "./modalModeration";
+import { getGroupsAuth } from "../../../hooks/reduxHooks.js";
 
 const ModerationProcess = () => {
+  const group = getGroupsAuth();
+
   const [load, setLoad] = useState(true);
   const [testData, setTestData] = useState();
   const [searchParams] = useSearchParams();
@@ -107,8 +110,11 @@ const Content = (props) => {
       .post(`test_attempts/${Number(idTest)}/moderate/`, data)
       .then(function (response) {
         setModalOpen(true);
+        console.log(response)
+
       })
       .catch(function (response) {
+        console.log(response)
       });
   };
 
@@ -265,16 +271,17 @@ const ModerationQues = (props) => {
             },
             "& .MuiOutlinedInput-root.Mui-focused": {
               "& > fieldset": {
-                border: "fff !important",
+                border: "1px solid #fff !important",
               },
             },
             "& .MuiInputLabel-root": {
               color: "#fff ",
             },
-            "& .MuiInputBase-root-MuiOutlinedInput-root.": {
+            "& .MuiInputBase-root-MuiOutlinedInput-root": {
               color: "#fff",
             },
             "& .MuiOutlinedInput-root": { color: "#fff" },
+            "& .MuiOutlinedInput-root:active": { color: "#fff" },
             "& .MuiOutlinedInput-root:hover": {
               color: "#fff",
               "& > fieldset": {

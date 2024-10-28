@@ -62,7 +62,7 @@ const CheckBoxDLS = (props) => {
       </div>
       <div
         className={
-          inputList.length < 2
+          inputList.length < 3
             ? classes.addBtnNoActive
             : customAnswer
             ? classes.addBtnNoActive

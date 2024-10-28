@@ -21,3 +21,15 @@ export const getEmployee_idUseAuth = () => {
     )
     return employee_id
 }
+export const getPasswordPolicyRegexUseAuth = () => {
+    const passwordPolicyRegex = useSelector((state) => state.auth.passwordPolicyRegex
+    )
+
+    return passwordPolicyRegex
+}
+export const getMicroProfile = () => {
+    const microProfile = useSelector((state) => state.auth.microProfile
+    )
+
+    return microProfile
+}

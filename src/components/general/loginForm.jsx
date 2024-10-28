@@ -1,8 +1,9 @@
 import React from "react";
 import classes from "./form.module.css";
 import { Link } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 const LoginForm = (props) => {
-  const { loginError, handleSubmit, setUsername, setPassword } = props;
+  const { loginError, handleSubmit, setUsername, setPassword, load } = props;
   return (
     <>
       <section
@@ -13,7 +14,7 @@ const LoginForm = (props) => {
           {" "}
           {loginError && (
             <div className={classes.loginError}>
-              Не правильный логин или пароль
+              Неправильный логин или пароль
             </div>
           )}
         </div>
@@ -35,7 +36,7 @@ const LoginForm = (props) => {
             placeholder="Введите пароль"
           />
           <button type="submin" className={classes.button}>
-            Вход
+            {load ? <CircularProgress sx={{fontSize:"1.4vw",width:"1.4vw !important",height:"1.4vw !important"}}/> : "Вход"}
           </button>
         </form>
       </section>

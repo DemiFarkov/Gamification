@@ -40,6 +40,11 @@ const ModalValidTest = (props) => {
       onClose={() => setVisibleModalValidTest(false)}
       fullWidth={true}
       maxWidth={"sm"}
+      sx={{
+        "& .MuiDialog-paper": {
+          background: "#202833",
+        },
+      }}
     >
       <DialogTitle>
         <div className={classes.validDialogTitle}>Внимание!</div>{" "}

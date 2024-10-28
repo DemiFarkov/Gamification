@@ -14,19 +14,20 @@ import { instance } from "../../../utils/axios/index.js";
 const StatisticAllTop = (props) => {
   const { openModalAllTop, setOpenModalAllTop, top_participants, allEmployee } =
     props;
+console.log(allEmployee)
   const [topParticipantsLocal, setTop_participantsocal] =
     useState(top_participants);
   const [selectTest, setSelectTest] = useState("");
-useEffect(()=>{},[])
+  useEffect(() => {}, []);
   useEffect(() => {
     if (selectTest == "") {
       setTop_participantsocal(top_participants);
     } else
-        instance
-          .get(`top_participants/?test_id=${selectTest} `)
-          .then((response) => {
-            setTop_participantsocal(response.data);
-          });
+      instance
+        .get(`top_participants/?test_id=${selectTest} `)
+        .then((response) => {
+          setTop_participantsocal(response.data);
+        });
   }, [selectTest]);
   if (top_participants) {
     return (
@@ -87,9 +88,9 @@ useEffect(()=>{},[])
             >
               {" "}
               <MenuItem value={""}>Не выбрано</MenuItem>
-              {allEmployee.map((el, index) => (
-                <MenuItem value={el.test_id} key={index}>
-                  {el.test_name}
+              {allEmployee &&allEmployee.map((el, index) => (
+                <MenuItem value={el.test__id} key={index}>
+                  {el.test__name  }
                 </MenuItem>
               ))}
             </Select>

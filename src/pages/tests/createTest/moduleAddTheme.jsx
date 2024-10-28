@@ -50,8 +50,13 @@ const ModuleAddTheme = (props) => {
       onClose={() => setVisibleModalAddTheme(false)}
       fullWidth={true}
       maxWidth={"sm"}
+      sx={{
+        "& .MuiDialog-paper": {
+          background: "#202833",
+        },
+      }}
     >
-      <DialogTitle>
+      <DialogTitle sx={{color:"#fff"}}>
         <div className={classes.createThemeText}>
           Введите название новой темы теста
         </div>

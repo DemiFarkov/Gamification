@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "./toolkitSlice";
+import authSlice, { changeBackgroundReducer } from "./toolkitSlice";
+import userData  from "./profileData";
 const store = configureStore({
     reducer: {
-        auth: authSlice
+        auth: authSlice,
+        background: changeBackgroundReducer,
+        userData: userData,
+
     }
 })
 

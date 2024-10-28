@@ -14,8 +14,13 @@ import { instance } from "../../../utils/axios/index.js";
 import ArrowUp from "../../../img/up-arrow.svg";
 import { useSearchParams } from "react-router-dom";
 import { MenuItem, Select } from "@mui/material";
+import { isMobile } from "../../../hooks/react-responsive.js";
+import { getGroupsAuth } from "../../../hooks/reduxHooks.js";
+import Not from "../../404Page/not.jsx";
 
 const CreateTest = (props) => {
+  const group = getGroupsAuth();
+
   var count = 0;
   const [upOrDown, setUpOrDown] = useState([]);
   const [countForBlocks, setCountForBlocks] = useState(0);
@@ -45,6 +50,7 @@ const CreateTest = (props) => {
   const [changeQuery, setChangeQuery] = useState(false);
   const [countClickReset, setCountClickReset] = useState(0);
   const [searchParams, setSearchParams] = useSearchParams();
+  const isMobileWidth = isMobile();
   const componentQue = (
     <TestQue
       key={countForBlocks}
@@ -113,6 +119,7 @@ const CreateTest = (props) => {
         },
       };
     } else {
+      setValueSelect(oldData.test.theme);
       setChangeQuery(true);
       document.querySelector(
         "#titleTestsCreator"
@@ -121,6 +128,7 @@ const CreateTest = (props) => {
         "#btnContainerBtnForm"
       ).innerHTML = `Сохранить изменения`;
     }
+    console.log(JSON.parse(localStorage.getItem("key")));
     if (oldData.test.unlimited_time == true) {
       document.querySelector(`#checkbox1`).checked = true;
     }
@@ -220,17 +228,21 @@ const CreateTest = (props) => {
 
   // Получаем имеющиеся темы для теста
   function refreshThemes(nameNewTheme) {
+    const idTest = searchParams.get("id");
+
     // document.querySelector("#checkbox3").checked = true;
     const themes_with_tests = instance.get("themes/").then((response) => {
       let data = [];
       let index = 0;
       data = data.concat(response.data);
       setSelectOption(data);
+      console.log(idTest);
       localStorage.getItem("key") !== null &&
         data.map(
           (el) =>
             el.id == JSON.parse(localStorage.getItem("key")).theme &&
-            setValueSelect(el.id)
+            idTest == null &&
+            (setValueSelect(el.id), console.log("hi"))
         );
       if (nameNewTheme) {
         for (let i = 0; i < data.length; i++) {
@@ -258,9 +270,10 @@ const CreateTest = (props) => {
     const idTest = searchParams.get("id");
     if (idTest) {
       const oldDataAxios = instance
-        .get(`api/test/${idTest}/`)
+        .get(`test/${idTest}/`)
         .then(function (response) {
           fillingInTheData(response.data, true);
+          console.log(response.data);
         })
         .catch((err) => err);
     } else if (localStorage.getItem("key") !== null) {
@@ -434,7 +447,7 @@ const CreateTest = (props) => {
       valueAchievementSelect !== "Без достижения" ? false : true;
     let max_score = Number(value);
     let formData = new FormData();
-    console.log("collectionDataBlock------------", collectionDataBlock)
+    console.log("collectionDataBlock------------", collectionDataBlock);
 
     formData.append("name", name);
     formData.append("description", description);
@@ -456,9 +469,9 @@ const CreateTest = (props) => {
     formData.append("max_score", max_score);
     formData.append("image", fileName);
     for (let [name, value] of formData) {
-      name !== "image" && console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
+      console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
     }
-    console.log(formData.get("blocks"))
+    console.log(formData.get("blocks"));
 
     let dataForTest = {
       name: name,
@@ -481,6 +494,13 @@ const CreateTest = (props) => {
       max_score: max_score,
       image: null,
     };
+    // formData.append("dataForTest", JSON.stringify(dataForTest));
+    // formData.append("image", fileName);
+
+    // for (let [name, value] of formData) {
+    //   console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
+    // }
+
     // console.log(JSON.stringify(dataForTest));
     return dataForTest;
   }
@@ -492,6 +512,10 @@ const CreateTest = (props) => {
     }
   }, [actionForm]);
   const createTest = async (dataForTest) => {
+    let formData = new FormData();
+    formData.append("data", dataForTest);
+
+    const idTest = searchParams.get("id");
     changeQuery
       ? await instance
           .put(`update_test_and_content/${idTest}/`, dataForTest)
@@ -602,6 +626,11 @@ const CreateTest = (props) => {
       }
     }
   }, [upOrDown]);
+  // Сохранение данных в localStorage
+  function saveData() {
+    localStorage.setItem("key", JSON.stringify(objectFormation()));
+    console.log(localStorage.getItem("key"));
+  }
   // Создание теории или вопроса
   const onAddBtnClick = (name) => {
     if (name == "theory") {
@@ -673,213 +702,220 @@ const CreateTest = (props) => {
   }
   return (
     <div>
-      <Header />
-      <div className={classes.testContainer}>
-        <Navigation />
-        <div className={classes.testMainContent}>
-          <h1 className={classes.H1} id="titleTestsCreator">
-            Конструктор тестов
-          </h1>
-          <div className={classes.mainContentGrid}>
-            <div className={classes.sideCheckbox}>
-              <MainCheckbox
-                setInputTime={setInputTime}
-                setInputAttemptTwice={setInputAttemptTwice}
-              />
-              <div
-                className={classes.saveTestBtn}
-                onClick={() =>
-                  localStorage.setItem("key", JSON.stringify(objectFormation()))
-                }
-              >
-                Сохранить изменения
-              </div>
-              <div
-                className={classes.saveTestBtn}
-                ref={refBtn}
-                onClick={() =>
-                  countClickReset == 0
-                    ? setCountClickReset(1)
-                    : (localStorage.removeItem("key"), window.location.reload())
-                }
-                style={countClickReset == 1 ? { background: "#faea3eca" } : {}}
-              >
-                {countClickReset == 0
-                  ? "Обнулить тест"
-                  : "Нажмите для подтверждения"}
-              </div>
-            </div>
-            <form action="" onSubmit={(e) => CreateThisTest(e)}>
-              <div className={classes.TestName}>
-                <div className={classes.TestNameInputContainer}>
-                  <div className={classes.TestNameInputWrapper}>
-                    <div className={classes.TestNameInputTitle}>
-                      Наименование теста
-                    </div>
-                    <input
-                      type="text"
-                      className={classes.TestNameInput}
-                      id="TestNameInput"
-                      placeholder="Введите наименование теста"
-                      required
-                    />{" "}
-                  </div>
-
-                  <div className={classes.TestNameInputWrapper}>
-                    <div className={classes.TestNameInputTitle}>Тема</div>
-                    <Select
-                      id="valueThemeSelect"
-                      value={valueSelect}
-                      onChange={(event) => {
-                        setValueSelect(event.target.value);
-                        setErrorSelect(false);
-                      }}
-                      error={errorSelect}
-                      sx={{
-                        borderRadius: "3vw",
-                        lineHeight: "normal",
-                        "& .MuiSelect-outlined": {
-                          padding: ".7vw",
-                          fontSize: "1.2vw",
-                          background: "#D9D9D9",
-                          borderRadius: "3vw",
-                          color: "#000",
-                          outline: "none",
-                          textAlign: "start",
-                          display: "flex",
-                          alignItems: "center",
-                          minHeight: "1em !important",
-                        },
-                        "& fieldset": {
-                          padding: ".7vw",
-                          fontSize: ".95vw",
-                          borderRadius: "3vw",
-                          border: "none",
-                          outline: "none",
-                        },
-
-                        "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus":
-                          {
-                            borderRadius: "3vw",
-                            outline: "none",
-                          },
-                        "& .Mui-error": {
-                          border: "#d42929 .15vw solid",
-                          color: "#d42929",
-                        },
-                      }}
-                    >
-                      <MenuItem value={"Не выбрано"}>Не выбрано </MenuItem>
-                      <MenuItem
-                        value={"0"}
-                        onClick={() => setVisibleModalAddTheme(true)}
-                      >
-                        Создать новую{" "}
-                        <AddCircleOutlineIcon
-                          sx={{ fontSize: "1.5vw", marginLeft: ".5vw" }}
-                        />
-                      </MenuItem>
-                      {selectOption.map((el, index) => (
-                        <MenuItem key={index} value={el.id}>
-                          {el.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </div>
-                </div>
-                <div className={classes.answerInputFileContainer}>
-                  <label
-                    htmlFor="logoTest"
-                    className={classes.answerInputFileText}
-                  >
-                    Выберите файл
-                  </label>
-                  <div
-                    className={classes.answerInputFileName}
-                    id="logoTestColor"
-                  >
-                    {fileName ? fileName.name : "Файл не выбран"}
-                  </div>
-                  <input
-                    id="logoTest"
-                    type="file"
-                    onChange={handleChange}
-                    className={classes.answerInputFile}
-                    accept="image/jpeg,image/png"
+      {group == "Администраторы" ? (
+        <>
+          <Header />
+          <div className={classes.testContainer}>
+            {!isMobileWidth && <Navigation />}
+            <div className={classes.testMainContent}>
+              <h1 className={classes.H1} id="titleTestsCreator">
+                Конструктор тестов
+              </h1>
+              <div className={classes.mainContentGrid}>
+                <div className={classes.sideCheckbox}>
+                  <MainCheckbox
+                    setInputTime={setInputTime}
+                    setInputAttemptTwice={setInputAttemptTwice}
                   />
+                  <div
+                    className={classes.saveTestBtn}
+                    onClick={() => saveData()}
+                  >
+                    Сохранить изменения
+                  </div>
+                  <div
+                    className={classes.saveTestBtn}
+                    ref={refBtn}
+                    onClick={() =>
+                      countClickReset == 0
+                        ? setCountClickReset(1)
+                        : (localStorage.removeItem("key"),
+                          window.location.reload())
+                    }
+                    style={
+                      countClickReset == 1 ? { background: "#faea3eca" } : {}
+                    }
+                  >
+                    {countClickReset == 0
+                      ? "Обнулить тест"
+                      : "Нажмите для подтверждения"}
+                  </div>
                 </div>
-              </div>
-              <div className={classes.TestSettingsBlock}>
-                <TestSettings
-                  setValueAchievementSelect={setValueAchievementSelect}
-                  valueAchievementSelect={valueAchievementSelect}
-                  achievementsOption={achievementsOption}
-                />
-              </div>
-              {blockList}
-              <div className={classes.btnContainer}>
-                <div
-                  className={classes.btnContainerBtn}
-                  onClick={() => onAddBtnClick("theory", count)}
-                >
-                  Добавить теорию
-                </div>
-                <div
-                  className={classes.btnContainerBtn}
-                  onClick={() => onAddBtnClick("test", count)}
-                >
-                  Добавить вопрос
-                </div>
+                <form action="" onSubmit={(e) => CreateThisTest(e)}>
+                  <div className={classes.TestName}>
+                    <div className={classes.TestNameInputContainer}>
+                      <div className={classes.TestNameInputWrapper}>
+                        <div className={classes.TestNameInputTitle}>
+                          Наименование теста
+                        </div>
+                        <input
+                          type="text"
+                          className={classes.TestNameInput}
+                          id="TestNameInput"
+                          placeholder="Введите наименование теста"
+                          required
+                        />{" "}
+                      </div>
 
-                <button
-                  className={classes.btnContainerBtnForm}
-                  id="btnContainerBtnForm"
-                  style={{ fontWeight: "400" }}
-                >
-                  Создать тест
-                </button>
-              </div>
-            </form>
-            <div className={classes.sideAbout}>
-              <div className={classes.textareaContainer}>
-                <div className={classes.textareaTitle}>Описание теста</div>
-                <textarea
-                  name=""
-                  cols="30"
-                  rows="20"
-                  className={classes.textareaCOntent}
-                  id="testDescription"
-                ></textarea>
+                      <div className={classes.TestNameInputWrapper}>
+                        <div className={classes.TestNameInputTitle}>Тема</div>
+                        <Select
+                          id="valueThemeSelect"
+                          value={valueSelect}
+                          onChange={(event) => {
+                            setValueSelect(event.target.value);
+                            setErrorSelect(false);
+                          }}
+                          error={errorSelect}
+                          sx={{
+                            borderRadius: "3vw",
+                            lineHeight: "normal",
+                            "& .MuiSelect-outlined": {
+                              padding: ".7vw",
+                              fontSize: "1.2vw",
+                              background: "#D9D9D9",
+                              borderRadius: "3vw",
+                              color: "#000",
+                              outline: "none",
+                              textAlign: "start",
+                              display: "flex",
+                              alignItems: "center",
+                              minHeight: "1em !important",
+                            },
+                            "& fieldset": {
+                              padding: ".7vw",
+                              fontSize: ".95vw",
+                              borderRadius: "3vw",
+                              border: "none",
+                              outline: "none",
+                            },
+
+                            "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input:focus":
+                              {
+                                borderRadius: "3vw",
+                                outline: "none",
+                              },
+                            "& .Mui-error": {
+                              border: "#d42929 .15vw solid",
+                              color: "#d42929",
+                            },
+                          }}
+                        >
+                          <MenuItem value={"Не выбрано"}>Не выбрано </MenuItem>
+                          <MenuItem
+                            value={"0"}
+                            onClick={() => setVisibleModalAddTheme(true)}
+                          >
+                            Создать новую{" "}
+                            <AddCircleOutlineIcon
+                              sx={{ fontSize: "1.5vw", marginLeft: ".5vw" }}
+                            />
+                          </MenuItem>
+                          {selectOption.map((el, index) => (
+                            <MenuItem key={index} value={el.id}>
+                              {el.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </div>
+                    </div>
+                    <div className={classes.answerInputFileContainer}>
+                      <label
+                        htmlFor="logoTest"
+                        className={classes.answerInputFileText}
+                      >
+                        Выберите файл
+                      </label>
+                      <div
+                        className={classes.answerInputFileName}
+                        id="logoTestColor"
+                      >
+                        {fileName ? fileName.name : "Файл не выбран"}
+                      </div>
+                      <input
+                        id="logoTest"
+                        type="file"
+                        onChange={handleChange}
+                        className={classes.answerInputFile}
+                        accept="image/jpeg,image/png"
+                      />
+                    </div>
+                  </div>
+                  <div className={classes.TestSettingsBlock}>
+                    <TestSettings
+                      setValueAchievementSelect={setValueAchievementSelect}
+                      valueAchievementSelect={valueAchievementSelect}
+                      achievementsOption={achievementsOption}
+                    />
+                  </div>
+                  {blockList}
+                  <div className={classes.btnContainer}>
+                    <div
+                      className={classes.btnContainerBtn}
+                      onClick={() => onAddBtnClick("theory", count)}
+                    >
+                      Добавить теорию
+                    </div>
+                    <div
+                      className={classes.btnContainerBtn}
+                      onClick={() => onAddBtnClick("test", count)}
+                    >
+                      Добавить вопрос
+                    </div>
+
+                    <button
+                      className={classes.btnContainerBtnForm}
+                      id="btnContainerBtnForm"
+                      style={{ fontWeight: "400" }}
+                    >
+                      Создать тест
+                    </button>
+                  </div>
+                </form>
+                <div className={classes.sideAbout}>
+                  <div className={classes.textareaContainer}>
+                    <div className={classes.textareaTitle}>Описание теста</div>
+                    <textarea
+                      name=""
+                      cols="30"
+                      rows="20"
+                      className={classes.textareaCOntent}
+                      id="testDescription"
+                    ></textarea>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      {visible && (
-        <img
-          src={ArrowUp}
-          alt=""
-          className={classes.BTNscrollToTop}
-          onClick={() => {
-            scrollToTop();
-          }}
-        />
-      )}
-      <ModuleAddTheme
-        visibleModalAddTheme={visibleModalAddTheme}
-        setVisibleModalAddTheme={setVisibleModalAddTheme}
-        selectOption={selectOption}
-        setSelectOption={setSelectOption}
-        refreshThemes={refreshThemes}
-      />
-      {visibleModalValidTest && (
-        <ModalValidTest
-          visibleModalValidTest={visibleModalValidTest}
-          setVisibleModalValidTest={setVisibleModalValidTest}
-          ModalValidTestText={ModalValidTestText}
-          setActionForm={setActionForm}
-          setForRemove={setForRemove}
-        />
+          {visible && (
+            <img
+              src={ArrowUp}
+              alt=""
+              className={classes.BTNscrollToTop}
+              onClick={() => {
+                scrollToTop();
+              }}
+            />
+          )}
+          <ModuleAddTheme
+            visibleModalAddTheme={visibleModalAddTheme}
+            setVisibleModalAddTheme={setVisibleModalAddTheme}
+            selectOption={selectOption}
+            setSelectOption={setSelectOption}
+            refreshThemes={refreshThemes}
+          />
+          {visibleModalValidTest && (
+            <ModalValidTest
+              visibleModalValidTest={visibleModalValidTest}
+              setVisibleModalValidTest={setVisibleModalValidTest}
+              ModalValidTestText={ModalValidTestText}
+              setActionForm={setActionForm}
+              setForRemove={setForRemove}
+            />
+          )}
+        </>
+      ) : (
+        <Not />
       )}
     </div>
   );

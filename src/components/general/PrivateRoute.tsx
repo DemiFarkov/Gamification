@@ -4,9 +4,8 @@ import { getIsLoggetAuth } from "../../hooks/reduxHooks";
 
 const PrivateRoute = () => {
   const auth = getIsLoggetAuth();
-
   // const auth = true;
-  return (  auth ? <Outlet /> : <Navigate to="/" />
+  return (  auth ? <Outlet /> : <Navigate to="/autorization_form.jsx" />
   )
 };
 

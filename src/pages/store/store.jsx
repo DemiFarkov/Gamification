@@ -4,10 +4,13 @@ import Header from "../../components/general/header";
 import Navigation from "../../components/general/navigation";
 import StoreCard from "./storeCard";
 import HistoryCard from "./historyCard";
-import ModalNoAccess from "../../components/general/modalNoAccess";
 import { getGroupsAuth } from "../../hooks/reduxHooks";
+import { isMobile } from "../../hooks/react-responsive";
+import Not from "../404Page/not";
 
 const Store = () => {
+  const isMobileWidth = isMobile()
+
   const group = getGroupsAuth();
   return (
     <div>
@@ -15,7 +18,7 @@ const Store = () => {
         <>
           <Header skrol="0" />
           <div className={classes.mainContentBox}>
-            <Navigation />
+          {!isMobileWidth && <Navigation />}
             <div className={classes.mainContent}>
               <h1 className={classes.H1}>Магазин</h1>
               <div className={classes.mainContentGrid}>
@@ -37,7 +40,7 @@ const Store = () => {
           </div>
         </>
       ) : (
-        <ModalNoAccess />
+        <Not />
       )}
     </div>
   );

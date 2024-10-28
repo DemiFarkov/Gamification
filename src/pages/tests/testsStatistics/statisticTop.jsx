@@ -11,7 +11,6 @@ import {
 import React, { useEffect, useState } from "react";
 
 import classes from "./testsStatistics.module.css";
-import { instance } from "../../../utils/axios/index.js";
 const StatisticTop = (props) => {
   const {
     openModalTop,
@@ -38,7 +37,7 @@ const StatisticTop = (props) => {
       open={openModalTop}
       onClose={() => setOpenModalTop(false)}
       fullWidth={true}
-      maxWidth={"md"}
+      maxWidth={"xl"}
       sx={{
         "& .MuiDialog-paper": {
           maxHeight: "80vh",
@@ -61,20 +60,22 @@ const StatisticTop = (props) => {
           <>
             <div className={classes.rowTitle}>
               <div className={classes.rowTitleItem} style={{ width: "35%" }}>
-                Вопрос
+                <p>Вопрос</p>
+                
               </div>
               <div className={classes.rowTitleItem} style={{ width: "21%" }}>
-                Всего ответов
+                                <p>Всего ответов</p>
+
               </div>
               <div className={classes.rowTitleItem} style={{ width: "21%" }}>
-                {contentForModal[1]
+                <p>{contentForModal[1]
                   ? "Правильных ответов"
-                  : "Не правильных ответов"}
+                  : "Не правильных ответов"}</p>
               </div>
               <div className={classes.rowTitleItem} style={{ width: "19%" }}>
-                {contentForModal[1]
+                <p>{contentForModal[1]
                   ? "% правильных ответов"
-                  : "% не правильных ответов"}
+                  : "% не правильных ответов"}</p>
               </div>
             </div>
             

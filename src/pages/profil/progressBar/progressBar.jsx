@@ -1,33 +1,40 @@
-const ProgressBar = (props) => {
-  const { bgcolor, completed } = props;
+import { useState } from "react";
+import "./progressBar.css";
 
-  const containerStyles = {
-    width: "85%",
-    margin: "0 auto",
-    backgroundColor: "#e0e0de",
-    borderRadius: 50,
-  };
+const ProgressBar = (props) => {
+  const { bgcolor, completed, data } = props;
+  const [amount, setAmount] = useState(
+    `${data.experience} / ${data.next_level_experience}`
+  );
+  const amountExperience = Math.floor(
+    (data.experience / (data.next_level_experience)) * 100
+  );
+  const completedd = amountExperience;
 
   const fillerStyles = {
-    height: "100%",
-    width: `${completed}%`,
+    height: "20px",
+    width: `${completedd}%`,
+    maxWidth:"100%",
     backgroundColor: "#97dadd",
     borderRadius: "inherit",
     textAlign: "right",
   };
 
-  const labelStyles = {
-    marginRight: ".9vw",
-    fontSize: "1vw",
-    color: "black",
-    fontWeight: "bold",
-  };
-
   return (
-    <div style={containerStyles}>
-      <div style={fillerStyles}>
-        <div style={labelStyles}>{`${completed}%`}</div>
-      </div>
+    <div
+      className="containerStyles"
+      onMouseOver={() => {
+        setAmount(
+          `${Math.floor((data.experience / data.next_level_experience
+          ) * 100)}%`
+        );
+      }}
+      onMouseOut={() => {
+        setAmount(`${data.experience} / ${data.next_level_experience        }`);
+      }}
+    >
+      <div className="labelStyles">{amount}</div>
+      <div style={fillerStyles} className="fillerStyles"></div>
     </div>
   );
 };

@@ -1,0 +1,163 @@
+.cardDemo {
+    margin: 0 auto;
+    height: 400px;
+    width: 300px;
+
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+.cardDemo:hover .cardInner {
+    /* transform: rotateY(180deg); */
+    border-radius: 10px;
+
+}
+
+.cardDemoContent {
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    background-color: #202833;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0px 0px 200px rgb(0 0 0 / 83%);
+}
+
+.cardInner {
+    height: 400px;
+    width: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.999s;
+}
+
+.cardFront,
+.cardBack {
+    position: absolute;
+    height: 400px;
+    width: 300px;
+    backface-visibility: hidden;
+    cursor: default;
+
+}
+
+.cardFront {
+    color: #fff;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 24px;
+    transform: rotateY(0deg);
+}
+
+.cardBack {
+    color: #fff;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 24px;
+    transform: rotateY(180deg);
+    /* background: url(https://formaxfun.com/wp-content/uploads/2023/12/prikoly-na-novyj-god-drakona-2024-smeshnye-shutki-i-rozygryshi_657500b8c8c34.gif); */
+    background-repeat: no-repeat;
+    background-size: 300px 400px;
+    background-position: 1px 1px;
+    background-color: #202833;
+    box-shadow: inset 0px 0px 200px rgb(0 0 0 / 83%);
+
+}
+
+.rotateCard {
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    transform: rotate(180deg);
+    border-top: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-radius: 0 10px 0 0;
+    cursor: pointer !important;
+    z-index: 100;
+}
+
+.cardItem {
+    position: absolute;
+    width: 80% !important;
+    left: 10%;
+    top: 125px;
+    height: 150px !important;
+}
+
+.resursesCard {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    font-size: 20px !important;
+    align-items: center;
+    justify-content: space-around;
+    font-Family: "Tektur", "Arkial", sayns-serif
+}
+
+html {
+    color-scheme: light only;
+}
+
+
+
+
+.article {
+    width: 300px;
+    height: 400px;
+    aspect-ratio: 2 / 1.1;
+    max-height: calc(100svh - 2rem);
+    /*	max-height: 100px;*/
+    position: relative;
+    overflow: hidden;
+    /*	border-radius: 4em;*/
+    /*	clip-path: inset(0 0 0 0 round 4em);*/
+    /* max-width: calc(100% - 2rem); */
+}
+
+.assets>img {
+    position: absolute;
+    /* top: 0; */
+    /* left: 50%; */
+    height: 100%;
+    width: 660px;
+    object-fit: cover;
+    /* object-position: center 43%; */
+    user-select: none;
+    pointer-events: none;
+}
+
+.cardImgFront {
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    object-position: calc((var(--x) * 15px)) calc((var(--y) * -10px));
+}
+
+.cardImgBack {
+    width: auto;
+    object-fit: cover;
+    left: 0;
+
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    /* object-position: calc((var(--x) * 20px)) calc( (var(--y) * -40px)); */
+}
+.cardFrontDate{
+    width: 20%;
+    position: absolute;
+    bottom: 26px;
+    left: 39.5%;
+    font-size: 13px;
+}
+.assets {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}

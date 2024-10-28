@@ -1,0 +1,131 @@
+.mainContainer {
+    padding-right: 1vw;
+    margin: 1vw 0.7vw 1.5vw 0.7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+}
+
+.H1 {
+    padding: .7vw;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw;
+}
+
+.H3 {
+    padding-bottom: 1vw;
+    border-bottom: .1vw #469C9A solid;
+    text-align: start;
+    font-size: 2vw;
+    width: 100%;
+}
+
+.H4 {
+    margin-bottom: 1vw;
+    text-align: start;
+    font-size: 1.3vw;
+}
+
+.mainBlock {
+    padding: 3vw 5vw 3vw 5vw;
+    margin: 1vw auto;
+    width: 85%;
+    position: relative;
+    border-radius: 1vw;
+    background: #202833;
+    min-height: 25vh;
+}
+
+.tabWrapper {
+    position: absolute;
+    right: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab {
+    padding: .6vw .3vw .6vw 1vw;
+    font-size: 1.2vw;
+    background: #202833;
+    border-radius: 1vw 0 0 0;
+    cursor: pointer;
+}
+
+.tab:nth-child(2) {
+    border-radius: 0 0 0 1vw;
+}
+
+.avationBlock {
+    padding: 2vw;
+    margin: 2vw 0;
+    border-radius: 1vw;
+    background: #56606f;
+}
+
+.changeCarmaWrapper {
+    width: 55%;
+    margin: 1.5vw 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pChangeKarma{
+    font-size: 1.1vw;
+}
+.actionWrapper {
+    padding: 0 3vw;
+    margin-top: 2vw;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.button {
+    width: 45%;
+    background: #469C9A !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.mainCheckboxInputDls:checked+label::before {
+    background-color: #407d7c;
+}
+
+.mainCheckboxInputDls {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+.customChangeKarmaWrapper{
+    width: 55%;
+    margin: 1vw 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mainCheckboxLabelDls {
+    display: flex;
+    text-align: start;
+    width: auto;
+    align-items: center;
+    user-select: none;
+    padding: .5vw 0;
+    border-radius: 3vw;
+    font-size: 1.1vw;
+
+}
+
+.mainCheckboxLabelDls::before {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}

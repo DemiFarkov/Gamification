@@ -25,8 +25,8 @@ const AccordiontStatisticss = (props) => {
     theme_name,
     test_attempt,
     allEmployee,
+    data,
   } = props;
-  const createHandleMenuClick = (menuItem) => {};
   const navigate = useNavigate();
   function resetAttempt() {
     instance
@@ -39,23 +39,23 @@ const AccordiontStatisticss = (props) => {
     <div className={classes.rowStatistic} id={"id" + test_attempt}>
       <div className={classes.rowcontainer}>
         <div className={classes.rowItem} style={{ width: "19%" }}>
-          {employee_name}
+          {data.full_name}
         </div>
         <div className={classes.rowItem} style={{ width: "19%" }}>
-          {theme_name}
+          {data.test__theme__name}
         </div>
         <div className={classes.rowItem} style={{ width: "19%" }}>
-          {test_name}
+          {data.test__name}
         </div>
 
         <div className={classes.rowItem} style={{ width: "7%" }}>
-          {duration}
+          {data.duration_seconds}
         </div>
         <div className={classes.rowItem} style={{ width: "10%" }}>
-          {end_time && end_time.slice(0, end_time.indexOf(" "))}
+          {data.end_time && end_time.slice(0, end_time.indexOf("T"))}
         </div>
         <div className={classes.rowItem} style={{ width: "13%" }}>
-          {employee_name}
+          {data.full_name}
         </div>
         <div className={classes.rowItem} style={{ width: "10%" }}>
           {status == "Не начато" ? (

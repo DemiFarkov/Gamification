@@ -15,7 +15,7 @@ const AccordionTraning = (props) => {
     countTheme,
     removeCuttentTheme,
     theme_id,
-    group,
+    group,dataUser,
   } = props;
   const ref = useRef(null);
   function removeTheme() {
@@ -71,6 +71,7 @@ const AccordionTraning = (props) => {
                     remaining_time={que.remaining_time}
                     AccordionSummaryy={AccordionSummaryy}
                     group={group}
+                    dataUser={dataUser}
                   />
                 ))}
               </tbody>
@@ -111,7 +112,7 @@ const RowTable = (props) => {
     countTheme,
     test_available,
     remaining_time,
-    AccordionSummaryy,group,
+    AccordionSummaryy,group,dataUser,
 
     status,
   } = props;
@@ -173,8 +174,8 @@ const RowTable = (props) => {
       .forEach((el) => (el.style.left = 100 + "%"));
   }
 
-  const karma = Cookies.get("karma");
-  const experience = Cookies.get("experience");
+  const karma = dataUser.karma
+  const experience = dataUser.experience
   function changeStyleСonditions() {
     if (karma >= carmaValue && experience >= expValue) {
       navigate({
@@ -294,14 +295,22 @@ const RemoveTestDialog = (props) => {
   return (
     <Dialog
       open={visibleRemoveTestDialog[0]}
-      onClose={() => setVisibleRemoveTestDialog([false])}
+      onClose={() => setVisibleRemoveTestDialog([false,visibleRemoveTestDialog[1]])}
+      sx={{
+        "& .MuiDialog-paper": {
+          background: "#202833",
+        },
+      }}
     >
-      <DialogContent>
+      <DialogContent sx={{color:"#fff"}}>
         Вы действительно хотите удалить тест "{visibleRemoveTestDialog[1]}"
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => setVisibleRemoveTestDialog([false])}>Нет</Button>
+        <Button 
+        sx={{color: " #fff"}}
+        onClick={() => setVisibleRemoveTestDialog([false])}>Нет</Button>
         <Button
+        sx={{color: " #fff"}}
           onClick={() => {
             removeRow(), setVisibleRemoveTestDialog([false]);
           }}

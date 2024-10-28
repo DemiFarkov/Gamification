@@ -9,7 +9,8 @@ export const authSlice = createSlice({
         login(state, action) {
             state.user = action.payload
             state.isLogged = true
-        }
+        },
+        
     }
 })
 

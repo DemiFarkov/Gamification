@@ -1,0 +1,357 @@
+.mainContainer {
+    padding-right: 1vw;
+    margin: 1vw 0.7vw 1.5vw 0.7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav {
+    padding: 2vw 0;
+    background: #202833;
+    width: 20%;
+    height: 80vh;
+    border-radius: 1vw;
+}
+
+.navList li {
+    background: #4B515A;
+    border-radius: 1vw;
+    position: relative;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+.navList li:hover {
+    background: #6b7079;
+
+}
+
+.navList li a::before {
+    content: "";
+    position: absolute;
+    border-radius: 1vw;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    box-shadow: inset 0 .3vw .3vw #00000079;
+}
+
+.navListLink {
+    color: #fff;
+    font-weight: normal;
+    padding: 1vw;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.mainContent {
+    width: 75%;
+    background: #202833;
+    border-radius: 1vw;
+}
+
+.blocksFlex {
+    padding: 2vw 3vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.blocksFlex article {
+    position: relative;
+    width: 24%;
+    background: #4B515A;
+    border-radius: 1vw;
+}
+
+.blockTitle {
+    padding: 1vw;
+    font-size: .8vw;
+    border-bottom: .1vw #202833 solid;
+}
+
+.blockDataWrapper {
+    margin: .5vw 1.5vw;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.blockDataList {
+    list-style-position: inside;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.blockDataList li {
+    height: auto;
+}
+
+.setBlocks {
+    width: 48%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.setBlocks article {
+    width: 48%;
+    background: #4B515A;
+}
+
+.blockDataPointWrapper {
+
+    height: 40vh;
+    overflow: scroll;
+}
+
+.blockDataPoint {
+    margin: .3vw 1vw;
+    font-size: .8vw;
+    text-align: start;
+    border-bottom: .1vw #2028338e solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+.blockDataPoint:last-child {
+    border: none
+}
+
+.articleBtn {
+    padding: .2vw 1vw !important;
+    position: absolute !important;
+    bottom: .5vw !important;
+    left: 30%;
+    border: .1vw #66FCF1 solid !important;
+    background: #202833 !important;
+    border-radius: 1vw !important;
+    color: aliceblue !important;
+    font-size: .6vw !important;
+    transition: background-color .2s linear !important;
+}
+
+.articleBtn:hover {
+    background: #374760 !important;
+}
+
+.mainContentWrapper {
+    padding: 0 2vw 2vw 2vw;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.mainTypeBlocks {
+    margin-top: 2vw;
+    padding: 20px;
+    width: 48%;
+    background: #4B515A;
+    border-radius: 1vw;
+}
+
+.titleTypeBlocks {
+    font-size: 20px;
+    text-align: start;
+}
+
+.TitleH5 {
+    text-align: start;
+    font-size: 16px;
+}
+
+.subTitleTypeBlocks {
+    margin-top: 1vw;
+    text-align: start;
+    font-size: 16px;
+}
+
+.btnPlace {
+    width: 100%;
+    text-align: end;
+}
+
+
+
+.answerInputFileContainer {
+    position: relative;
+    margin: 1.5vw 0;
+    position: relative;
+    padding: 7px;
+    width: 100%;
+    display: block;
+    font-size: 1.2vw;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    transition: all 1s linear;
+
+}
+
+.answerInputFileText {
+    padding: 3px;
+    background: #9B9B9B;
+    border-radius: .5vw;
+    border: 1px solid #202833;
+    font-size: 1rem;
+    transition: all .1s;
+    color: #fff;
+}
+
+.answerInputFileText:hover {
+    background: rgb(110, 110, 110);
+}
+
+.inputWrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.BtnTypeBlocks {
+    color: #ffffff !important;
+    border: .1vw solid #fff;
+    border-radius: .5vw !important;
+    position: relative !important;
+    overflow: hidden;
+    transition: all 1s linear !important;
+
+}
+
+.answerInputFileName {
+    vertical-align: middle;
+    margin-left: 1vw;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.answerInputFile {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+}
+
+.fieldset {
+    padding: 0 8px;
+    position: absolute;
+    top: -10px;
+    border-radius: 10px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: .1vw solid #ffffff;
+    transition: all 1s linear;
+
+}
+
+.legend {
+    padding: 0 5px;
+    text-align: start;
+    font-size: 0.75rem;
+    color: #fff !important;
+
+}
+
+.lawContainer {
+    margin-Top: 2vw;
+    padding-Top: .5vw;
+    border-Image: linear-gradient(90deg, #fff, #4B515A 80%);
+    border-Top: 1px solid transparent;
+    border-Image-Slice: 1;
+}
+
+.lawCollection {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.securitySelectWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.securitySelectWrapper>div {
+    width: 48%;
+}
+.logsContainer{
+    margin-top: 20px;
+    padding: 0 20px;
+    position: relative;
+    border-top: 1px #fff solid;
+    left: -20px;
+    width: calc(100% + 40px);
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+.logsPointWrapper {
+    padding: 10px;
+    margin: 1.5vw 0 0 0;
+    box-Shadow: 0 .8vw 1.5vw .2vw #30343a;
+    border-Radius: 1vw;
+    border: 1px #fff solid;
+    text-align: start;
+    font-size: 18px;
+}
+
+.mainCheckboxInputDls:checked+label::before {
+    background-color: #407d7c;
+}
+
+.mainCheckboxInputDls {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.mainCheckboxLabelDls {
+    display: flex;
+    text-align: start;
+    width: 100%;
+    align-items: center;
+    user-select: none;
+    padding: .5vw 2vw .5vw 1.5vw;
+    font-size: 16px;
+
+}
+
+.mainCheckboxLabelDls::before {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}
+
+.idLabelOldDisabled {
+    display: flex;
+    text-align: start;
+    width: 100%;
+    align-items: center;
+    user-select: none;
+    padding: .5vw 2vw .5vw 1.5vw;
+    font-size: 16px;
+    color: #94999e94;
+
+}
+
+.idLabelOldDisabled::before {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #94999e94;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}

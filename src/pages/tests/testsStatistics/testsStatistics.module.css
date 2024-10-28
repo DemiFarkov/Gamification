@@ -210,8 +210,12 @@ th {
     font-size: 1.2vw;
     text-align: center;
     border-radius: 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.rowTitleItemText{
+
+.rowTitleItemText {
     width: 80%;
 }
 
@@ -363,7 +367,7 @@ th {
 .AccordionTHResetBTN:hover {
     background: #384454;
     cursor: pointer;
-    
+
 }
 
 .AccordionSubTitle {
@@ -381,13 +385,14 @@ th {
     display: block;
     font-size: 1.1vw;
     height: 100%;
-    cursor: default;color: #1C2025;
+    cursor: default;
+    color: #1C2025;
     height: 100%;
     width: 100%;
 }
 
-.dialogTitle{
-display: flex;
-justify-content: space-between;
-color: aliceblue;
+.dialogTitle {
+    display: flex;
+    justify-content: space-between;
+    color: aliceblue;
 }

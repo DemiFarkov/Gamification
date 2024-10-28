@@ -8,9 +8,7 @@ import {
   StyledButton,
 } from "./inputComponent";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import {
-  Unstable_NumberInput as BaseNumberInput
-} from "@mui/base/Unstable_NumberInput";
+import { Unstable_NumberInput as BaseNumberInput } from "@mui/base/Unstable_NumberInput";
 const Input = (props) => {
   const { content, idInput, countForAnswer } = props;
   useEffect(() => {
@@ -54,16 +52,6 @@ const Input = (props) => {
           },
         }}
       />
-      {/* <input
-        type="text"
-        className={classes.answerInput}
-        placeholder="Введите ответ"
-        id={idInput}
-        onChange={() =>
-          props.changeArrInput(countForAnswer, idInput, "input")
-        }
-        required
-      />{" "} */}
       {props.customAnswer == false && (
         <TestAnswerCheckbox
           idCheckBox={idInput + "checkBox"}
@@ -78,63 +66,7 @@ const Input = (props) => {
   );
 };
 
-const InputDLS = (props) => {
-  return (
-    <div className={classes.answerInputContainer}>
-      <TextField
-        multiline
-        cols={30}
-        id={props.idInput}
-        onChange={() => props.changeArrInput(countForAnswer, idInput, "input")}
-        required
-        placeholder="Введите ответ"
-        sx={{
-          background: "#D9D9D9",
-          borderRadius: "3vw",
-          width: "90%",
-          "& .MuiFormControl-root": {
-            borderRadius: "1vw",
-          },
-          "& .MuiOutlinedInput-notchedOutline": {
-            border: "1px solid #fff",
-            borderRadius: "3vw",
-          },
-          "& .MuiInputLabel-root": {
-            color: "#fff",
-            fontSize: "1.2vw",
-          },
-          "& .MuiInputBase-root-MuiOutlinedInput-root.": {
-            color: "#fff",
-          },
-          "& .MuiOutlinedInput-root": {
-            padding: ".7vw",
-            color: "#000",
-            fontSize: "1.2vw",
-          },
-        }}
-      />
-      {/* <input
-        type="text"
-        className={classes.answerInput}
-        placeholder="Введите ответ"
-        id={props.idInput}
-        onChange={() =>
-          props.changeArrInput(props.countForAnswer, props.idInput, "input")
-        }
-        required
-      />{" "} */}
-      {props.customAnswer == false && (
-        <TestAnswerCheckbox
-          idCheckBox={props.idInput + "checkBox"}
-          customAnswer={props.customAnswer}
-          changeArrInput={props.changeArrInput}
-          idInput={props.idInput}
-          countForAnswer={props.countForAnswer}
-        />
-      )}
-    </div>
-  );
-};
+
 
 const TestAnswerCheckbox = (props) => {
   const { content, idCheckBox } = props;
@@ -192,7 +124,7 @@ const TestQue = (props) => {
     setModalValidTestText,
     setVisibleModalValidTest,
   } = props;
-  const [countForAnswer, setCountForAnswer] = useState(1);
+  const [countForAnswer, setCountForAnswer] = useState(2);
   const [customAnswer, setCustomAnswer] = useState(false);
   const [limitedTime, setLimitedTime] = useState(false);
   const [annotation, setAnnotation] = useState(false);
@@ -202,6 +134,10 @@ const TestQue = (props) => {
   const [fileName, setFileName] = useState();
   const [collectionQue, setCollectionQue] = useState({});
   const [answer_options, setAnswer_options] = useState([
+    {
+      option_text: "",
+      is_correct: false,
+    },
     {
       option_text: "",
       is_correct: false,
@@ -216,6 +152,15 @@ const TestQue = (props) => {
       countForAnswer={0}
       idCheckBoxCustom={idCheckBoxCustom}
       idInput={idMainBlock + "IdInput" + 0}
+      removeInput={removeInput}
+      changeArrInput={changeArrInput}
+    />,
+    <Input
+      key={1}
+      customAnswer={customAnswer}
+      countForAnswer={1}
+      idCheckBoxCustom={idCheckBoxCustom}
+      idInput={idMainBlock + "IdInput" + 1}
       removeInput={removeInput}
       changeArrInput={changeArrInput}
     />,
@@ -236,6 +181,10 @@ const TestQue = (props) => {
             option_text: "",
             is_correct: false,
           },
+          {
+            option_text: "",
+            is_correct: false,
+          },
         ]);
       }
 
@@ -244,7 +193,7 @@ const TestQue = (props) => {
       for (let i = 0; i < content.answer_options.length; i++) {
         collectionInputList[i] = (
           <Input
-            key={i + 1}
+            key={i + 2}
             customAnswer={customAnswer}
             countForAnswer={i}
             idCheckBoxCustom={idCheckBoxCustom}
@@ -282,7 +231,7 @@ const TestQue = (props) => {
       }
 
       setCountForAnswer(
-        content.answer_options.length == 0 ? 1 : content.answer_options.length
+        content.answer_options.length == 0 ? 2 : content.answer_options.length
       );
       setInputList(collectionInputList);
     }
@@ -335,7 +284,6 @@ const TestQue = (props) => {
     let timeValue = document.querySelector(`#${idTime}`)
       ? Number(document.querySelector(`#${idTime}`).value)
       : 0;
-      console.log(fileName)
     setCollectionQue({
       type: "question",
       content: {
@@ -446,7 +394,7 @@ const TestQue = (props) => {
   //  Удаление поля для ответа со страницы и из массива для отправки данных
   function removeInput() {
     if (customAnswer === false) {
-      if (inputList.length > 1) {
+      if (inputList.length > 2) {
         setInputList(
           inputList.filter(function (currentValue, index) {
             return index < inputList.length - 1;
@@ -535,29 +483,6 @@ const TestQue = (props) => {
         aria-label="Demo number input"
         placeholder="Баллы за ответ"
       />
-      {/* <input
-        type="number"
-        className={classes.answerInput}
-        placeholder="Введите баллы за правильный ответ"
-        max={100}
-        min={1}
-        name="pointsForQue"
-        onFocus={(e) =>
-          e.target.addEventListener(
-            "wheel",
-            function (e) {
-              e.preventDefault();
-            },
-            { passive: false }
-          )
-        }
-        id={idValuePoins}
-        onChange={(value) => {
-          changecollectionQue();
-          changeMinPointsForTest();
-        }}
-        required
-      /> */}
       <div className={classes.answerInputFileContainer}>
         <label htmlFor={idfile} className={classes.answerInputFileText}>
           Выберите файл

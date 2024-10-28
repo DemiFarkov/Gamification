@@ -1,0 +1,252 @@
+@font-face {
+    font-family: 'Tektur';
+    font-style: normal;
+    font-weight: 400;
+    src:
+        url('../../../fonts/TekturVariableFontWdthWght.ttf') format('truetype'),
+        url('../../../fonts/Philosopher-Italic.ttf') format('truetype'),
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.mainContainer {
+    padding-right: 1vw;
+    margin: 1vw 0.7vw 1.5vw 0.7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainContent {
+    width: 94%;
+}
+
+.H1 {
+    padding: .7vw;
+    font-size: 2.5vw;
+    background: #469C9A;
+    border-radius: 1vw;
+}
+
+.mainBlock {
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    border-radius: 1vw;
+    min-height: 25vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1vw 1vw;
+}
+
+.column1SelectContainer {
+    background: #202833;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+.column3EmployeeSelection {
+    background: #202833;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.greenLine {
+    margin-top: 35px;
+    width: 100%;
+    height: 1px;
+    background: #469C9A;
+}
+
+.column3ButtonWrapper {
+    margin-top: 20px;
+}
+
+.columnBlock {
+    margin-top: 1vw;
+    background: #202833;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.AppealsBlock {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 0 2vw;
+}
+
+.titleMinPlock {
+    text-align: start;
+    font-size: 24px;
+}
+
+.AppealsP {
+    margin-top: 15px;
+    text-align: start;
+}
+
+.mainCheckboxInputDls:checked+label::before {
+    background-color: #407d7c;
+}
+
+.mainCheckboxInputDls {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.mainCheckboxLabelDls {
+    display: flex;
+    text-align: start;
+    width: 100%;
+    align-items: center;
+    user-select: none;
+    padding: .5vw 0;
+    font-size: 12.5px;
+
+}
+
+.mainCheckboxLabelDls::before {
+    content: '';
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: inline-block;
+    width: 1.5vw;
+    height: 1.5vw;
+    border: 1px solid #469C9A;
+    border-radius: 0.25em;
+    margin-right: 1vw;
+}
+
+.demoTitle {
+    position: relative;
+    bottom: 0;
+    font-size: 15px;
+}
+
+.avaImg {
+    cursor: pointer;
+    max-width: 100px;
+    max-height: 110px;
+    pointer-events: auto !important;
+}
+
+.answerInputFileText {
+    padding: 3px;
+    background: #9B9B9B;
+    border-radius: .5vw;
+    border: 1px solid #202833;
+    font-size: 1rem;
+    transition: all .1s;
+    color: #fff;
+}
+
+.answerInputFileText:hover {
+    background: rgb(110, 110, 110);
+}
+
+.answerInputFileName {
+    vertical-align: middle;
+    margin-left: 1vw;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.answerInputFile {
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+}
+
+.fieldset {
+    padding: 0 8px;
+    position: absolute;
+    top: -10px;
+    border-radius: 10px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: .1vw solid #ffffff;
+    transition: all 1s linear;
+
+}
+
+.legend {
+    padding: 0 5px;
+    text-align: start;
+    font-size: 0.75rem;
+    color: #fff !important;
+
+}
+
+.answerInputFileContainer {
+    position: relative;
+    margin: 1.5vw 0;
+    position: relative;
+    padding: 7px;
+    width: 100%;
+    display: block;
+    font-size: 1.2vw;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    transition: all 1s linear;
+
+}
+
+.titleCardColorWrapper {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.titleCardColorPoint {
+    margin-right: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+
+.titleCardColorPoint:hover {
+    border: 3px solid #202833;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
