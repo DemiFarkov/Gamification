@@ -140,14 +140,20 @@ function Item(props) {
           <div
             className={classes.difficultyScale}
             style={{
-              backgroundImage: `linear-gradient(0.25turn, #51b678 ${el.contentPoint[0].percentage + "%"}, #c4c853 ${
+              backgroundImage: `linear-gradient(0.25turn, #51b678 0% ${
+                el.contentPoint[0].percentage + "%"
+              }, #c4c853 ${el.contentPoint[0].percentage + "%"} ${
                 el.contentPoint[0].percentage + el.contentPoint[1].percentage !=
                 0
                   ? el.contentPoint[0].percentage +
                     el.contentPoint[1].percentage +
                     "%"
                   : "50%"
-              }, #c85353 100%)`,
+              }, #c85353 ${
+                el.contentPoint[0].percentage +
+                el.contentPoint[1].percentage +
+                "%"
+              } 100%)`,
             }}
           ></div>
         )}

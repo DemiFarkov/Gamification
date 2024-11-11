@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import classes from "./creatingAchievements.module.css";
 import {
+  FormControl,
+  InputLabel,
   MenuItem,
+  OutlinedInput,
   Select,
   Stack,
   Switch,
@@ -38,19 +41,11 @@ import {
 
 const Column2 = (props) => {
   const {
-    nameAchievements,
-    setNameAchievements,
     typeAchievements,
     setTypeAchievements,
-    typeAchievementsSwitch,
-    setTypeAchievementsSwitch,
     setUrlAvaPhoto,
     achData,
     setAchData,
-    EXPValue,
-    setEXPValue,
-    acoinValue,
-    setAcoinValue,
     setFileImage,
     fileImage,
     setFileBackground,
@@ -59,16 +54,16 @@ const Column2 = (props) => {
     collectBackgrounds,
     collectNonBackgrounds,
     setUrlItemPhoto,
-    setDescription,
   } = props;
   const newTypeStyleDataSelector = useSelector(
     (state) => state.auth.newTypeStyleData
   );
+  console.log(typeAchievements);
   const MainDataSelector = useSelector((state) => state.auth.newTypeMainData);
   const dispatch = useDispatch();
   useEffect(() => {
-    typeAchievementsSwitch && setTypeAchievements(0);
-  }, [typeAchievementsSwitch]);
+    MainDataSelector.is_award && setTypeAchievements(0);
+  }, [MainDataSelector.is_award]);
   useEffect(() => {
     dispatch(
       newTypeStyleData({
@@ -82,7 +77,7 @@ const Column2 = (props) => {
         .forEach((el, i) => el.removeEventListener("click", changeTitleColor));
     };
   }, []);
-
+  console.log(MainDataSelector);
   function changeTitleColor(e) {
     dispatch(
       newTypeStyleData({
@@ -134,7 +129,19 @@ const Column2 = (props) => {
             type="checkbox"
             id={"visibleTitle"}
             className={classes.mainCheckboxInputDls}
-            onChange={() => changeVisibleTitle()}
+            checked={
+              Object.values(MainDataSelector).length > 0
+                ? MainDataSelector.show_name
+                : false
+            }
+            onChange={(e) =>
+              dispatch(
+                newTypeMainData({
+                  ...MainDataSelector,
+                  show_name: e.target.checked,
+                })
+              )
+            }
           />
           <label
             htmlFor={"visibleTitle"}
@@ -161,11 +168,19 @@ const Column2 = (props) => {
             },
           }}
           focused
-          value={nameAchievements}
+          value={
+            Object.values(MainDataSelector).length > 0
+              ? MainDataSelector.name
+              : ""
+          }
           onChange={(e) => {
-            setNameAchievements(e.target.value);
+            dispatch(
+              newTypeMainData({
+                ...MainDataSelector,
+                name: e.target.value,
+              })
+            );
           }}
-          
         />
       </div>
       <div className={classes.columnBlock} mainblock="true">
@@ -182,7 +197,13 @@ const Column2 = (props) => {
               cursor: "pointer",
             }}
             onClick={() => {
-              setUrlAvaPhoto("");
+              dispatch(
+                newTypeMainData({
+                  ...MainDataSelector,
+                  back_image: undefined,
+                })
+              ),
+                setUrlAvaPhoto("");
             }}
           />
         </div>
@@ -321,40 +342,56 @@ const Column2 = (props) => {
             },
           }}
           value={
-            MainDataSelector ? MainDataSelector.description : ""
+            Object.values(MainDataSelector).length > 0
+              ? MainDataSelector.description
+              : ""
           }
           focused
           label="Сзади"
           onChange={(e) => {
-            e.target.value.length < 225 && setDescription(e.target.value);
+            e.target.value.length < 225 &&
+              dispatch(
+                newTypeMainData({
+                  ...MainDataSelector,
+                  description: e.target.value,
+                })
+              );
           }}
         />
       </div>
       <div className={classes.columnBlock}>
         <TextField
           fullWidth
-          multiline
           sx={{
             ...TextFieldStyle,
-            "& textarea": {
-              padding: "0",
+            margin: "1vw 0 0 0",
+            "& input": {
+              padding: "8px",
               fontSize: ".95vw",
             },
           }}
-          focused
           label="A-coin-ов за достижение..."
+          focused
+          value={
+            Object.values(MainDataSelector).length > 0
+              ? MainDataSelector.reward_currency
+              : ""
+          }
           onChange={(e) => {
-            setAcoinValue(e.target.value);
+            dispatch(
+              newTypeMainData({
+                ...MainDataSelector,
+                reward_currency: e.target.value,
+              })
+            );
           }}
-          value={acoinValue}
           type="number"
         />
+
         <TextField
           fullWidth
-          multiline
           sx={{
             ...TextFieldStyle,
-            marginTop: "0",
             "& textarea": {
               padding: "0",
               fontSize: ".95vw",
@@ -364,9 +401,18 @@ const Column2 = (props) => {
           focused
           label="Опыт за достижение..."
           onChange={(e) => {
-            setEXPValue(e.target.value);
+            dispatch(
+              newTypeMainData({
+                ...MainDataSelector,
+                reward_experience: e.target.value,
+              })
+            );
           }}
-          value={EXPValue}
+          value={
+            Object.values(MainDataSelector).length > 0
+              ? MainDataSelector.reward_experience
+              : ""
+          }
         />
       </div>
       <div className={classes.columnBlock}>
@@ -378,7 +424,11 @@ const Column2 = (props) => {
           onChange={(e) => {
             setTypeAchievements(e.target.value);
           }}
-          disabled={typeAchievementsSwitch}
+          disabled={
+            Object.values(MainDataSelector).length > 0
+              ? MainDataSelector.is_award
+              : true
+          }
         >
           {" "}
           <MenuItem value={0}>Не выбрано</MenuItem>
@@ -409,9 +459,18 @@ const Column2 = (props) => {
         >
           <Typography>Достижение</Typography>
           <Switch
-            checked={typeAchievementsSwitch}
+            checked={
+              Object.values(MainDataSelector).length > 0
+                ? MainDataSelector.is_award
+                : false
+            }
             onChange={(event) => {
-              setTypeAchievementsSwitch(event.target.checked);
+              dispatch(
+                newTypeMainData({
+                  ...MainDataSelector,
+                  is_award: event.target.checked,
+                })
+              );
             }}
             sx={{
               "&.MuiSwitch-root": { width: "80px" },

@@ -23,18 +23,21 @@ const Appeals = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     let ids = [];
-    experienceRequset.map((el) => ids.push(el.id));
+    let type_specific_data = {};
+    requiredRequestsCount &&
+      (type_specific_data.required_requests_count = requiredRequestsCount);
+    isMassive && (type_specific_data.is_massive = isMassive);
+    ids.length > 0 && (type_specific_data.classification_ids = ids);
     getData();
-    dispatch(
-      typeAchData({
-        difficulty: complexityAch,
-        type_specific_data: {
-          required_requests_count: requiredRequestsCount,
-          is_massive: isMassive,
-          classification_ids: ids,
-        },
-      })
-    );
+    if (Array.isArray(experienceRequset)) {
+      experienceRequset.map((el) => ids.push(el.id));
+      dispatch(
+        typeAchData({
+          complexityAch: complexityAch,
+          type_specific_data: type_specific_data,
+        })
+      );
+    }
   }, [requiredRequestsCount, isMassive, experienceRequset]);
   async function getData() {
     await instance.get(`classifications/leaf_nodes/`).then((response) => {
@@ -103,8 +106,7 @@ const Appeals = (props) => {
             sx={{ ...selecetStyle, marginTop: "0" }}
             value={complexityAch}
             onChange={(e) => {
-              setСomplexityAch(e.target.value),
-                dispatch(typeAchData({ complexityAch: e.target.value }));
+              setСomplexityAch(e.target.value)
             }}
           >
             {" "}

@@ -18,18 +18,22 @@ import {
   ButtonStyle,
 } from "../../../components/styles/styles.js";
 import { instance } from "../../../utils/axios/index.js";
-import { getGroupsAuth, getPasswordPolicyRegexUseAuth } from "../../../hooks/reduxHooks.js";
+import {
+  getGroupsAuth,
+  getPasswordPolicyRegexUseAuth,
+} from "../../../hooks/reduxHooks.js";
 import { changeColorSelect, changeErrorColorSelect } from "./changeColor.js";
 import ModalNoAccess from "../../../components/general/modalNoAccess.jsx";
+import { ConnectingAirportsOutlined } from "@mui/icons-material";
 
 const Security = () => {
   const group = getGroupsAuth();
 
   const [loader, setLoader] = useState(null);
+  const [gettigettingData, setGettigettingData] = useState(true);
 
   const [logs, setLogs] = useState();
   const [logsEXPCarmaAc, setLogsEXPCarmaAc] = useState();
-
   const [passwordPolicy1, setPasswordPolicy1] = useState("");
   const [passwordPolicy2, setPasswordPolicy2] = useState("");
   const [passwordPolicy3, setPasswordPolicy3] = useState("");
@@ -40,13 +44,18 @@ const Security = () => {
   const [allowedSymbols, setAllowedSymbols] = useState();
 
   const [logsType, setLogsType] = useState(0);
-
+  const [deleteLogType, setDeleteLogType] = useState(0);
+  const [deleteLogEmploee, setDeleteLogEmploee] = useState();
+  const [allUsers, setAllUsers] = useState([]);
   const passwordPolicyRegex = getPasswordPolicyRegexUseAuth();
+  console.log(allUsers);
   useEffect(() => {
-    getData();
+    getData().then(() => {
+      setGettigettingData(false);
+    });
   }, []);
-  function getData() {
-    instance.get(`password-policy/get_policy/`).then((response) => {
+  const getData = async () => {
+    await instance.get(`password-policy/get_policy/`).then((response) => {
       setPasswordPolicy1(response.data.min_length);
       setPasswordPolicy2(response.data.max_length);
       setPasswordPolicy3(response.data.min_uppercase);
@@ -57,16 +66,20 @@ const Security = () => {
       setAllowedSymbols(response.data.allowed_symbols);
       console.log(response);
     });
-    instance.get(`logs/`).then((response) => {
+    await instance.get(`users/`).then((response) => {
+      console.log(response.data);
+      setAllUsers(response.data);
+      setDeleteLogEmploee(response.data[0].id);
+    });
+    await instance.get(`logs/`).then((response) => {
       console.log(response);
       setLogs(response.data);
     });
-    instance.get(`currency-logs/`).then((response) => {
+    await instance.get(`currency-logs/`).then((response) => {
       console.log(response);
       setLogsEXPCarmaAc(response.data);
     });
-  }
-  console.log(logs);
+  };
   function postUpdate_policy(id1) {
     setLoader(1);
     instance
@@ -94,7 +107,43 @@ const Security = () => {
         setLoader(null);
       });
   }
-  console.log(passwordPolicyRegex);
+  function postDeleteLogs(id1) {
+    setLoader(2);
+    let action;
+    switch (deleteLogType) {
+      case 0:
+        action = "";
+        break;
+      case 1:
+        action = "?log_type=employee_log";
+        break;
+      case 2:
+        action = "?log_type=employee_action_log";
+        break;
+      case 3:
+        action = `?employee_id=${deleteLogEmploee}`;
+        break;
+      case 4:
+        action = `?employee_id=${deleteLogEmploee}&log_type=employee_action_log`;
+        break;
+      case 5:
+        action = `?employee_id=${deleteLogEmploee}&log_type=employee_log`;
+        break;
+    }
+    instance
+      .delete(`delete-logs/${action}`)
+      .then((response) => {
+        console.log(response);
+        changeColorSelect(id1);
+      })
+      .catch((response) => {
+        console.log(response);
+        changeErrorColorSelect(id1);
+      })
+      .finally(function () {
+        setLoader(null);
+      });
+  }
   return (
     <div>
       {group == "Администраторы" ? (
@@ -104,163 +153,233 @@ const Security = () => {
             <Navigation styleBackground={"Security"} />
             <section className={classes.mainContent}>
               <div className={classes.mainContentWrapper}>
-                <article
-                  className={classes.mainTypeBlocks}
-                  id="updatePolicyContainer"
-                >
-                  <h4 className={classes.titleTypeBlocks}>
-                    Требования к паролю
-                  </h4>
+                <div style={{ width: "48%" }}>
+                  <article
+                    className={classes.mainTypeBlocks}
+                    id="updatePolicyContainer"
+                    style={{ width: "100%" }}
+                  >
+                    <h4 className={classes.titleTypeBlocks}>
+                      Требования к паролю
+                    </h4>
 
-                  <TextField
-                    fullWidth
-                    sx={{
-                      ...TextFieldStyle,
-                      margin: "1.5vw 0 0 0",
-                      "& input": {
-                        padding: "8px",
-                        fontSize: ".95vw",
-                      },
-                    }}
-                    value={passwordPolicy1}
-                    onChange={(e) => {
-                      setPasswordPolicy1(e.target.value);
-                    }}
-                    focused
-                    label="Минимальное к-во символов"
-                    // value={newNameRequset}
-                  />
-                  <TextField
-                    fullWidth
-                    sx={{
-                      ...TextFieldStyle,
-                      margin: "1.5vw 0 0 0",
-                      "& input": {
-                        padding: "8px",
-                        fontSize: ".95vw",
-                      },
-                    }}
-                    value={passwordPolicy2}
-                    onChange={(e) => {
-                      setPasswordPolicy2(e.target.value);
-                    }}
-                    focused
-                    label="Максимальное к-во символов"
-                    // value={newNameRequset}
-                  />
-                  <TextField
-                    fullWidth
-                    sx={{
-                      ...TextFieldStyle,
-                      margin: "1.5vw 0 0 0",
-                      "& input": {
-                        padding: "8px",
-                        fontSize: ".95vw",
-                      },
-                    }}
-                    value={passwordPolicy3}
-                    onChange={(e) => {
-                      setPasswordPolicy3(e.target.value);
-                    }}
-                    focused
-                    label="Минимальное к-во заглавных букв"
-                    // value={newNameRequset}
-                  />
-                  <TextField
-                    fullWidth
-                    sx={{
-                      ...TextFieldStyle,
-                      margin: "1.5vw 0 0 0",
-                      "& input": {
-                        padding: "8px",
-                        fontSize: ".95vw",
-                      },
-                    }}
-                    value={passwordPolicy4}
-                    onChange={(e) => {
-                      setPasswordPolicy4(e.target.value);
-                    }}
-                    focused
-                    label="Минимальное к-во строчных букв"
-                    // value={newNameRequset}
-                  />
-                  <TextField
-                    fullWidth
-                    sx={{
-                      ...TextFieldStyle,
-                      margin: "1.5vw 0 0 0",
-                      "& input": {
-                        padding: "8px",
-                        fontSize: ".95vw",
-                      },
-                    }}
-                    value={passwordPolicy5}
-                    onChange={(e) => {
-                      setPasswordPolicy5(e.target.value);
-                    }}
-                    focused
-                    label="Минимальное к-во цифр"
-                    // value={newNameRequset}
-                  />
-                  <TextField
-                    fullWidth
-                    sx={{
-                      ...TextFieldStyle,
-                      margin: "1.5vw 0 0 0",
-                      "& input": {
-                        padding: "8px",
-                        fontSize: ".95vw",
-                      },
-                    }}
-                    value={passwordPolicy6}
-                    onChange={(e) => {
-                      setPasswordPolicy6(e.target.value);
-                    }}
-                    focused
-                    label="Другие допустимые символы"
-                    // value={newNameRequset}
-                  />
-                  <p style={{ textAlign: "start" }}>
-                    Допустимые символы: {allowedSymbols}
-                  </p>
-                  <p style={{ position: "relative", marginTop: ".5vw" }}>
-                    {" "}
-                    <input
-                      type="checkbox"
-                      forsearch="idCheckBoxOld"
-                      id={"idCheckBoxOld"}
-                      checked={passwordPolicy7}
-                      className={classes.mainCheckboxInputDls}
-                      onChange={() => {}}
-                    />
-                    <label
-                      htmlFor={"idCheckBoxOld"}
-                      id={"idLabelOld"}
-                      className={classes.mainCheckboxLabelDls}
-                      onClick={() => setPasswordPolicy7(!passwordPolicy7)}
-                    >
-                      Без пробелов
-                    </label>
-                  </p>
-
-                  <article className={classes.btnPlace}>
-                    {" "}
-                    <Button
-                      className={classes.BtnTypeBlocks}
-                      style={{ marginTop: "2vw" }}
-                      sx={ButtonStyle}
-                      onClick={() => {
-                        postUpdate_policy("updatePolicyContainer");
+                    <TextField
+                      fullWidth
+                      sx={{
+                        ...TextFieldStyle,
+                        margin: "1.5vw 0 0 0",
+                        "& input": {
+                          padding: "8px",
+                          fontSize: ".95vw",
+                        },
                       }}
-                    >
-                      {loader == 1 ? (
-                        <CircularProgress size={24} />
-                      ) : (
-                        "Сохранить"
-                      )}
-                    </Button>
+                      value={passwordPolicy1}
+                      onChange={(e) => {
+                        setPasswordPolicy1(e.target.value);
+                      }}
+                      focused
+                      label="Минимальное к-во символов"
+                      // value={newNameRequset}
+                    />
+                    <TextField
+                      fullWidth
+                      sx={{
+                        ...TextFieldStyle,
+                        margin: "1.5vw 0 0 0",
+                        "& input": {
+                          padding: "8px",
+                          fontSize: ".95vw",
+                        },
+                      }}
+                      value={passwordPolicy2}
+                      onChange={(e) => {
+                        setPasswordPolicy2(e.target.value);
+                      }}
+                      focused
+                      label="Максимальное к-во символов"
+                      // value={newNameRequset}
+                    />
+                    <TextField
+                      fullWidth
+                      sx={{
+                        ...TextFieldStyle,
+                        margin: "1.5vw 0 0 0",
+                        "& input": {
+                          padding: "8px",
+                          fontSize: ".95vw",
+                        },
+                      }}
+                      value={passwordPolicy3}
+                      onChange={(e) => {
+                        setPasswordPolicy3(e.target.value);
+                      }}
+                      focused
+                      label="Минимальное к-во заглавных букв"
+                      // value={newNameRequset}
+                    />
+                    <TextField
+                      fullWidth
+                      sx={{
+                        ...TextFieldStyle,
+                        margin: "1.5vw 0 0 0",
+                        "& input": {
+                          padding: "8px",
+                          fontSize: ".95vw",
+                        },
+                      }}
+                      value={passwordPolicy4}
+                      onChange={(e) => {
+                        setPasswordPolicy4(e.target.value);
+                      }}
+                      focused
+                      label="Минимальное к-во строчных букв"
+                      // value={newNameRequset}
+                    />
+                    <TextField
+                      fullWidth
+                      sx={{
+                        ...TextFieldStyle,
+                        margin: "1.5vw 0 0 0",
+                        "& input": {
+                          padding: "8px",
+                          fontSize: ".95vw",
+                        },
+                      }}
+                      value={passwordPolicy5}
+                      onChange={(e) => {
+                        setPasswordPolicy5(e.target.value);
+                      }}
+                      focused
+                      label="Минимальное к-во цифр"
+                      // value={newNameRequset}
+                    />
+                    <TextField
+                      fullWidth
+                      sx={{
+                        ...TextFieldStyle,
+                        margin: "1.5vw 0 0 0",
+                        "& input": {
+                          padding: "8px",
+                          fontSize: ".95vw",
+                        },
+                      }}
+                      value={passwordPolicy6}
+                      onChange={(e) => {
+                        setPasswordPolicy6(e.target.value);
+                      }}
+                      focused
+                      label="Другие допустимые символы"
+                      // value={newNameRequset}
+                    />
+                    <p style={{ textAlign: "start" }}>
+                      Допустимые символы: {allowedSymbols}
+                    </p>
+                    <p style={{ position: "relative", marginTop: ".5vw" }}>
+                      {" "}
+                      <input
+                        type="checkbox"
+                        forsearch="idCheckBoxOld"
+                        id={"idCheckBoxOld"}
+                        checked={passwordPolicy7}
+                        className={classes.mainCheckboxInputDls}
+                        onChange={() => {}}
+                      />
+                      <label
+                        htmlFor={"idCheckBoxOld"}
+                        id={"idLabelOld"}
+                        className={classes.mainCheckboxLabelDls}
+                        onClick={() => setPasswordPolicy7(!passwordPolicy7)}
+                      >
+                        Без пробелов
+                      </label>
+                    </p>
+
+                    <article className={classes.btnPlace}>
+                      {" "}
+                      <Button
+                        className={classes.BtnTypeBlocks}
+                        style={{ marginTop: "2vw" }}
+                        sx={ButtonStyle}
+                        onClick={() => {
+                          postUpdate_policy("updatePolicyContainer");
+                        }}
+                      >
+                        {loader == 1 ? (
+                          <CircularProgress size={24} />
+                        ) : (
+                          "Сохранить"
+                        )}
+                      </Button>
+                    </article>
                   </article>
-                </article>
+                  <article
+                    className={classes.mainTypeBlocks}
+                    style={{ width: "100%" }}
+                    
+                    id="deleteLogContainer"
+                  >
+                    <h4 className={classes.titleTypeBlocks}>Очистка логов</h4>
+                    {gettigettingData ? (
+                      <CircularProgress size={24} />
+                    ) : (
+                      <Select
+                        id="valueThemeSelect"
+                        sx={selecetStyle}
+                        value={deleteLogType}
+                        onChange={(e) => {
+                          setDeleteLogType(e.target.value);
+                        }}
+                      >
+                        {" "}
+                        <MenuItem value={0}>Все логи </MenuItem>
+                        <MenuItem value={1}>Опыт, карма, акоины</MenuItem>
+                        <MenuItem value={2}>Логи действий </MenuItem>
+                        <MenuItem value={3}>Все у сотрудника</MenuItem>
+                        <MenuItem value={4}>
+                          Логи действий у сотрудника{" "}
+                        </MenuItem>
+                        <MenuItem value={5}>Логи валюты у сотрудника </MenuItem>
+                      </Select>
+                    )}
+
+                    {deleteLogType > 2 && (
+                      <Select
+                        id="valueThemeSelect"
+                        sx={selecetStyle}
+                        value={deleteLogEmploee}
+                        onChange={(e) => {
+                          setDeleteLogEmploee(e.target.value);
+                        }}
+                      >
+                        {" "}
+                        {allUsers &&
+                          allUsers.map((el, i) => (
+                            <MenuItem value={el.id} key={i}>
+                              {el.first_name + " " + el.last_name}{" "}
+                            </MenuItem>
+                          ))}
+                      </Select>
+                    )}
+                    <article className={classes.btnPlace}>
+                      {" "}
+                      <Button
+                        className={classes.BtnTypeBlocks}
+                        style={{ marginTop: "2vw" }}
+                        sx={ButtonStyle}
+                        onClick={() => {
+                          postDeleteLogs("deleteLogContainer");
+                        }}
+                      >
+                        {loader == 2 ? (
+                          <CircularProgress size={24} />
+                        ) : (
+                          "Очистить"
+                        )}
+                      </Button>
+                    </article>
+                  </article>
+                </div>
+
                 <article
                   className={classes.mainTypeBlocks}
                   style={{ paddingBottom: "0" }}
@@ -294,23 +413,27 @@ const Security = () => {
                       </Select>
                     </div>
                   </div>
-                  {logsType == 0
-                    ? logs && (
-                        <div className={classes.logsContainer}>
-                          {logs.map((el, i) => (
-                            <LogsPoint key={i} data={el} />
-                          ))}
-                        </div>
-                      )
-                    : logsType == 1
-                    ? logsEXPCarmaAc && (
-                        <div className={classes.logsContainer}>
-                          {logsEXPCarmaAc.map((el, i) => (
-                            <LogsEXPCarmaAcPoint key={i} data={el} />
-                          ))}
-                        </div>
-                      )
-                    : {}}
+                  {gettigettingData ? (
+                    <CircularProgress size={50} sx={{ marginTop: "5vw" }} />
+                  ) : logsType == 0 ? (
+                    logs && (
+                      <div className={classes.logsContainer}>
+                        {logs.map((el, i) => (
+                          <LogsPoint key={i} data={el} />
+                        ))}
+                      </div>
+                    )
+                  ) : logsType == 1 ? (
+                    logsEXPCarmaAc && (
+                      <div className={classes.logsContainer}>
+                        {logsEXPCarmaAc.map((el, i) => (
+                          <LogsEXPCarmaAcPoint key={i} data={el} />
+                        ))}
+                      </div>
+                    )
+                  ) : (
+                    {}
+                  )}
                 </article>
               </div>
             </section>

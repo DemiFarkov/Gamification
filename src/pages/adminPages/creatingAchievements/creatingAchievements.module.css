@@ -81,9 +81,11 @@ h3 {
     gap: 0 2vw;
 }
 
-.titleMinPlock {
+.titleMinBlock {
     text-align: start;
     font-size: 24px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .AppealsP {

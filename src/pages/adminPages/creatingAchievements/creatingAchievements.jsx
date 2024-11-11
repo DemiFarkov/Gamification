@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./creatingAchievements.module.css";
 import Header from "../../../components/general/header";
 import Navigation from "../../../components/general/navigation";
@@ -13,32 +13,25 @@ import {
   newTypeStyleData,
 } from "../../../toolkitRedux/toolkitSlice";
 import { getGroupsAuth } from "../../../hooks/reduxHooks";
-import ModalNoAccess from "../../../components/general/modalNoAccess";
-// import { oldAchievementsData } from "../../../toolkitRedux/toolkitSlice";
-import fs from "fs";
 import Not from "../../404Page/not";
 const CreatingAchievements = () => {
   const group = getGroupsAuth();
 
   const [collectBackgrounds, setCollectBackgrounds] = useState([]);
   const [collectNonBackgrounds, setCollectNonBackgrounds] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
 
   const [oldAchievements, setOldAchievements] = useState();
   const [valueOldAchievements, setValueOldAchievements] = useState(0);
 
   const [typeAchievements, setTypeAchievements] = useState(0);
-  const [typeAchievementsSwitch, setTypeAchievementsSwitch] = useState(false);
   const [urlAvaPhoto, setUrlAvaPhoto] = useState({});
   const [urlItemPhoto, setUrlItemPhoto] = useState("");
-
-  const [EXPValue, setEXPValue] = useState("");
-  const [acoinValue, setAcoinValue] = useState("");
 
   const [achData, setAchData] = useState();
   const [fileBackground, setFileBackground] = useState();
   const [fileImage, setFileImage] = useState();
 
-  const [description, setDescription] = useState("");
   const newTypeStyleDataSelector = useSelector(
     (state) => state.auth.newTypeStyleData
   );
@@ -47,9 +40,6 @@ const CreatingAchievements = () => {
   const [nameAchievements, setNameAchievements] = useState("");
 
   const dispatch = useDispatch();
-  const achCurrentData = useSelector(
-    (state) => state.auth.currentAchievementsData
-  );
   const MainDataSelector = useSelector((state) => state.auth.newTypeMainData);
 
   function dataValidation() {
@@ -65,7 +55,7 @@ const CreatingAchievements = () => {
       use_border: newTypeStyleDataSelector.use_border,
     };
     console.log(styleCard);
-    let typeAchContent = typeAchievementsSwitch
+    let typeAchContent = MainDataSelector.is_award
       ? {}
       : {
           difficulty: "Medium",
@@ -81,17 +71,21 @@ const CreatingAchievements = () => {
       background_image:
         "http://shaman.pythonanywhere.com/media/achievement_backgrounds/bg.jpg",
     };
-    formData.append("typeAchContent", JSON.stringify(typeAchContent));
+    !MainDataSelector.is_award &&
+      formData.append("typeAchContent", JSON.stringify(typeAchContent));
     formData.append("styleCard", JSON.stringify(styleCard));
-    formData.append("name", nameAchievements);
-    formData.append("description", MainDataSelector.description);
-    formData.append("type", typeAchievements);
-    formData.append("reward_experience", EXPValue);
-    formData.append("reward_currency", acoinValue);
-    formData.append("is_award", typeAchievementsSwitch);
+    formData.append("name", MainDataSelector.name);
+    MainDataSelector.description && formData.append("description", MainDataSelector.description);
+    !MainDataSelector.is_award && formData.append("type", typeAchievements);
+    formData.append("reward_experience", MainDataSelector.reward_experience);
+    formData.append("reward_currency", MainDataSelector.reward_currency);
+    formData.append("show_name", MainDataSelector.show_name);
+    formData.append("is_award", MainDataSelector.is_award);
     formData.append("is_double", MainDataSelector.is_double);
     !fileBackground && formData.append("template_background", urlAvaPhoto.id); // ID шаблона, который используется как фон
-    !fileImage && formData.append("template_foreground", urlItemPhoto.id); // ID шаблона, который используется как изображение на переднем плане
+    !fileImage &&
+      urlItemPhoto &&
+      formData.append("template_foreground", urlItemPhoto.id); // ID шаблона, который используется как изображение на переднем плане
     fileBackground && formData.append("background_image", fileBackground);
     fileImage && formData.append("foreground_image", fileImage);
 
@@ -100,8 +94,6 @@ const CreatingAchievements = () => {
     for (let [name, value] of formData.entries()) {
       console.log(name, value);
     }
-    // formData.append("image", typeAchievementsSwitch);
-    // formData.append("background_image", typeAchievementsSwitch);
     return formData;
   }
   useEffect(() => {
@@ -113,20 +105,25 @@ const CreatingAchievements = () => {
       //   dispatch(newTypeMainData({}));
     };
   }, []);
-  useEffect(() => {
-    group == "Администраторы" &&
-      valueOldAchievements > 0 &&
-      (setEXPValue(MainDataSelector.reward_experience),
-      setAcoinValue(MainDataSelector.reward_currency),
-      (document.querySelector(`#${"addBackSide"}`).checked =
-        MainDataSelector.is_double),
-      setNameAchievements(MainDataSelector.name));
-  }, [valueOldAchievements]);
+  // useEffect(() => {
+  //   group == "Администраторы" && console.log(valueOldAchievements);
+  //   valueOldAchievements > 0 &&
+  //     (setEXPValue(MainDataSelector.reward_experience),
+  //     setAcoinValue(MainDataSelector.reward_currency),
+  //     (document.querySelector(`#${"addBackSide"}`).checked =
+  //       MainDataSelector.is_double),
+  //     setNameAchievements(MainDataSelector.name));
+  // }, [valueOldAchievements]);
 
   function getData() {
     instance.get(`achievements/`).then((response) => {
       console.log(response.data);
       setOldAchievements(response.data);
+      // dispatch(oldAchievementsData(response.data));
+    });
+    instance.get(`users/`).then((response) => {
+      console.log(response.data);
+      setAllUsers(response.data);
       // dispatch(oldAchievementsData(response.data));
     });
     instance.get(`templates/`).then((response) => {
@@ -149,13 +146,14 @@ const CreatingAchievements = () => {
     if (group == "Администраторы") {
       if (fileBackground) {
         const file = fileBackground;
-
         const readerBack = new FileReader();
         readerBack.onloadend = () => {
           setBackUrl(readerBack.result);
         };
 
         readerBack.readAsDataURL(file);
+        dispatch(newTypeMainData({ ...MainDataSelector, back_image:undefined }))
+
       }
       if (fileImage) {
         const file = fileImage;
@@ -166,35 +164,19 @@ const CreatingAchievements = () => {
         };
 
         readerBack.readAsDataURL(file);
+        dispatch(newTypeMainData({ ...MainDataSelector, back_image:undefined }))
       }
       let ojbMainData = {
-        name: nameAchievements,
-        description: description,
         type: typeAchievements,
-        reward_experience: EXPValue,
-        reward_currency: acoinValue,
-        is_award: typeAchievementsSwitch,
         urlAvaPhoto: urlAvaPhoto.url,
         urlItemPhoto: urlItemPhoto.url,
         is_double: document.querySelector(`#addBackSide`).checked,
       };
       dispatch(newTypeMainData({ ...MainDataSelector, ...ojbMainData }));
     }
-  }, [
-    nameAchievements,
-    EXPValue,
-    acoinValue,
-    fileBackground,
-    fileImage,
-    urlItemPhoto,
-    urlAvaPhoto,
-    description,
-    typeAchievementsSwitch,
-  ]);
-  // Для сраных фото
+  }, [fileBackground, fileImage, urlItemPhoto, urlAvaPhoto]);
+  // Для фото
   useEffect(() => {
-    console.log(backUrl);
-    setFileBackground(backUrl);
     dispatch(
       newTypeMainData({
         ...MainDataSelector,
@@ -203,7 +185,6 @@ const CreatingAchievements = () => {
     );
   }, [backUrl]);
   useEffect(() => {
-    setFileImage(frontUrl);
     dispatch(
       newTypeMainData({
         ...MainDataSelector,
@@ -234,22 +215,12 @@ const CreatingAchievements = () => {
                   fileBackground={fileBackground}
                 />
                 <Column2
-                  nameAchievements={nameAchievements}
-                  setNameAchievements={setNameAchievements}
                   typeAchievements={typeAchievements}
                   setTypeAchievements={setTypeAchievements}
-                  typeAchievementsSwitch={typeAchievementsSwitch}
-                  setTypeAchievementsSwitch={setTypeAchievementsSwitch}
                   setUrlAvaPhoto={setUrlAvaPhoto}
                   setUrlItemPhoto={setUrlItemPhoto}
                   setAchData={setAchData}
                   achData={achData}
-                  description={description}
-                  setDescription={setDescription}
-                  EXPValue={EXPValue}
-                  setEXPValue={setEXPValue}
-                  acoinValue={acoinValue}
-                  setAcoinValue={setAcoinValue}
                   setFileImage={setFileImage}
                   fileImage={fileImage}
                   setFileBackground={setFileBackground}
@@ -261,6 +232,8 @@ const CreatingAchievements = () => {
                   sendData={sendData}
                   fileBackground={fileBackground}
                   fileImage={fileImage}
+                  valueOldAchievements={valueOldAchievements}
+                  allUsers={allUsers}
                 />
               </div>
             </div>

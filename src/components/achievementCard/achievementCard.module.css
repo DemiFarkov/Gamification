@@ -1,5 +1,5 @@
 .cardDemo {
-    margin: 0 auto;
+    margin: 1vw auto;
     height: 400px;
     width: 300px;
 
@@ -60,7 +60,7 @@
     background-size: 300px 400px;
     background-position: 1px 1px;
     background-color: #202833;
-    box-shadow: inset 0px 0px 200px rgb(0 0 0 / 83%);
+    /* box-shadow: inset 0px 0px 200px rgb(0 0 0 / 83%); */
 
 }
 
@@ -78,6 +78,11 @@
     z-index: 100;
 }
 
+.date{
+    margin: 10% 0 0 10%;
+    font-size: 16px;
+    text-align: start;
+}
 .cardItem {
     position: absolute;
     width: 80% !important;

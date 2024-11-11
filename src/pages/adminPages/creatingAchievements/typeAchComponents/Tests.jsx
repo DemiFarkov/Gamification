@@ -1,40 +1,83 @@
 import React, { useEffect, useState } from "react";
 import classes from "../creatingAchievements.module.css";
-import { MenuItem, Select, TextField } from "@mui/material";
+import {
+  IconButton,
+  MenuItem,
+  Select,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import {
   selecetStyle,
   TextFieldStyle,
 } from "../../../../components/styles/styles";
 import { useDispatch } from "react-redux";
 import { typeAchData } from "../../../../toolkitRedux/toolkitSlice";
+import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
+
+import Fade from "@mui/material/Fade";
 
 const Tests = () => {
   const [complexityAch, setСomplexityAch] = useState(0);
   const [forTests, setForTests] = useState(false);
   const [totalTestsRequired, setTotalTestsRequired] = useState("");
   const [successfulTestsRequired, setSuccessfulTestsRequired] = useState("");
-  const [perfectScoreTestsRequired, setPerfectScoreTestsRequired] = useState("");
+  const [perfectScoreTestsRequired, setPerfectScoreTestsRequired] =
+    useState("");
   const [moderationTestsRequired, setModerationTestsRequired] = useState("");
 
   const dispatch = useDispatch();
 
- 
   useEffect(() => {
+    let type_specific_data = {};
+    totalTestsRequired &&
+      (type_specific_data.total_tests_required = totalTestsRequired);
+    successfulTestsRequired &&
+      (type_specific_data.successful_tests_required = successfulTestsRequired);
+    perfectScoreTestsRequired &&
+      (type_specific_data.perfect_score_tests_required =
+        perfectScoreTestsRequired);
+    moderationTestsRequired &&
+      (type_specific_data.streak_days_required = moderationTestsRequired);
+
     dispatch(
       typeAchData({
         difficulty: complexityAch,
-        type_specific_data: {
-          total_tests_required : totalTestsRequired,
-          successful_tests_required : successfulTestsRequired,
-          perfect_score_tests_required: perfectScoreTestsRequired,
-          moderation_tests_required : moderationTestsRequired,
-        },
+        type_specific_data: type_specific_data,
       })
     );
-  }, [totalTestsRequired, successfulTestsRequired, perfectScoreTestsRequired,moderationTestsRequired]);
+  }, [
+    totalTestsRequired,
+    successfulTestsRequired,
+    perfectScoreTestsRequired,
+    moderationTestsRequired,
+  ]);
   return (
     <div className={classes.columnBlock}>
-      <h3 className={classes.titleMinPlock}>Обращения</h3>
+      <h3 className={classes.titleMinBlock}>
+        <div>Обращения</div>
+        <Tooltip
+          PopperProps={{
+            sx: {
+              " .MuiTooltip-tooltipPlacementBottom": {
+                fontSize: "18px !important",
+                maxWidth: "500px",
+              },
+            },
+          }}
+          arrow
+          TransitionComponent={Fade}
+          title="Чтобы условие не учитывалось, поле необходимо оставить полностью пустым"
+          sx={{
+            color: "#fff",
+            fontSize: "20px !important",
+          }}
+        >
+          <IconButton>
+            <HelpRoundedIcon />
+          </IconButton>
+        </Tooltip>
+      </h3>
       <div className={classes.AppealsBlock}>
         <div>
           <div style={{ position: "relative", marginTop: "32px" }}>

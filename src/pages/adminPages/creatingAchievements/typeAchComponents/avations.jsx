@@ -60,7 +60,7 @@ const Avations = () => {
           </Select>
         </div>
         <div>
-          <p className={classes.AppealsP}>Получить аваций всего</p>
+          <p className={classes.AppealsP}>Получить оваций всего</p>
           <Select
             id="valueThemeSelect"
             sx={{ ...selecetStyle, marginTop: "0" }}
@@ -78,7 +78,7 @@ const Avations = () => {
                         ))} */}
           </Select>
           <p className={classes.AppealsP}>
-            Получать авации несколько дней подряд
+            Получать овации несколько дней подряд
           </p>
           <Select
             id="valueThemeSelect"
@@ -96,7 +96,7 @@ const Avations = () => {
                           </MenuItem>
                         ))} */}
           </Select>{" "}
-          <p className={classes.AppealsP}>Отправлено аваций</p>
+          <p className={classes.AppealsP}>Отправлено оваций</p>
           <Select
             id="valueThemeSelect"
             sx={{ ...selecetStyle, marginTop: "0" }}

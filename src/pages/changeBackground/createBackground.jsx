@@ -36,16 +36,16 @@ const CreateBackground = (props) => {
     formData.append("level_required", avatarLvl);
     formData.append("karma_required", avatarKarma);
     formData.append("image", avatarFile);
-    document.querySelector(`#${id}`).style.background = "#2d8939";
 
-    // instance
-    //   .post(`avatars/`, formData)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((response) => {
-    //     console.log(response);
-    //   });
+    instance
+      .post(`avatars/`, formData)
+      .then((response) => {
+        console.log(response.data);
+        document.querySelector(`#${id}`).style.background = "#2d8939";
+      })
+      .catch((response) => {
+        console.log(response);
+      });
   }
   function createBackground(id) {
     const formData = new FormData();
@@ -54,17 +54,16 @@ const CreateBackground = (props) => {
     formData.append("level_required", backgroundLvl);
     formData.append("karma_required", backgroundKarma);
     formData.append("image", backgroundFile);
-    document.querySelector(`#${id}`).style.background = "#2d8939";
 
-    // instance
-    //   .post(`backgrounds/`, formData)
-    //   .then((response) => {
-    //     console.log(response.data);
-
-    //   })
-    //   .catch((response) => {
-    //     console.log(response);
-    //   });
+    instance
+      .post(`backgrounds/`, formData)
+      .then((response) => {
+        console.log(response.data);
+        document.querySelector(`#${id}`).style.background = "#2d8939";
+      })
+      .catch((response) => {
+        console.log(response);
+      });
   }
   return (
     <div>
@@ -185,7 +184,7 @@ const CreateBackground = (props) => {
               }}
             />
             <Button
-              sx={{...ButtonStyle, padding:"0"}}
+              sx={{ ...ButtonStyle, padding: "0" }}
               onClick={() => {
                 createAvatar("saveBtnText3");
               }}
@@ -253,7 +252,7 @@ const CreateBackground = (props) => {
               }}
             />
             <Button
-              sx={{...ButtonStyle, padding:"0"}}
+              sx={{ ...ButtonStyle, padding: "0" }}
               onClick={() => {
                 createBackground("saveBtnText4");
               }}

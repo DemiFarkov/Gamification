@@ -7,7 +7,7 @@ body {
     display: grid;
     z-index: 5;
     grid-template-columns: 460px 1fr 2fr;
-    grid-template-rows: minmax(100px, 12vh) minmax(287px, 29vh) minmax(250px, 25vh) minmax(130px, 14vh);
+    grid-template-rows: minmax(100px, 11vh) minmax(287px, 29vh) minmax(250px, 25vh) minmax(130px, 14vh);
 
     gap: 1vw 1vw;
     grid-template-areas:
@@ -142,7 +142,7 @@ body {
     justify-content: center;
     align-items: center;
     grid-area: box2;
-    background: url(https://i.yapx.ru/IoH0d.gif);
+    background: url(https://media.tenor.com/njAmc1dMqP0AAAAi/cat-tongue.gif);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

@@ -31,11 +31,12 @@ const AchievementCard = (props) => {
   const cardBack = MainDataSelector.is_double;
   const urlItemPhoto = MainDataSelector.urlItemPhoto;
   const urlAvaPhoto = MainDataSelector.urlAvaPhoto;
+  console.log(backPhoto.current);
   useEffect(() => {
     if (small) {
       {
-        frontPhoto.current.style.objectPosition = "0 0";
-        frontPhoto.current.style.translate = "0 0";
+        frontPhoto.current && (frontPhoto.current.style.objectPosition = "0 0");
+        frontPhoto.current && (frontPhoto.current.style.translate = "0 0");
         document.querySelectorAll(`.${classes.cardDemo}`).forEach((e) => {
           (e.style.height = "108px"), (e.style.width = "81px");
         });
@@ -92,8 +93,14 @@ const AchievementCard = (props) => {
     frontPhoto.current &&
       MainDataSelector.foreground_image &&
       (frontPhoto.current.src = MainDataSelector.foreground_image);
-    cardBackRef.current &&
-      (cardBackRef.current.style.backgroundImage = `url("${MainDataSelector.back_image}")`);
+    MainDataSelector.back_image &&
+      ((cardBackRef.current.style.backgroundImage = `url("${MainDataSelector.back_image}")`),
+      (document.querySelector(`.${classes.cardBack}`).style.boxShadow =
+        "none"));
+    !MainDataSelector.back_image &&
+      ((cardBackRef.current.style.backgroundImage = ``),
+      (document.querySelector(`.${classes.cardBack}`).style.boxShadow =
+        "inset 0px 0px 200px rgb(0 0 0 / 83%)"));
     return () => {
       cardDemo.removeEventListener("mousemove", UPDATE);
     };
@@ -218,11 +225,6 @@ const AchievementCard = (props) => {
                 />
               )}
             </div>
-            {!small && (
-              <span className={classes.cardFrontDate}>
-                {MainDataSelector.date ? MainDataSelector.date : "03.05.2001"}
-              </span>
-            )}
           </div>
           {!small && (
             <div
@@ -241,6 +243,7 @@ const AchievementCard = (props) => {
                   }}
                 />
               )}
+              <p className={classes.date}>03.05.2001</p>
               <TextField
                 multiline
                 onMouseDown={(e) => {

@@ -43,18 +43,22 @@ const Column1 = (props) => {
 
   function changeData(id) {
     let data;
-    oldAchievements.map((el) => id == el.id && (data = el));
-    let mainData = data;
-    dispatch(newTypeStyleData(data.styleCard));
-    dispatch(typeAchData(data.typeAchContent));
-    dispatch(newTypeMainData(mainData));
-
+    if (id !== 0) {
+      oldAchievements.map((el) => id == el.id && (data = el));
+      let mainData = data;
+      dispatch(newTypeStyleData(data.styleCard));
+      dispatch(typeAchData(data.typeAchContent));
+      dispatch(newTypeMainData(mainData));
+    }else if(id == 0){
+      dispatch(newTypeStyleData({}));
+      dispatch(typeAchData({}));
+      dispatch(newTypeMainData({}));
+    }
     setValueOldAchievements(id);
   }
-   function changeBackSide() {
+  function changeBackSide() {
     let use = document.querySelector(`#addBackSide`).checked;
     dispatch(newTypeMainData({ ...MainDataSelector, is_double: use }));
-
   }
   function changeBorder() {
     let use = document.querySelector(`#addBorder`).checked;

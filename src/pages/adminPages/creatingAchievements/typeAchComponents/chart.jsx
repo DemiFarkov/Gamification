@@ -17,14 +17,18 @@ const Chart = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    let type_specific_data = {};
+    streakDaysRequired &&
+      (type_specific_data.streak_days_required = streakDaysRequired);
+    totalDaysRequired &&
+      (type_specific_data.total_days_required = totalDaysRequired);
+    totalWorkedDaysRequired &&
+      (type_specific_data.total_worked_days_required = totalWorkedDaysRequired);
+
     dispatch(
       typeAchData({
         difficulty: complexityAch,
-        type_specific_data: {
-          streak_days_required: streakDaysRequired,
-          total_days_required: totalDaysRequired,
-          total_worked_days_required: totalWorkedDaysRequired,
-        },
+        type_specific_data: type_specific_data,
       })
     );
   }, [streakDaysRequired, totalDaysRequired, totalWorkedDaysRequired]);

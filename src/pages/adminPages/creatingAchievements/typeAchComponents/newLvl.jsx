@@ -18,14 +18,14 @@ const NewLvl = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    let type_specific_data = {};
+    requiredLevel && (type_specific_data.required_level = requiredLevel);
+    expEarned && (type_specific_data.exp_earned = expEarned);
+    expEarnedWeek && (type_specific_data.exp_earned_week = expEarnedWeek);
     dispatch(
       typeAchData({
         difficulty: complexityAch,
-        type_specific_data: {
-          required_level: requiredLevel,
-          exp_earned: expEarned,
-          exp_earned_week: expEarnedWeek,
-        },
+        type_specific_data: type_specific_data,
       })
     );
   }, [requiredLevel, expEarned, expEarnedWeek]);

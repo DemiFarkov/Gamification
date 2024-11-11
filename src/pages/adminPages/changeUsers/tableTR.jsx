@@ -41,7 +41,7 @@ const TableTR = (props) => {
     });
   }
   function activate(id) {
-    instance.post(`users/${id}/deactivate/`).then((response) => {
+    instance.post(`users/${id}/activate/`).then((response) => {
       alert("Пользователь активирован");
     });
   }
